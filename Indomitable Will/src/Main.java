@@ -60,6 +60,9 @@ public class Main {
 	public void howToPlay() {
 		((CardLayout)cardPanel.getLayout()).last(cardPanel);
 	}
+	public void titleScreen() {
+		((CardLayout)cardPanel.getLayout()).first(cardPanel);
+	}
 	public void changePanel() {
 		((CardLayout)cardPanel.getLayout()).next(cardPanel);
 		processingCanvas.requestFocus();

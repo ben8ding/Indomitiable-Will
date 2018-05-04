@@ -6,18 +6,21 @@ import javax.swing.JPanel;
 
 public class InstructionPanel extends JPanel implements ActionListener {
 	Main w;
-	
+	JButton menu;
 	public InstructionPanel (Main w) {
 		this.w = w;
-		JButton instructions = new JButton("Return");
-		instructions.addActionListener(this);
-		add(instructions);
+		menu = new JButton("Return");
+		menu.addActionListener(this);
+		add(menu);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		w.howToPlay();
+		if(e.getSource() == menu) {
+			w.titleScreen();
+		}
+		
 	}
 
 }
