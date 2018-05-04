@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InstructionPanel extends JPanel implements ActionListener {
@@ -12,6 +13,8 @@ public class InstructionPanel extends JPanel implements ActionListener {
 		menu = new JButton("Return");
 		menu.addActionListener(this);
 		add(menu);
+		JLabel label = new JLabel("\nWelcome!");
+		add(label);
 	}
 	
 	@Override
