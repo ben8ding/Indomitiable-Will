@@ -10,7 +10,7 @@ public class DrawingSurface extends PApplet {
 
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
-
+	private int state;
 	private Rectangle screenRect;
 
 
@@ -22,6 +22,8 @@ public class DrawingSurface extends PApplet {
 	
 
 	public DrawingSurface() {
+		state = 1;
+		background(255,255,255);
 		
 	}
 
