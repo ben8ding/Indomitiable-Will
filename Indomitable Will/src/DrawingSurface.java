@@ -22,17 +22,7 @@ public class DrawingSurface extends PApplet {
 	
 
 	public DrawingSurface() {
-		super();
-		assets = new ArrayList<PImage>();
-		keys = new ArrayList<Integer>();
-		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-		obstacles = new ArrayList<Shape>();
 		
-		obstacles.add(new Rectangle(200,400,400,50));
-		obstacles.add(new Rectangle(0,250,100,50));
-		obstacles.add(new Rectangle(700,250,100,50));
-		obstacles.add(new Rectangle(375,300,50,100));
-		obstacles.add(new Rectangle(300,250,200,50));
 	}
 
 
@@ -55,34 +45,7 @@ public class DrawingSurface extends PApplet {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-
-		// drawing stuff
-
-		background(0,255,255);   
-
-		pushMatrix();
-
-		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)height/DRAWING_HEIGHT;
-
-		scale(ratioX, ratioY);
-
-		fill(100);
-		for (Shape s : obstacles) {
-			if (s instanceof Rectangle) {
-				Rectangle r = (Rectangle)s;
-				rect(r.x,r.y,r.width,r.height);
-			}
-		}
-
-		
-
-		popMatrix();
-
-
-		// modifying stuff
-
-	
+		rect(0,0,100,100);
 	}
 
 
@@ -98,7 +61,5 @@ public class DrawingSurface extends PApplet {
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
-
-
 }
 
