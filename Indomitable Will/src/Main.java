@@ -14,6 +14,7 @@ public class Main {
 	private JPanel cardPanel;
 	
 	private OptionPanel panel1;    
+	private InstructionPanel instructions;
 	private DrawingSurface panel2;
 	
 	private PSurfaceAWT.SmoothCanvas processingCanvas;
@@ -38,9 +39,11 @@ public class Main {
 	    window.getContentPane().removeAll();
 	    
 		panel1 = new OptionPanel(this);    
+		instructions = new InstructionPanel(this);
 	    panel2 = new DrawingSurface();
 	    
 	    cardPanel.add(panel1,"1");
+	    cardPanel.add(instructions, "3");
 	    cardPanel.add(processingCanvas,"2");
 	    
 	    window.setLayout(new BorderLayout());
@@ -54,7 +57,9 @@ public class Main {
 	{
 		Main m = new Main();
 	}
-  
+	public void howToPlay() {
+		((CardLayout)cardPanel.getLayout()).last(cardPanel);
+	}
 	public void changePanel() {
 		((CardLayout)cardPanel.getLayout()).next(cardPanel);
 		processingCanvas.requestFocus();
