@@ -6,19 +6,24 @@ import java.awt.event.*;
 public class OptionPanel extends JPanel implements ActionListener {
 	
 	Main w;
-	
+	private JButton instructions;
 	public OptionPanel(Main w) {
 		this.w = w;
 		JButton play = new JButton("Play");
 		play.addActionListener(this);
 		add(play);
-		JButton instructions = new JButton("How to Play");
+		instructions = new JButton("How to Play");
 		instructions.addActionListener(this);
 		add(instructions);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		w.changePanel();
+		if(e.getSource() == instructions) {
+			w.howToPlay();
+		} else {
+			w.changePanel();
+		}
+		
 	}
 	
 }

@@ -9,10 +9,7 @@ public class InstructionPanel extends JPanel implements ActionListener {
 	
 	public InstructionPanel (Main w) {
 		this.w = w;
-		JButton play = new JButton("Play");
-		play.addActionListener(this);
-		add(play);
-		JButton instructions = new JButton("How to Play");
+		JButton instructions = new JButton("Return");
 		instructions.addActionListener(this);
 		add(instructions);
 	}

@@ -43,9 +43,9 @@ public class Main {
 	    panel2 = new DrawingSurface();
 	    
 	    cardPanel.add(panel1,"1");
-	    cardPanel.add(instructions, "3");
-	    cardPanel.add(processingCanvas,"2");
 	    
+	    cardPanel.add(processingCanvas,"2");
+	    cardPanel.add(instructions, "3");
 	    window.setLayout(new BorderLayout());
 	    
 	    window.add(cardPanel);
