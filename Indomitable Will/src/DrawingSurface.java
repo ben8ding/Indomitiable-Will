@@ -22,16 +22,14 @@ public class DrawingSurface extends PApplet {
 	
 
 	public DrawingSurface() {
+		super();
+		keys = new ArrayList<Integer>();
+		assets = new ArrayList<PImage>();
 		state = 1;
-		background(255,255,255);
+		
 		
 	}
 
-
-	public void spawnNewMario() {
-		
-	}
-	
 	public void runMe() {
 		runSketch();
 	}
@@ -47,7 +45,21 @@ public class DrawingSurface extends PApplet {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
+		
+		
+		
+		float ratioX = (float)width/DRAWING_WIDTH;
+		float ratioY = (float)height/DRAWING_HEIGHT;
+		background(255,255,255);
+		pushMatrix();
+		
+
+		scale(ratioX, ratioY);
 		rect(0,0,100,100);
+		
+		
+		popMatrix();
+
 	}
 
 
