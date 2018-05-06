@@ -14,11 +14,27 @@ public abstract class Basic {
 	protected double dx2;
 	protected double dy2;
 	
+	public Basic(int x, int y) {
+		xLoc = x;
+		yLoc = y;
+	}
+	
+	public Basic(int x, int y, int size) {
+		xLoc = x;
+		yLoc = y;
+		this.size = size;
+	}
+	
+	public Basic()
+	{
+		
+	}
+	
 	public int getXLoc() {
 		return xLoc;
 	}
 	
-	public int getyLoc() {
+	public int getYLoc() {
 		return yLoc;
 	}
 	

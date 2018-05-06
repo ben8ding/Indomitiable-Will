@@ -13,19 +13,20 @@ public class HitBox extends Basic{
 	
 	public HitBox()
 	{
+		super(0,0,25);
 		size = 25;
 		hitBox();
 	}
 	
 	public HitBox(int set)
 	{
-		size = set;
+		super(0,0,set);
 		hitBox();
 	}
 	
 	public HitBox(Basic other)
 	{
-		size = other.getSize();
+		super(0,0,other.getSize());
 		hitBox();
 	}
 	
@@ -47,10 +48,10 @@ public class HitBox extends Basic{
 
 	public void hitBox()
 	{
-		UYBox = new Line(xLoc+25,yLoc-25,xLoc-25,yLoc-25);
-		DYBox = new Line(xLoc+25,yLoc+25,xLoc-25,yLoc+25);
-		RXBox = new Line(xLoc+25,yLoc-25,xLoc+25,yLoc+25);
-		LXBox = new Line(xLoc-25,yLoc+25,xLoc-25,yLoc-25);
+		UYBox = new Line(xLoc+size,yLoc-size,xLoc-size,yLoc-size);
+		DYBox = new Line(xLoc+size,yLoc+size,xLoc-size,yLoc+size);
+		RXBox = new Line(xLoc+size,yLoc-size,xLoc+size,yLoc+size);
+		LXBox = new Line(xLoc-size,yLoc+size,xLoc-size,yLoc-size);
 	}
 	
 	public boolean checkCollision(Line other)

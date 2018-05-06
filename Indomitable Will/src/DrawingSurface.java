@@ -1,3 +1,4 @@
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -19,6 +20,8 @@ public class DrawingSurface extends PApplet {
 
 	private Level testLevel;
 	private ArrayList<Integer> keys;
+	public static final int xSize = 1000;
+	public static final int ySize = 700;
 
 	public DrawingSurface() {
 		keys = new ArrayList<Integer>();
@@ -26,7 +29,7 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void settings() {
-		size(1000, 700);
+		size(xSize, ySize);
 
 	}
 
@@ -99,9 +102,32 @@ public class DrawingSurface extends PApplet {
 		if (keyCode == PApplet.UP) {
 			testLevel.getPlayer().sUp();
 		}
+		
+		if (key == 'w') {
+			// System.out.println("cake");
+			testLevel.getPlayer().sUp();
+		}
+		if (key == 'a') {
+			testLevel.getPlayer().sLeft();
+		}
+		if (key == 's') {
+			testLevel.getPlayer().sDown();
+		}
+
+		if (key == 'd') {
+			testLevel.getPlayer().sRight();
+		}
 
 	}
+	
+	public int getMouseX(){
+		return mouseX;
+	}
 
+	public int getMouseY(){
+		return mouseY;
+	}
+	
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}

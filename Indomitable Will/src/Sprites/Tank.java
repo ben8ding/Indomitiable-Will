@@ -1,4 +1,5 @@
 package Sprites;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
@@ -6,13 +7,15 @@ import shapes.Line;
 public class Tank extends Basic {
 
 	private HitBox hB;
+	private int health;
+	private boolean wall;
 	public static final double cs = 3.5;
 
 	public Tank() {
+		super(350, 300, 25);
 
-		xLoc = 350;
-		yLoc = 300;
-		size = 25;
+		wall = false;
+		health = 5;
 		hB = new HitBox(this);
 
 	}
@@ -22,14 +25,14 @@ public class Tank extends Basic {
 	}
 
 	public void draw(PApplet drawer) {
-
+		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		hB.draw(drawer);
-
 		act();
+		drawer.popStyle();
 	}
 
 	public void act() {
@@ -57,13 +60,20 @@ public class Tank extends Basic {
 	public boolean checkCollisionL(Line other) {
 		return hB.checkCollisionL(other);
 	}
-	
+
 	public boolean checkCollision(Line other) {
+
+		if (hB.checkCollision(other))
+			wall = true;
+		else
+			wall = false;
+
 		return hB.checkCollision(other);
 	}
 
 	public void move() {
 
+		// if (!wall) {
 		double dxf = (double) dx;
 
 		dxf += 0.3 * ((double) dx2 - 0.012 * (float) dx);
@@ -92,6 +102,7 @@ public class Tank extends Basic {
 		if (xLoc > 989) {
 			xLoc = 989;
 		}
+		// }
 
 	}
 
@@ -129,7 +140,7 @@ public class Tank extends Basic {
 	public void sLeft() {
 		dx2 = 0;
 	}
-	
+
 	public void rX() {
 
 		dy = 0;
@@ -138,7 +149,5 @@ public class Tank extends Basic {
 	public void rY() {
 		dy = 0;
 	}
-
-	
 
 }
