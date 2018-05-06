@@ -1,79 +1,109 @@
+import java.awt.Dimension;
 
+import javax.swing.JFrame;
 
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.util.ArrayList;
+import Level.Level;
+import Sprites.Tank;
+import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
+import shapes.Line;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DrawingSurface extends PApplet {
 
-	public static final int DRAWING_WIDTH = 800;
-	public static final int DRAWING_HEIGHT = 600;
-	private int state;
-	private Rectangle screenRect;
-
-
-	private ArrayList<Shape> obstacles;
-
+	private Level testLevel;
 	private ArrayList<Integer> keys;
-	
-	private ArrayList<PImage> assets;
-	
 
 	public DrawingSurface() {
-		super();
 		keys = new ArrayList<Integer>();
-		assets = new ArrayList<PImage>();
-		state = 1;
-		
-		
+		testLevel = new Level();
 	}
 
-	public void runMe() {
-		runSketch();
+	public void settings() {
+		size(1000, 700);
+
 	}
 
-	// The statements in the setup() function 
-	// execute once when the program begins
 	public void setup() {
-		
+		background(255);
+
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.
 	public void draw() {
-		
-		
-		
-		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)height/DRAWING_HEIGHT;
-		background(255,255,255);
-		pushMatrix();
-		
 
-		scale(ratioX, ratioY);
-		rect(0,0,100,100);
-		
-		
-		popMatrix();
+		testLevel.draw(this);
 
 	}
-
 
 	public void keyPressed() {
-		keys.add(keyCode);
+		if (keyCode == '1') {
+
+		}
+		if (keyCode == '2') {
+
+		}
+		if (keyCode == '3') {
+
+		}
+		if (key == 'w') {
+			// System.out.println("cake");
+			testLevel.getPlayer().mUp();
+		}
+		if (key == 'a') {
+			testLevel.getPlayer().mLeft();
+		}
+		if (key == 's') {
+			testLevel.getPlayer().mDown();
+		}
+
+		if (key == 'd') {
+			testLevel.getPlayer().mRight();
+		}
+
+		if (keyCode == PApplet.RIGHT) {
+			// System.out.println("cake");
+			testLevel.getPlayer().mRight();
+		}
+		if (keyCode == PApplet.LEFT) {
+			testLevel.getPlayer().mLeft();
+		}
+
+		if (keyCode == PApplet.DOWN) {
+			testLevel.getPlayer().mDown();
+		}
+
+		if (keyCode == PApplet.UP) {
+			testLevel.getPlayer().mUp();
+		}
 	}
 
 	public void keyReleased() {
-		while(keys.contains(keyCode))
-			keys.remove(new Integer(keyCode));
+
+		if (keyCode == PApplet.RIGHT) {
+			testLevel.getPlayer().sRight();
+		}
+		if (keyCode == PApplet.LEFT) {
+			testLevel.getPlayer().sLeft();
+		}
+
+		if (keyCode == PApplet.DOWN) {
+			testLevel.getPlayer().sDown();
+		}
+
+		if (keyCode == PApplet.UP) {
+			testLevel.getPlayer().sUp();
+		}
+
 	}
 
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
-}
 
+}
