@@ -2,7 +2,7 @@ package Level;
 
 import java.util.ArrayList;
 import Sprites.Projectile;
-import Sprites.Tank;
+import Sprites.Player;
 
 import processing.core.PApplet;
 import shapes.Line;
@@ -10,14 +10,14 @@ import shapes.Line;
 public class Level {
 
 	
-	private Tank player;
+	private Player player;
 	private ArrayList<Line> walls;
 	private ArrayList<Projectile> bullets;
 	
 	public Level()
 	{
 
-		player = new Tank();
+		player = new Player();
 		walls = new ArrayList<Line>();
 		bullets = new ArrayList<Projectile>();
 		walls.add(new Line(500, 0, 500, 700));
@@ -53,7 +53,7 @@ public class Level {
 		
 	}
 
-	public Tank getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 	

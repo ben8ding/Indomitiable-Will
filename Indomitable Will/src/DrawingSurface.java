@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import Level.Level;
-import Sprites.Tank;
+import Sprites.Player;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;

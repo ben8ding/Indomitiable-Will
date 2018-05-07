@@ -4,14 +4,14 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
 
-public class Tank extends Basic {
+public class Player extends Basic {
 
 	private HitBox hB;
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
 
-	public Tank() {
+	public Player() {
 		super(350, 300, 25);
 
 		wall = false;
