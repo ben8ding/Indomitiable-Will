@@ -2,6 +2,7 @@ package Level;
 
 import java.util.ArrayList;
 import Sprites.Projectile;
+import Sprites.Enemy;
 import Sprites.Player;
 
 import processing.core.PApplet;
@@ -13,6 +14,7 @@ public class Level {
 	private Player player;
 	private ArrayList<Line> walls;
 	private ArrayList<Projectile> bullets;
+	private ArrayList<Enemy> enemies;
 	
 	public Level()
 	{
@@ -20,6 +22,8 @@ public class Level {
 		player = new Player();
 		walls = new ArrayList<Line>();
 		bullets = new ArrayList<Projectile>();
+		enemies = new ArrayList<Enemy>();
+		enemies.add(new Enemy());
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
 		bullets.add(new Projectile());
@@ -40,9 +44,19 @@ public class Level {
 		for (Projectile object : bullets) {
 			object.draw(drawer);
 		}
+		for (Enemy object : enemies) {
+			object.draw(drawer);
+		}
 		if(player.isFiring()) {
 			bullets.add(player.fire());
 		}
+		
+		for (Projectile object : bullets) {
+			for (Enemy object2 : enemies) {
+				
+			}
+		}
+		
 		drawer.popStyle();
 		
 	}
