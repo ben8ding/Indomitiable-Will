@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/core.jar"/>
+	<classpathentry kind="lib" path="lib/core.jar" sourcepath="lib/core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

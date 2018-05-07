@@ -9,7 +9,7 @@ public class Tank extends Basic {
 	private HitBox hB;
 	private int health;
 	private boolean wall;
-	public static final double cs = 3.5;
+	private static final double cs = 3.5;
 
 	public Tank() {
 		super(350, 300, 25);

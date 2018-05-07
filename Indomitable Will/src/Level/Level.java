@@ -44,7 +44,6 @@ public class Level {
 
 		for (Line object : walls) {
 			if (player.checkCollision(object)) {
-				System.out.println("ping");
 				bullets.add(new Projectile(player.getXLoc(),player.getYLoc(),(player.getXLoc()-500)*-0.1,(player.getYLoc()-350)*-0.1));
 			}
 
