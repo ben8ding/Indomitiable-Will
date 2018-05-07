@@ -152,11 +152,11 @@ public class Player extends Basic {
 	public boolean isFiring() {
 		return firing;
 	}
-	/**
-	 * @post if the player is firing, stop firing; if the player is not firing, start firing
-	 */
-	public void switchFiring() {
-		firing = !firing;
+	public void stopFiring() {
+		firing = false;
+	}
+	public void startFiring() {
+		firing = true;
 	}
 	public Projectile fire() {
 		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-500)*-0.1,(getYLoc()-350)*-0.1);
