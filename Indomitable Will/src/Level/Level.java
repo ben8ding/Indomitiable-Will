@@ -22,7 +22,6 @@ public class Level {
 		bullets = new ArrayList<Projectile>();
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
-		
 		bullets.add(new Projectile());
 	}
 	
@@ -41,14 +40,9 @@ public class Level {
 		for (Projectile object : bullets) {
 			object.draw(drawer);
 		}
-
-		for (Line object : walls) {
-			if (player.checkCollision(object)) {
-				bullets.add(new Projectile(player.getXLoc(),player.getYLoc(),(player.getXLoc()-500)*-0.1,(player.getYLoc()-350)*-0.1));
-			}
-
+		if(player.isFiring()) {
+			bullets.add(player.fire());
 		}
-	
 		drawer.popStyle();
 		
 	}

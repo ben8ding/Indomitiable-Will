@@ -68,7 +68,10 @@ public class DrawingSurface extends PApplet {
 		if (key == 'd') {
 			testLevel.getPlayer().mRight();
 		}
-
+		if(keyCode == 'b') {
+					System.out.println("fire");
+					testLevel.getPlayer().switchFiring();
+		}
 		if (keyCode == PApplet.RIGHT) {
 			// System.out.println("cake");
 			testLevel.getPlayer().mRight();
@@ -84,6 +87,7 @@ public class DrawingSurface extends PApplet {
 		if (keyCode == PApplet.UP) {
 			testLevel.getPlayer().mUp();
 		}
+		
 	}
 
 	public void keyReleased() {
@@ -117,7 +121,9 @@ public class DrawingSurface extends PApplet {
 		if (key == 'd') {
 			testLevel.getPlayer().sRight();
 		}
-
+		if(keyCode == 'b') {
+			testLevel.getPlayer().switchFiring();
+		}
 	}
 	
 	public int getMouseX(){

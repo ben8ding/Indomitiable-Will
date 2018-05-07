@@ -10,7 +10,7 @@ public class Player extends Basic {
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
-
+	private boolean firing;
 	public Player() {
 		super(350, 300, 25);
 
@@ -149,5 +149,16 @@ public class Player extends Basic {
 	public void rY() {
 		dy = 0;
 	}
-
+	public boolean isFiring() {
+		return firing;
+	}
+	/**
+	 * @post if the player is firing, stop firing; if the player is not firing, start firing
+	 */
+	public void switchFiring() {
+		firing = !firing;
+	}
+	public Projectile fire() {
+		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-500)*-0.1,(getYLoc()-350)*-0.1);
+	}
 }
