@@ -1,3 +1,4 @@
+package processing;
 
 import java.awt.Dimension;
 
@@ -39,40 +40,26 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void draw() {
-
 		testLevel.draw(this);
-
-	}
-
-	public void keyPressed() {
-		if (keyCode == '1') {
-
-		}
-		if (keyCode == '2') {
-
-		}
-		if (keyCode == '3') {
-
-		}
-		if (key == 'w') {
+		 if (keys.contains('W') ){
 			// System.out.println("cake");
 			testLevel.getPlayer().mUp();
 		}
-		if (key == 'a') {
+		if (keys.contains((int)'A')) {
 			testLevel.getPlayer().mLeft();
 		}
-		if (key == 's') {
+		if (keys.contains((int)'S')) {
 			testLevel.getPlayer().mDown();
 		}
 
-		if (key == 'd') {
+		if (keys.contains((int)'D')){
 			testLevel.getPlayer().mRight();
 		}
-		if(key == 'b') {
+		if(keys.contains((int)'B')) {
 			System.out.println("fire");
 			testLevel.getPlayer().startFiring();
 		}
-		if (keyCode == PApplet.RIGHT) {
+		if (keys.contains(LEFT)) {
 			// System.out.println("cake");
 			testLevel.getPlayer().mRight();
 		}
@@ -86,12 +73,8 @@ public class DrawingSurface extends PApplet {
 		if (keyCode == PApplet.UP) {
 			testLevel.getPlayer().mUp();
 		}
-		
-	}
-
-	public void keyReleased() {
-
-		if (keyCode == PApplet.RIGHT) {
+		/*
+		 * if (keyCode == PApplet.RIGHT) {
 			testLevel.getPlayer().sRight();
 		}
 		if (keyCode == PApplet.LEFT) {
@@ -122,6 +105,28 @@ public class DrawingSurface extends PApplet {
 		}
 		if(key == 'b') {
 			testLevel.getPlayer().stopFiring();
+		}
+		*/ 
+	}
+
+	public void keyPressed() {
+		if (keyCode == '1') {
+
+		}
+		if (keyCode == '2') {
+
+		}
+		if (keyCode == '3') {
+
+		}
+		
+		keys.add(keyCode);
+		
+	}
+
+	public void keyReleased() {
+		if(keys.contains(keyCode)) {
+			keys.remove(keys.indexOf(keyCode));
 		}
 	}
 	

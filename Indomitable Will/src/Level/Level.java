@@ -26,7 +26,7 @@ public class Level {
 	}
 	
 	public void draw(PApplet drawer) {
-	
+		
 		drawer.pushStyle();
 		drawer.clear();
 		drawer.background(255);

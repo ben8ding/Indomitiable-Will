@@ -1,5 +1,4 @@
 package Sprites;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
@@ -107,7 +106,6 @@ public class Player extends Basic {
 	}
 
 	public void mUp() {
-
 		dy2 = -cs;
 
 	}
