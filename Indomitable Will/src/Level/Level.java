@@ -27,8 +27,11 @@ public class Level {
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
 		bullets.add(new Projectile());
+		
 	}
-	
+	public void setup(PApplet drawer) {
+		player.setup(drawer);
+	}
 	public void draw(PApplet drawer) {
 		
 		drawer.pushStyle();

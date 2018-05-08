@@ -38,9 +38,9 @@ public class DrawingSurface extends PApplet {
 
 	public void setup() {
 		background(255);
-
+		testLevel.setup(this);
 	}
-
+	
 	public void draw() {
 		testLevel.draw(this);
 		boolean down = keys.contains((int) 'S') || keys.contains(DOWN);

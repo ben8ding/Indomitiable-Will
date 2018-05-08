@@ -17,11 +17,10 @@ public class Player extends Basic {
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
-
 	}
 
 	public void setup(PApplet drawer) {
-		img = drawer.loadImage("sprites/player.png");
+		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
 	public void draw(PApplet drawer) {
 		
