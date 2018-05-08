@@ -14,7 +14,6 @@ public class Player extends Basic {
 
 	public Player() {
 		super(350, 300, 25);
-
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -22,15 +21,16 @@ public class Player extends Basic {
 	}
 
 	public void setup(PApplet drawer) {
-
+		img = drawer.loadImage("sprites/player.png");
 	}
-
 	public void draw(PApplet drawer) {
+		
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
-		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+		drawer.image(img, xLoc, yLoc);
+//		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		hB.draw(drawer);
 		move();
 		hB.refreshLoc(this);

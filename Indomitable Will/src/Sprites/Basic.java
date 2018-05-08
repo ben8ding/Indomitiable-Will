@@ -1,9 +1,10 @@
 package Sprites;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public abstract class Basic {
-
+	protected PImage img;
 	protected int xLoc;
 	protected int yLoc;
 	protected double xVel;
