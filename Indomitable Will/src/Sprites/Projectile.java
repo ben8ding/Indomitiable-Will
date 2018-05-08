@@ -6,7 +6,6 @@ public class Projectile extends Basic{
 
 	private HitBox hB;
 	
-	
 	public Projectile()
 	{
 		super(20,20,10);
