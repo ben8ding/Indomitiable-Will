@@ -41,87 +41,38 @@ public class DrawingSurface extends PApplet {
 
 	public void draw() {
 		testLevel.draw(this);
-		 if (keys.contains('W') ){
-			// System.out.println("cake");
+		if (keys.contains((int)'W') || keys.contains(UP)){
 			testLevel.getPlayer().mUp();
+		} else {
+			testLevel.getPlayer().sUp();
 		}
-		if (keys.contains((int)'A')) {
+		if (keys.contains((int)'A') || keys.contains(LEFT)) {
 			testLevel.getPlayer().mLeft();
+		} else {
+			testLevel.getPlayer().sLeft();
 		}
-		if (keys.contains((int)'S')) {
+		if (keys.contains((int)'S') || keys.contains(DOWN)) {
 			testLevel.getPlayer().mDown();
+		} else {
+			testLevel.getPlayer().sDown();
 		}
 
-		if (keys.contains((int)'D')){
+		if (keys.contains((int)'D') || keys.contains(RIGHT)){
 			testLevel.getPlayer().mRight();
+		} else {
+			testLevel.getPlayer().sRight();
 		}
 		if(keys.contains((int)'B')) {
-			System.out.println("fire");
 			testLevel.getPlayer().startFiring();
-		}
-		if (keys.contains(LEFT)) {
-			// System.out.println("cake");
-			testLevel.getPlayer().mRight();
-		}
-		if (keyCode == PApplet.LEFT) {
-			testLevel.getPlayer().mLeft();
-		}
-		if (keyCode == PApplet.DOWN) {
-			testLevel.getPlayer().mDown();
-		}
-
-		if (keyCode == PApplet.UP) {
-			testLevel.getPlayer().mUp();
-		}
-		/*
-		 * if (keyCode == PApplet.RIGHT) {
-			testLevel.getPlayer().sRight();
-		}
-		if (keyCode == PApplet.LEFT) {
-			testLevel.getPlayer().sLeft();
-		}
-
-		if (keyCode == PApplet.DOWN) {
-			testLevel.getPlayer().sDown();
-		}
-
-		if (keyCode == PApplet.UP) {
-			testLevel.getPlayer().sUp();
-		}
-		
-		if (key == 'w') {
-			// System.out.println("cake");
-			testLevel.getPlayer().sUp();
-		}
-		if (key == 'a') {
-			testLevel.getPlayer().sLeft();
-		}
-		if (key == 's') {
-			testLevel.getPlayer().sDown();
-		}
-
-		if (key == 'd') {
-			testLevel.getPlayer().sRight();
-		}
-		if(key == 'b') {
+		} else {
 			testLevel.getPlayer().stopFiring();
 		}
-		*/ 
 	}
 
 	public void keyPressed() {
-		if (keyCode == '1') {
-
+		if(!keys.contains(keyCode)) {
+			keys.add(keyCode);
 		}
-		if (keyCode == '2') {
-
-		}
-		if (keyCode == '3') {
-
-		}
-		
-		keys.add(keyCode);
-		
 	}
 
 	public void keyReleased() {
@@ -138,8 +89,5 @@ public class DrawingSurface extends PApplet {
 		return mouseY;
 	}
 	
-	public boolean isPressed(Integer code) {
-		return keys.contains(code);
-	}
 
 }

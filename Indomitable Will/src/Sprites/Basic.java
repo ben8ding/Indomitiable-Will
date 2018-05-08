@@ -9,8 +9,6 @@ public abstract class Basic {
 	protected double xVel;
 	protected double yVel;
 	protected int size;
-	protected double dx;
-	protected double dy;
 	protected double dx2;
 	protected double dy2;
 	
@@ -50,7 +48,7 @@ public abstract class Basic {
 		return xVel;
 	}
 	
-	public double getyVel() {
+	public double getYVel() {
 		return yVel;
 	}
 	
@@ -63,7 +61,7 @@ public abstract class Basic {
 		xVel = set;
 	}
 	
-	public void setyVel(double set) {
+	public void setYVel(double set) {
 		yVel = set;
 	}
 	

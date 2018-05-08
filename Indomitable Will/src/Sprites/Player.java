@@ -35,11 +35,7 @@ public class Player extends Basic {
 	}
 
 	public void act() {
-		xLoc += xVel;
-		yLoc += yVel;
-
 		move();
-
 		hB.refreshLoc(this);
 
 	}
@@ -61,7 +57,6 @@ public class Player extends Basic {
 	}
 
 	public boolean checkCollision(Line other) {
-
 		if (hB.checkCollision(other))
 			wall = true;
 		else
@@ -71,22 +66,21 @@ public class Player extends Basic {
 	}
 
 	public void move() {
-
 		// if (!wall) {
-		double dxf = (double) dx;
+		double dxf = (double) xVel;
 
-		dxf += 0.3 * ((double) dx2 - 0.012 * (float) dx);
+		dxf += 0.3 * ((double) dx2 - 0.012 * (double) xVel);
 
-		dx = (int) dxf;
+		xVel = (int) dxf;
 
-		double dyf = (double) dy;
+		double dyf = (double) yVel;
 
-		dyf += 0.3 * ((double) dy2 - 0.012 * (double) dy);
+		dyf += 0.3 * ((double) dy2 - 0.012 * (double) yVel);
 
-		dy = (int) dyf;
+		yVel = (int) dyf;
 
-		xLoc += dx;
-		yLoc += dy;
+		xLoc += xVel;
+		yLoc += yVel;
 
 		if (xLoc < -11) {
 			xLoc = -11;
@@ -95,11 +89,11 @@ public class Player extends Basic {
 		if (yLoc < -11) {
 			yLoc = -11;
 		}
-		if (yLoc > 589) {
-			yLoc = 589;
+		if (yLoc > 661) {
+			yLoc = 661;
 		}
-		if (xLoc > 989) {
-			xLoc = 989;
+		if (xLoc > 1011) {
+			xLoc = 1011;
 		}
 		// }
 
@@ -107,7 +101,6 @@ public class Player extends Basic {
 
 	public void mUp() {
 		dy2 = -cs;
-
 	}
 
 	public void mDown() {
@@ -123,7 +116,6 @@ public class Player extends Basic {
 	}
 
 	public void sUp() {
-
 		dy2 = 0;
 	}
 
@@ -140,12 +132,11 @@ public class Player extends Basic {
 	}
 
 	public void rX() {
-
-		dy = 0;
+		xVel = 0;
 	}
 
 	public void rY() {
-		dy = 0;
+		yVel = 0;
 	}
 	public boolean isFiring() {
 		return firing;

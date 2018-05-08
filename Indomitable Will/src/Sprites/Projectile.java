@@ -19,11 +19,10 @@ public class Projectile extends Basic{
 		super(x,y,10);
 		xVel=xDir;
 		yVel=yDir;
-		hB = new HitBox(this);
+		hB = new HitBox(this); 
 	}
 
 	public void act() {
-		
 		this.xLoc+=this.xVel;	
 		this.yLoc+=this.yVel;
 	}
