@@ -43,51 +43,49 @@ public class DrawingSurface extends PApplet {
 
 	public void draw() {
 		testLevel.draw(this);
-		if (keys.contains((int)'W') || keys.contains(UP)){
-			testLevel.getPlayer().mUp();
-		} else {
-			testLevel.getPlayer().sUp();
-		}
-		if (keys.contains((int)'A') || keys.contains(LEFT)) {
-			testLevel.getPlayer().mLeft();
-		} else {
-			testLevel.getPlayer().sLeft();
-		}
-		if (keys.contains((int)'S') || keys.contains(DOWN)) {
-			testLevel.getPlayer().mDown();
-		} else {
-			testLevel.getPlayer().sDown();
-		}
-
-		if (keys.contains((int)'D') || keys.contains(RIGHT)){
-			testLevel.getPlayer().mRight();
-		} else {
-			testLevel.getPlayer().sRight();
-		}
-		if(keys.contains((int)'B')) {
+		boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
+		boolean up = keys.contains((int) 'W') || keys.contains(UP);
+		boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
+		boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
+		// these booleans track if the player is moving in a certain direction
+		if (keys.contains((int) 'B')) {
 			testLevel.getPlayer().startFiring();
 		} else {
 			testLevel.getPlayer().stopFiring();
 		}
+		if (up) {
+			testLevel.getPlayer().mUp();
+		} else if(down){
+			testLevel.getPlayer().mDown();
+		} else {
+			testLevel.getPlayer().stopY();
+		}
+		if(left) {
+			testLevel.getPlayer().mLeft();
+		} else if(right) {
+			testLevel.getPlayer().mRight();
+		} else {
+			testLevel.getPlayer().stopX();
+		}
 	}
 
 	public void keyPressed() {
-		if(!keys.contains(keyCode)) {
+		if (!keys.contains(keyCode)) {
 			keys.add(keyCode);
 		}
 	}
 
 	public void keyReleased() {
+		if(keys.contains(keyCode))
 		keys.remove(keys.indexOf(keyCode));
 	}
-	
-	public int getMouseX(){
+
+	public int getMouseX() {
 		return mouseX;
 	}
 
-	public int getMouseY(){
+	public int getMouseY() {
 		return mouseY;
 	}
-	
 
 }

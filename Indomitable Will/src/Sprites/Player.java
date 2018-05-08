@@ -1,4 +1,5 @@
 package Sprites;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
@@ -10,6 +11,7 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
+
 	public Player() {
 		super(350, 300, 25);
 
@@ -60,7 +62,7 @@ public class Player extends Basic {
 		return hB.checkCollision(other);
 	}
 
-	public void move() {
+	private void move() {
 		// if (!wall) {
 		xVel = (int) (xVel + 0.3 * ((double) dx2 - 0.012 * (double) xVel));
 		yVel = (int) (yVel + 0.3 * ((double) dy2 - 0.012 * (double) yVel));
@@ -92,28 +94,26 @@ public class Player extends Basic {
 		dy2 = cs;
 	}
 
-	public void mRight() {
-		dx2 = cs;
-	}
+	
 
 	public void mLeft() {
 		dx2 = -cs;
 	}
+	public void mRight() {
+		dx2 = cs;
+	}
+	public void stopY() {
+		if (dy2 != 0) {
+			dy2 = 0;
+		}
 
-	public void sUp() {
-		dy2 = 0;
 	}
 
-	public void sDown() {
-		dy2 = 0;
-	}
+	public void stopX() {
+		if (dx2 != 0) {
+			dx2 = 0;
+		}
 
-	public void sRight() {
-		dx2 = 0;
-	}
-
-	public void sLeft() {
-		dx2 = 0;
 	}
 
 	public void rX() {
@@ -123,16 +123,20 @@ public class Player extends Basic {
 	public void rY() {
 		yVel = 0;
 	}
+
 	public boolean isFiring() {
 		return firing;
 	}
+
 	public void stopFiring() {
 		firing = false;
 	}
+
 	public void startFiring() {
 		firing = true;
 	}
+
 	public Projectile fire() {
-		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-500)*-0.1,(getYLoc()-350)*-0.1);
+		return new Projectile(getXLoc(), getYLoc(), (getXLoc() - 500) * -0.1, (getYLoc() - 350) * -0.1);
 	}
 }
