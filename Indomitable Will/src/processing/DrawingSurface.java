@@ -15,6 +15,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class DrawingSurface extends PApplet {
@@ -76,9 +78,7 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void keyReleased() {
-		if(keys.contains(keyCode)) {
-			keys.remove(keys.indexOf(keyCode));
-		}
+		keys.remove(keys.indexOf(keyCode));
 	}
 	
 	public int getMouseX(){

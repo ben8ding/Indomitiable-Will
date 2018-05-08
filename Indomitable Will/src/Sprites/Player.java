@@ -30,14 +30,9 @@ public class Player extends Basic {
 		// basic tank is just circle :P
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		hB.draw(drawer);
-		act();
-		drawer.popStyle();
-	}
-
-	public void act() {
 		move();
 		hB.refreshLoc(this);
-
+		drawer.popStyle();
 	}
 
 	public boolean checkCollisionU(Line other) {
@@ -67,17 +62,8 @@ public class Player extends Basic {
 
 	public void move() {
 		// if (!wall) {
-		double dxf = (double) xVel;
-
-		dxf += 0.3 * ((double) dx2 - 0.012 * (double) xVel);
-
-		xVel = (int) dxf;
-
-		double dyf = (double) yVel;
-
-		dyf += 0.3 * ((double) dy2 - 0.012 * (double) yVel);
-
-		yVel = (int) dyf;
+		xVel = (int) (xVel + 0.3 * ((double) dx2 - 0.012 * (double) xVel));
+		yVel = (int) (yVel + 0.3 * ((double) dy2 - 0.012 * (double) yVel));
 
 		xLoc += xVel;
 		yLoc += yVel;
@@ -96,7 +82,6 @@ public class Player extends Basic {
 			xLoc = 1011;
 		}
 		// }
-
 	}
 
 	public void mUp() {

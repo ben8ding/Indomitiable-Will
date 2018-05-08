@@ -25,7 +25,6 @@ public abstract class Basic {
 	
 	public Basic()
 	{
-		
 	}
 	
 	public int getXLoc() {
