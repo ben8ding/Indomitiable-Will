@@ -1,5 +1,5 @@
 package sprites;
 
-public abstract class Pickup extends Sprite{
+public abstract class Pickup{
 	
 }
