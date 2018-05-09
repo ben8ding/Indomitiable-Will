@@ -27,7 +27,7 @@ public class Player extends Basic {
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
-		drawer.image(img, xLoc-24, yLoc-24);
+		drawer.image(img, xLoc-size, yLoc-size);
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);

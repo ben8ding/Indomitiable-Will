@@ -3,28 +3,33 @@ package sprites;
 import processing.core.PApplet;
 import shapes.Line;
 
-public class Enemy extends Basic{
+public class Capsule extends Basic {
 
 	private HitBox hB;
-	private int health;
-	
-	public Enemy() {
-		super(500, 350, 15);
+	private Pickup item;
 
-		health = 3;
+	public Capsule() {
+		super(600, 450, 10);
+
 		hB = new HitBox(this);
-		
-		
+
 	}
-	
+
+	public Capsule(int x, int y, Pickup z) {
+		super(x, y, 10);
+
+		this.item = z;
+		hB = new HitBox(this);
+
+	}
+
 	@Override
 	public void draw(PApplet drawer) {
-		
-		
+
 		drawer.pushStyle();
 		drawer.stroke(0);
-		drawer.fill(255);
-	
+		drawer.fill(120,255,10);
+		//drawer.image(item.getImg(), xLoc-size, yLoc-size);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		hB.draw(drawer);
 		act();
@@ -33,24 +38,17 @@ public class Enemy extends Basic{
 
 	public boolean checkCollision(Line other) {
 
-		
 		return hB.checkCollision(other);
 	}
 
-	public void takeDamage(int power) {
-		health-=power;
-	}
-	
 	public void act() {
-		
 
 		hB.refreshLoc(this);
 
 	}
 	
-	public Projectile fire(int x, int y) {
-		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-x)*-0.1,(getYLoc()-y)*-0.1);
-		//return new Projectile(getXLoc(),getYLoc(),10,0);
+	public Pickup getItem() {
+		return this.item;
 	}
-	
+
 }
