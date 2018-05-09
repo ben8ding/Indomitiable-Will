@@ -56,9 +56,6 @@ public class Level {
 		}
 		if(player.isFiring()) {
 			bullets.add(player.fire());
-			for (Enemy object : enemies) {
-				object.fire(player.getXLoc(), player.getYLoc());
-			}
 		}
 		
 		if(timer%100==0) {
