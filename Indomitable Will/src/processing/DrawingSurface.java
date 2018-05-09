@@ -65,7 +65,7 @@ public class DrawingSurface extends PApplet {
 				fill(0);
 				text("Back", width - 100, height - 30);
 				textSize(20);
-				text("Welcome to Indomitable Will, a game where chickens prosper!", 100, 100);
+				text("\"THIS GAME NEEDS CHICKENS!!!\"- THE DICKTATOR OF WAKANDA", 100, 100);
 				howToPlay = true;
 			} else if (howToPlay && getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 50
 					&& getMouseY() < height - 20 && mousePressed) {
