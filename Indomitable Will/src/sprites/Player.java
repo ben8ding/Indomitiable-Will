@@ -1,4 +1,4 @@
-package Sprites;
+package sprites;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -113,14 +113,12 @@ public class Player extends Basic {
 		if (dy2 != 0) {
 			dy2 = 0;
 		}
-
 	}
 
 	public void stopX() {
 		if (dx2 != 0) {
 			dx2 = 0;
 		}
-
 	}
 
 	public void rX() {

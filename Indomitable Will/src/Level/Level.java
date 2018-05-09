@@ -1,12 +1,12 @@
 package Level;
 
 import java.util.ArrayList;
-import Sprites.Projectile;
-import Sprites.Enemy;
-import Sprites.Player;
 
 import processing.core.PApplet;
 import shapes.Line;
+import sprites.Enemy;
+import sprites.Player;
+import sprites.Projectile;
 
 public class Level {
 
