@@ -1,4 +1,4 @@
-package Sprites;
+package sprites;
 
 import processing.core.PApplet;
 
@@ -16,22 +16,9 @@ public class Projectile extends Basic {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param angle
-	 * @param velocity do not make this negative
+	 * @param xDir
+	 * @param yDir
 	 */
-	public Projectile(int x, int y, int angle, double velocity) {
-		super(x, y, 10);
-		if (angle == 0) {
-			yVel = velocity;
-		} else if (angle == 90) {
-			xVel = -velocity;
-		} else if (angle == 180) {
-			yVel = -velocity;
-		} else if (angle == 270) {
-			xVel = velocity;
-		}
-	}
-
 	public Projectile(int x, int y, double xDir, double yDir) {
 		super(x, y, 10);
 		xVel = xDir;

@@ -1,4 +1,4 @@
-package Sprites;
+package sprites;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -113,14 +113,12 @@ public class Player extends Basic {
 		if (dy2 != 0) {
 			dy2 = 0;
 		}
-
 	}
 
 	public void stopX() {
 		if (dx2 != 0) {
 			dx2 = 0;
 		}
-
 	}
 
 	public void rX() {
@@ -144,6 +142,6 @@ public class Player extends Basic {
 	}
 
 	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), angle, 5);
+		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle+90))*15, Math.sin(Math.toRadians(angle+90))*15);
 	}
 }

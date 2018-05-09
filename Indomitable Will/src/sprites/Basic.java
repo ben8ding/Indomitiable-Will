@@ -1,4 +1,4 @@
-package Sprites;
+package sprites;
 
 import processing.core.PApplet;
 import processing.core.PImage;

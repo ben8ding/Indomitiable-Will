@@ -6,11 +6,11 @@ import javax.swing.JFrame;
 
 import Level.*;
 import Level.Menu;
-import Sprites.Player;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
+import sprites.Player;
 
 import java.awt.*;
 import javax.swing.*;
@@ -33,7 +33,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		testLevel = new Level();
 		menu = new Menu();
-		levelStart = false;
+		levelStart = true;
 	}
 
 	public void settings() {
@@ -61,7 +61,6 @@ public class DrawingSurface extends PApplet {
 				background(255);
 				menu.draw(this);
 			}
-			
 		}
 		else {
 			testLevel.draw(this);
@@ -77,15 +76,19 @@ public class DrawingSurface extends PApplet {
 			}
 			if (up) {
 				testLevel.getPlayer().mUp();
+			
 			} else if (down) {
 				testLevel.getPlayer().mDown();
+				
 			} else {
 				testLevel.getPlayer().stopY();
 			}
 			if (left) {
 				testLevel.getPlayer().mLeft();
+			
 			} else if (right) {
 				testLevel.getPlayer().mRight();
+				
 			} else {
 				testLevel.getPlayer().stopX();
 			}
