@@ -12,7 +12,7 @@ public abstract class Basic {
 	protected int size;
 	protected double dx2;
 	protected double dy2;
-	
+	protected double angle;
 	public Basic(int x, int y) {
 		xLoc = x;
 		yLoc = y;
