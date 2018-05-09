@@ -4,7 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import Level.Level;
+import Level.*;
+import Level.Menu;
 import Sprites.Player;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
@@ -21,6 +22,8 @@ import java.util.Random;
 
 public class DrawingSurface extends PApplet {
 
+	private boolean levelStart;
+	private Menu menu;
 	private Level testLevel;
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
@@ -29,6 +32,8 @@ public class DrawingSurface extends PApplet {
 	public DrawingSurface() {
 		keys = new ArrayList<Integer>();
 		testLevel = new Level();
+		menu = new Menu();
+		levelStart = false;
 	}
 
 	public void settings() {
@@ -40,32 +45,41 @@ public class DrawingSurface extends PApplet {
 		background(255);
 		testLevel.setup(this);
 	}
-	
+
 	public void draw() {
-		testLevel.draw(this);
-		boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
-		boolean up = keys.contains((int) 'W') || keys.contains(UP);
-		boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
-		boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
-		// these booleans track if the player is moving in a certain direction
-		if (keys.contains((int) 'B')) {
-			testLevel.getPlayer().startFiring();
-		} else {
-			testLevel.getPlayer().stopFiring();
+		if(levelStart == false) {
+			menu.draw(this);
+			if(getMouseX() > width/2&& getMouseX() < width/2 + 200 &&getMouseY() > 20 && getMouseY()<200) {
+				
+			}
+			
 		}
-		if (up) {
-			testLevel.getPlayer().mUp();
-		} else if(down){
-			testLevel.getPlayer().mDown();
-		} else {
-			testLevel.getPlayer().stopY();
-		}
-		if(left) {
-			testLevel.getPlayer().mLeft();
-		} else if(right) {
-			testLevel.getPlayer().mRight();
-		} else {
-			testLevel.getPlayer().stopX();
+		else {
+			testLevel.draw(this);
+			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
+			boolean up = keys.contains((int) 'W') || keys.contains(UP);
+			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
+			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
+			// these booleans track if the player is moving in a certain direction
+			if (keys.contains((int) 'B')) {
+				testLevel.getPlayer().startFiring();
+			} else {
+				testLevel.getPlayer().stopFiring();
+			}
+			if (up) {
+				testLevel.getPlayer().mUp();
+			} else if (down) {
+				testLevel.getPlayer().mDown();
+			} else {
+				testLevel.getPlayer().stopY();
+			}
+			if (left) {
+				testLevel.getPlayer().mLeft();
+			} else if (right) {
+				testLevel.getPlayer().mRight();
+			} else {
+				testLevel.getPlayer().stopX();
+			}
 		}
 	}
 
@@ -76,8 +90,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void keyReleased() {
-		if(keys.contains(keyCode))
-		keys.remove(keys.indexOf(keyCode));
+		if (keys.contains(keyCode))
+			keys.remove(keys.indexOf(keyCode));
 	}
 
 	public int getMouseX() {
