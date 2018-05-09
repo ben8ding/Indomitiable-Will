@@ -22,6 +22,7 @@ import java.util.Random;
 
 public class DrawingSurface extends PApplet {
 
+	private boolean howToPlay, haveDrawn;
 	private boolean levelStart;
 	private Menu menu;
 	private Level testLevel;
@@ -34,7 +35,9 @@ public class DrawingSurface extends PApplet {
 		testLevel = new Level();
 		menu = new Menu();
 		levelStart = false;
-		menu = new Menu();	
+		menu = new Menu();
+		howToPlay = false;
+		haveDrawn = false;
 	}
 
 	public void settings() {
@@ -49,22 +52,35 @@ public class DrawingSurface extends PApplet {
 
 	public void draw() {
 		pushStyle();
-		if(levelStart == false) {
+		if (!haveDrawn) {
 			menu.draw(this);
-			if(getMouseX() > width/2&& getMouseX() < width/2 + 200 &&getMouseY() > 20 && getMouseY()<50) {
+			haveDrawn = true;
+		}
+		if (levelStart == false) {
+			if (getMouseX() > width / 2 && getMouseX() < width / 2 + 200 && getMouseY() > 20 && getMouseY() < 50
+					&& mousePressed) {
 
-				rect(0,0,width,height);
-				textSize(20);
+				rect(0, 0, width, height);
+				rect(width - 150, height - 50, 100, 30);
 				fill(0);
-				text("Welcome to Indomitable Will, a game where chickens prosper!",100,100);
-			}else if(getMouseX() < width/2&& getMouseX() > width/2-100 &&getMouseY() > 20 && getMouseY()<50) {
-				levelStart = true;
-			}else {
+				text("Back", width - 100, height - 30);
+				textSize(20);
+				text("Welcome to Indomitable Will, a game where chickens prosper!", 100, 100);
+				howToPlay = true;
+			} else if (howToPlay && getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 50
+					&& getMouseY() < height - 20 && mousePressed) {
+				howToPlay = false;
 				background(255);
 				menu.draw(this);
+			} else if (getMouseX() < width / 2 && getMouseX() > width / 2 - 100 && getMouseY() > 20 && getMouseY() < 50
+					&& mousePressed && !howToPlay) {
+				levelStart = true;
 			}
-		}
-		else {
+			// }else if(!howToPlay) {
+			// background(255);
+			// menu.draw(this);
+			// }
+		} else {
 			testLevel.draw(this);
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);
@@ -78,19 +94,19 @@ public class DrawingSurface extends PApplet {
 			}
 			if (up) {
 				testLevel.getPlayer().mUp();
-			
+
 			} else if (down) {
 				testLevel.getPlayer().mDown();
-				
+
 			} else {
 				testLevel.getPlayer().stopY();
 			}
 			if (left) {
 				testLevel.getPlayer().mLeft();
-			
+
 			} else if (right) {
 				testLevel.getPlayer().mRight();
-				
+
 			} else {
 				testLevel.getPlayer().stopX();
 			}
