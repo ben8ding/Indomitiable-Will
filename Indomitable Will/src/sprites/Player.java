@@ -1,5 +1,7 @@
 package sprites;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
@@ -12,7 +14,7 @@ public class Player extends Basic {
 	private static final double cs = 3.5;
 	private boolean firing;
 	public Player() {
-		super(350, 300, 25);
+		super(350, 300, 22);
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -22,7 +24,6 @@ public class Player extends Basic {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
 	public void draw(PApplet drawer) {
-		
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
@@ -35,36 +36,23 @@ public class Player extends Basic {
 		// basic tank is just circle :P
 		
 //		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		hB.draw(drawer);
+//		hB.draw(drawer);
 		move();
 		hB.refreshLoc(this);
 		drawer.popStyle();
 		
 	}
 
-	public boolean checkCollisionU(Line other) {
-		return hB.checkCollisionU(other);
-	}
 
-	public boolean checkCollisionD(Line other) {
-		return hB.checkCollisionD(other);
-	}
-
-	public boolean checkCollisionR(Line other) {
-		return hB.checkCollisionR(other);
-	}
-
-	public boolean checkCollisionL(Line other) {
-		return hB.checkCollisionL(other);
-	}
-
-	public boolean checkCollision(Line other) {
-		if (hB.checkCollision(other))
-			wall = true;
-		else
-			wall = false;
-
-		return hB.checkCollision(other);
+	public boolean checkCollision(ArrayList<Line> walls) {
+		boolean result = false;
+		for(Line l : walls) {
+			if(hB.checkCollision(l)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	private void move() {

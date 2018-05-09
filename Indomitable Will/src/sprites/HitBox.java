@@ -56,9 +56,6 @@ public class HitBox extends Basic{
 	
 	public boolean checkCollision(Line other)
 	{
-		
-		
-		
 		if (this.checkCollisionU(other))
 			return true;
 		if (this.checkCollisionD(other))
@@ -67,9 +64,6 @@ public class HitBox extends Basic{
 			return true;
 		if (this.checkCollisionR(other))
 			return true;
-		
-		
-		
 		
 		return false;
 		
