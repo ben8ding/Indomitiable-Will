@@ -11,7 +11,6 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
-
 	public Player() {
 		super(350, 300, 25);
 		wall = false;
@@ -145,6 +144,6 @@ public class Player extends Basic {
 	}
 
 	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), (getXLoc() - 500) * -0.1, (getYLoc() - 350) * -0.1);
+		return new Projectile(getXLoc(), getYLoc(), angle, 5);
 	}
 }
