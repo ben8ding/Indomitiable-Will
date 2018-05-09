@@ -47,10 +47,19 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void draw() {
+		pushStyle();
 		if(levelStart == false) {
 			menu.draw(this);
 			if(getMouseX() > width/2&& getMouseX() < width/2 + 200 &&getMouseY() > 20 && getMouseY()<200) {
+
+				rect(0,0,width,height);
+				textSize(32);
+				fill(0);
+				text("Welcome to Indomitable Will, a game where chickens prosper!",100,100);
 				
+			}else {
+				background(255);
+				menu.draw(this);
 			}
 			
 		}
@@ -81,6 +90,7 @@ public class DrawingSurface extends PApplet {
 				testLevel.getPlayer().stopX();
 			}
 		}
+		popStyle();
 	}
 
 	public void keyPressed() {
