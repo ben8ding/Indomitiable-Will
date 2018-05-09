@@ -48,4 +48,8 @@ public class Enemy extends Basic{
 
 	}
 	
+	public Projectile fire(int x, int y) {
+		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-x)*-0.1,(getYLoc()-y)*-0.1);
+	}
+	
 }

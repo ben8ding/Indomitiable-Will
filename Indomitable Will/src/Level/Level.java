@@ -15,6 +15,7 @@ public class Level {
 	private ArrayList<Line> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Enemy> enemies;
+	private int timer;
 	
 	public Level()
 	{
@@ -27,12 +28,15 @@ public class Level {
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
 		bullets.add(new Projectile());
+		timer = 0;
 		
 	}
 	public void setup(PApplet drawer) {
 		player.setup(drawer);
 	}
 	public void draw(PApplet drawer) {
+		
+		timer++;
 		
 		drawer.pushStyle();
 		drawer.clear();
@@ -52,6 +56,15 @@ public class Level {
 		}
 		if(player.isFiring()) {
 			bullets.add(player.fire());
+			for (Enemy object : enemies) {
+				object.fire(player.getXLoc(), player.getYLoc());
+			}
+		}
+		
+		if(timer%100==0) {
+			for (Enemy object : enemies) {
+				object.fire(player.getXLoc(), player.getYLoc());
+			}
 		}
 		
 		for (Projectile object : bullets) {
