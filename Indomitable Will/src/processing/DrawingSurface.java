@@ -34,6 +34,7 @@ public class DrawingSurface extends PApplet {
 		testLevel = new Level();
 		menu = new Menu();
 		levelStart = false;
+		menu = new Menu();	
 	}
 
 	public void settings() {
