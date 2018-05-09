@@ -27,7 +27,7 @@ public class Level {
 		enemies.add(new Enemy());
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
-		bullets.add(new Projectile());
+		//bullets.add(new Projectile());
 		timer = 0;
 		
 	}
@@ -56,13 +56,16 @@ public class Level {
 		}
 		if(player.isFiring()) {
 			bullets.add(player.fire());
+			for (Enemy object : enemies) {
+				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
+			}
 		}
 		
-		if(timer%100==0) {
+		/*if(timer%100==0) {
 			for (Enemy object : enemies) {
 				object.fire(player.getXLoc(), player.getYLoc());
 			}
-		}
+		}*/
 		
 		for (Projectile object : bullets) {
 			for (Enemy object2 : enemies) {
