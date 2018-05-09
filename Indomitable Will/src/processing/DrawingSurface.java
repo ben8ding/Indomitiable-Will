@@ -76,10 +76,6 @@ public class DrawingSurface extends PApplet {
 					&& mousePressed && !howToPlay) {
 				levelStart = true;
 			}
-			// }else if(!howToPlay) {
-			// background(255);
-			// menu.draw(this);
-			// }
 		} else {
 			testLevel.draw(this);
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
