@@ -32,7 +32,7 @@ public class DrawingSurface extends PApplet {
 	public DrawingSurface() {
 		keys = new ArrayList<Integer>();
 		testLevel = new Level();
-		menu = new Menu();
+		menu = new Menu();	
 		levelStart = true;
 	}
 
