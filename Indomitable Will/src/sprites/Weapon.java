@@ -6,6 +6,6 @@ public class Weapon {
 	private enum weaponType {SHOTGUN, RIFLE, SWORD};
 	
 	public int getWeaponType() {
-		return 0;
+		return 1;
 	}
 }
