@@ -33,7 +33,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		testLevel = new Level();
 		menu = new Menu();
-		levelStart = false;
+		levelStart = true;
 	}
 
 	public void settings() {
@@ -52,7 +52,6 @@ public class DrawingSurface extends PApplet {
 			if(getMouseX() > width/2&& getMouseX() < width/2 + 200 &&getMouseY() > 20 && getMouseY()<200) {
 				
 			}
-			
 		}
 		else {
 			testLevel.draw(this);

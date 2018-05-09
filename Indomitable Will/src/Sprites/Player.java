@@ -144,6 +144,6 @@ public class Player extends Basic {
 	}
 
 	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), angle, 5);
+		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle+90))*15, Math.sin(Math.toRadians(angle+90))*15);
 	}
 }
