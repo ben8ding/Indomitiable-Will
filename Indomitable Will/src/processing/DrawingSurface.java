@@ -64,8 +64,8 @@ public class DrawingSurface extends PApplet {
 				rect(width - 150, height - 50, 100, 30);
 				fill(0);
 				text("Back", width - 100, height - 30);
-				textSize(20);
-				text("\"THIS GAME NEEDS CHICKENS!!!\"- THE DICKTATOR OF WAKANDA", 100, 100);
+				textSize(14);
+				text("This program is a top-down shooter game where the player represents the character Skal, whose mission is to save his village \nfrom an evil invasion. Skal can pick up multiple weapons, powerups, and other goodies to help aid his fight against the invaders. \nHe also can find a map with his progress. Skal has the ability to fight boss enemies, who have special abilities and are \nstronger than regular enemies.\n\nPress play to play the game. Skal should then enter rooms and defeat enemies to try to complete the game.", 100, 100);
 				howToPlay = true;
 			} else if (howToPlay && getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 50
 					&& getMouseY() < height - 20 && mousePressed) {
