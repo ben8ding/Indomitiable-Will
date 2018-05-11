@@ -91,6 +91,22 @@ public class Rectangle extends Shape {
 		return result;
 	}
 
+	public Line getLeft() {
+		return new Line(x, y, x, y + height);
+	}
+
+	public Line getTop() {
+		return new Line(x, y, x + width, y);
+	}
+
+	public Line getBottom() {
+		return new Line(x, y + height, x + width, y + height);
+	}
+
+	public Line getRight() {
+		return new Line(x + width, y, x + width, y + height);
+	}
+
 	/**
 	 * Draws a new instance of a Rectangle object with the left and right edges of
 	 * the rectangle at x and x + width. The top and bottom edges are at y and y +
@@ -105,10 +121,8 @@ public class Rectangle extends Shape {
 		marker.pushStyle();
 		super.draw(marker);
 		marker.translate((float) x, (float) y);
-		marker.rectMode(marker.CENTER);
 		marker.rect(0, 0, (float) width * scale, (float) height * scale);
 		marker.popStyle();
 		marker.popMatrix();
 	}
-
 }

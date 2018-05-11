@@ -1,9 +1,10 @@
 package screens;
-
+ 
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 import shapes.Line;
+import shapes.Rectangle;
 import sprites.Enemy;
 import sprites.Player;
 import sprites.Projectile;
@@ -12,7 +13,7 @@ public class Level {
 
 	
 	private Player player;
-	private ArrayList<Line> walls;
+	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Enemy> enemies;
 	private int timer;
@@ -21,12 +22,12 @@ public class Level {
 	{
 
 		player = new Player();
-		walls = new ArrayList<Line>();
+		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		enemies.add(new Enemy());
-		walls.add(new Line(500, 0, 500, 700));
-		walls.add(new Line(0, 350, 1000, 350));
+		walls.add(new Rectangle(500, 0, 20, 700));
+		walls.add(new Rectangle(0, 350, 1000, 20));
 		//bullets.add(new Projectile());
 		timer = 0;
 		
@@ -47,7 +48,7 @@ public class Level {
 		player.checkCollision(walls);
 		drawer.stroke(0);
 
-		for (Line object : walls) {
+		for (Rectangle object : walls) {
 			object.draw(drawer);
 		}
 		for (Projectile object : bullets) {
