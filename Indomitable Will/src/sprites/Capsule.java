@@ -36,7 +36,7 @@ public class Capsule extends Basic {
 		drawer.popStyle();
 	}
 
-	public boolean checkCollision(Line other) {
+	public int checkCollision(Line other) {
 
 		return hB.checkCollision(other);
 	}

@@ -54,24 +54,17 @@ public class HitBox extends Basic{
 		LXBox = new Line(xLoc-size,yLoc+size,xLoc-size,yLoc-size);
 	}
 	
-	public boolean checkCollision(Line other)
+	public int checkCollision(Line other)
 	{
-		
-		
-		
 		if (this.checkCollisionU(other))
-			return true;
+			return 1;
 		if (this.checkCollisionD(other))
-			return true;
+			return 3;
 		if (this.checkCollisionL(other))
-			return true;
+			return 4;
 		if (this.checkCollisionR(other))
-			return true;
-		
-		
-		
-		
-		return false;
+			return 2;
+		return 0;
 		
 	}
 	

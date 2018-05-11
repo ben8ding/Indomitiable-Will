@@ -1,5 +1,7 @@
 package sprites;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
@@ -11,8 +13,10 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
+	private int moveIndex = 0;
+	private int blockedDir;
 	public Player() {
-		super(350, 300, 25);
+		super(350, 300, 22);
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -21,72 +25,62 @@ public class Player extends Basic {
 	public void setup(PApplet drawer) {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
+
 	public void draw(PApplet drawer) {
-		
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
+
 		drawer.image(img, xLoc-size, yLoc-size);
+
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
-		
-//		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+
+		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+		// hB.draw(drawer);
+
+			move();
 		hB.draw(drawer);
-		move();
 		hB.refreshLoc(this);
 		drawer.popStyle();
-		
+
 	}
 
-	public boolean checkCollisionU(Line other) {
-		return hB.checkCollisionU(other);
-	}
-
-	public boolean checkCollisionD(Line other) {
-		return hB.checkCollisionD(other);
-	}
-
-	public boolean checkCollisionR(Line other) {
-		return hB.checkCollisionR(other);
-	}
-
-	public boolean checkCollisionL(Line other) {
-		return hB.checkCollisionL(other);
-	}
-
-	public boolean checkCollision(Line other) {
-		if (hB.checkCollision(other))
-			wall = true;
-		else
-			wall = false;
-
-		return hB.checkCollision(other);
+	public boolean checkCollision(ArrayList<Line> walls) {
+		boolean result = false;
+		for (Line l : walls) {
+			if(blockedDir != hB.checkCollision(l)) {
+				blockedDir = hB.checkCollision(l);
+			}
+		}
+		System.out.println(blockedDir);
+		return result;
 	}
 
 	private void move() {
 		// if (!wall) {
-		xVel = (int) (xVel + 0.3 * ((double) dx2 - 0.012 * (double) xVel));
-		yVel = (int) (yVel + 0.3 * ((double) dy2 - 0.012 * (double) yVel));
+		xVel = (int) (xVel + 0.3 * ((double) dx2*1.01 - 0.02 * (double) xVel));
+		yVel = (int) (yVel + 0.3 * ((double) dy2*1.01 - 0.02 * (double) yVel));
 
 		xLoc += xVel;
 		yLoc += yVel;
 
-		if (xLoc < -11) {
-			xLoc = -11;
+		if (xLoc < 20) {
+			xLoc = 20;
 		}
 
-		if (yLoc < -11) {
-			yLoc = -11;
+		if (yLoc < 20) {
+			yLoc = 20;
 		}
-		if (yLoc > 661) {
-			yLoc = 661;
+		if (yLoc > 650) {
+			yLoc = 650;
 		}
-		if (xLoc > 1011) {
-			xLoc = 1011;
+		if (xLoc > 980) {
+			xLoc = 980;
 		}
 		// }
 	}
@@ -105,10 +99,12 @@ public class Player extends Basic {
 		angle = 90;
 		dx2 = -cs;
 	}
+
 	public void mRight() {
 		angle = 270;
 		dx2 = cs;
 	}
+
 	public void stopY() {
 		if (dy2 != 0) {
 			dy2 = 0;
@@ -142,6 +138,7 @@ public class Player extends Basic {
 	}
 
 	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle+90))*15, Math.sin(Math.toRadians(angle+90))*15);
+		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle + 90)) * 15,
+				Math.sin(Math.toRadians(angle + 90)) * 15);
 	}
 }
