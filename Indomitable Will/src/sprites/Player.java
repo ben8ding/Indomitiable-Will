@@ -41,10 +41,7 @@ public class Player extends Basic {
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		// hB.draw(drawer);
 
-		if (moveIndex % 2 == 0) {
 			move();
-		}
-		moveIndex++;
 		hB.refreshLoc(this);
 		drawer.popStyle();
 
@@ -65,8 +62,8 @@ public class Player extends Basic {
 
 	private void move() {
 		// if (!wall) {
-		xVel = (int) (xVel + 0.3 * ((double) dx2 - 0.012 * (double) xVel));
-		yVel = (int) (yVel + 0.3 * ((double) dy2 - 0.012 * (double) yVel));
+		xVel = (int) (xVel + 0.3 * ((double) dx2*1.01 - 0.02 * (double) xVel));
+		yVel = (int) (yVel + 0.3 * ((double) dy2*1.01 - 0.02 * (double) yVel));
 
 		xLoc += xVel;
 		yLoc += yVel;
