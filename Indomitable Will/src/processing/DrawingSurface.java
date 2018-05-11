@@ -31,7 +31,6 @@ public class DrawingSurface extends PApplet {
 	private enum State {
 		PAUSED, MENU, GAME, INSTRUCTIONS
 	};
-
 	private State state;
 
 	public DrawingSurface() {

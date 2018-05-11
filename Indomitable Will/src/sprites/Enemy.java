@@ -20,7 +20,6 @@ public class Enemy extends Basic{
 	@Override
 	public void draw(PApplet drawer) {
 		
-		
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
@@ -32,8 +31,6 @@ public class Enemy extends Basic{
 	}
 
 	public boolean checkCollision(Line other) {
-
-		
 		return hB.checkCollision(other);
 	}
 
