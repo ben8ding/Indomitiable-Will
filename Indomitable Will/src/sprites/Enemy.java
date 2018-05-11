@@ -20,7 +20,6 @@ public class Enemy extends Basic{
 	@Override
 	public void draw(PApplet drawer) {
 		
-		
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);

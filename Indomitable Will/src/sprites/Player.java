@@ -13,7 +13,6 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
-	private int moveIndex = 0;
 	private int blockedDir;
 	public Player() {
 		super(350, 300, 22);
