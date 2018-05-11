@@ -80,7 +80,6 @@ public class Player extends Basic {
 		// if (!wall) {
 		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 		yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
-
 		xLoc += xVel;
 		yLoc += yVel;
 
