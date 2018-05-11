@@ -78,11 +78,12 @@ public class DrawingSurface extends PApplet {
 			}
 		} else {
 			testLevel.draw(this);
+			// these booleans track if the player is moving in a certain direction
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);
 			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
 			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
-			// these booleans track if the player is moving in a certain direction
+			
 //			stroke(0);
 //			textSize(100);
 //			System.out.println("HI");
