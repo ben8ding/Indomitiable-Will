@@ -59,16 +59,18 @@ public class DrawingSurface extends PApplet {
 		if (levelStart == false) {
 			if (getMouseX() > width / 2 && getMouseX() < width / 2 + 200 && getMouseY() > 20 && getMouseY() < 50
 					&& mousePressed) {
-
+				
 				rect(0, 0, width, height);
-				rect(width - 150, height - 50, 100, 30);
+				rect(width - 150, height - 70, 100, 30);
 				fill(0);
-				text("Back", width - 100, height - 30);
+				textAlign(CENTER);
+				text("Back", width - 100, height - 50);
 				textSize(14);
+				textAlign(LEFT);
 				text("This program is a top-down shooter game where the player represents the character Skal, whose mission is to save his village \nfrom an evil invasion. Skal can pick up multiple weapons, powerups, and other goodies to help aid his fight against the invaders. \nHe also can find a map with his progress. Skal has the ability to fight boss enemies, who have special abilities and are \nstronger than regular enemies.\n\nPress play to play the game. Skal should then enter rooms and defeat enemies to try to complete the game.", 100, 100);
 				howToPlay = true;
-			} else if (howToPlay && getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 50
-					&& getMouseY() < height - 20 && mousePressed) {
+			} else if (howToPlay && getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 70
+					&& getMouseY() < height - 40 && mousePressed) {
 				howToPlay = false;
 				background(255);
 				menu.draw(this);
