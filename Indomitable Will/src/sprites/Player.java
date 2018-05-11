@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
+import shapes.Rectangle;
 
+/**
+ * 
+ * 
+ *
+ */
 public class Player extends Basic {
 
 	private HitBox hB;
@@ -13,7 +19,11 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
-	private int blockedDir;
+	/*
+	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
+	 */
+	private ArrayList<Integer> blockedDir = new ArrayList<Integer>(4);
+
 	public Player() {
 		super(350, 300, 22);
 		wall = false;
@@ -40,18 +50,26 @@ public class Player extends Basic {
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		// hB.draw(drawer);
 
-			move();
+		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
 		drawer.popStyle();
 
 	}
 
-	public boolean checkCollision(ArrayList<Line> walls) {
+	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
-		for (Line l : walls) {
-			if(blockedDir != hB.checkCollision(l)) {
-				blockedDir = hB.checkCollision(l);
+		blockedDir.clear();
+		for (Rectangle r : walls) {
+			if(Math.abs(r.getLeft().getX() - hB.getRXBox().getX()) < 5) {
+				if(!blockedDir.contains(2)) {
+					blockedDir.add(2);
+				}
+			}
+			if(Math.abs(r.getRight().getX() - hB.getLXBox().getX())< 5) {
+				if(!blockedDir.contains(4)) {
+					blockedDir.add(4);
+				}
 			}
 		}
 		System.out.println(blockedDir);
@@ -60,8 +78,8 @@ public class Player extends Basic {
 
 	private void move() {
 		// if (!wall) {
-		xVel = (int) (xVel + 0.3 * ((double) dx2*1.01 - 0.02 * (double) xVel));
-		yVel = (int) (yVel + 0.3 * ((double) dy2*1.01 - 0.02 * (double) yVel));
+		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
+		yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 
 		xLoc += xVel;
 		yLoc += yVel;
@@ -84,22 +102,34 @@ public class Player extends Basic {
 
 	public void mUp() {
 		angle = 180;
-		dy2 = -cs;
+		if (!blockedDir.contains(1)) {
+			dy2 = -cs;
+		}
+
 	}
 
 	public void mDown() {
 		angle = 0;
-		dy2 = cs;
+		if (!blockedDir.contains(3)) {
+			dy2 = cs;
+		}
+
 	}
 
 	public void mLeft() {
 		angle = 90;
-		dx2 = -cs;
+		if (!blockedDir.contains(4)) {
+			dx2 = -cs;
+		}
+
 	}
 
 	public void mRight() {
 		angle = 270;
-		dx2 = cs;
+		if (!blockedDir.contains(2)) {
+			dx2 = cs;
+		}
+
 	}
 
 	public void stopY() {

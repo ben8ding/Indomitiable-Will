@@ -1,29 +1,22 @@
 package sprites;
+import java.awt.geom.Rectangle2D;
+
 import processing.core.PApplet;
 import shapes.Line;
 
 
-public class HitBox extends Basic{
-
+public class HitBox extends Basic {
 	private Line UYBox;
 	private Line DYBox;
 	private Line RXBox;
 	private Line LXBox;
 	
 	
-	public HitBox()
-	{
-		super(0,0,25);
-		size = 25;
-		hitBox();
-	}
-	
 	public HitBox(int set)
 	{
 		super(0,0,set);
 		hitBox();
 	}
-	
 	public HitBox(Basic other)
 	{
 		super(0,0,other.getSize());
@@ -31,7 +24,6 @@ public class HitBox extends Basic{
 	}
 	
 	public void draw(PApplet drawer) {
-		
 		UYBox.draw(drawer);
 		DYBox.draw(drawer);
 		RXBox.draw(drawer);
@@ -58,14 +50,13 @@ public class HitBox extends Basic{
 	{
 		if (this.checkCollisionU(other))
 			return 1;
+		if (this.checkCollisionR(other))
+			return 2;
 		if (this.checkCollisionD(other))
 			return 3;
 		if (this.checkCollisionL(other))
 			return 4;
-		if (this.checkCollisionR(other))
-			return 2;
 		return 0;
-		
 	}
 	
 	
