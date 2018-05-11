@@ -54,11 +54,12 @@ public class Player extends Basic {
 		boolean result = false;
 		for (Line l : walls) {
 			if (hB.checkCollision(l)) {
+				//needs to be edited to include with side of the player
 				result = true;
-
 				break;
 			}
 		}
+		System.out.println(result);
 		return result;
 	}
 

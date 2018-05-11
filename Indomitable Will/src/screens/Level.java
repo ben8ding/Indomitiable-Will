@@ -44,6 +44,7 @@ public class Level {
 //		drawer.rect(drawer.width-20,drawer.height,20,20);
 //		drawer.textSize(10);
 		player.draw(drawer);
+		player.checkCollision(walls);
 		drawer.stroke(0);
 
 		for (Line object : walls) {
