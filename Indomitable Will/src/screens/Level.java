@@ -42,8 +42,11 @@ public class Level {
 		drawer.pushStyle();
 		drawer.clear();
 		drawer.background(255);
-//		drawer.rect(drawer.width-20,drawer.height,20,20);
-//		drawer.textSize(10);
+		drawer.rect(drawer.width-20,0,20,20);
+		drawer.textSize(15);
+		drawer.fill(0);
+		drawer.text("II", drawer.width - 14,17);
+
 		player.draw(drawer);
 		player.checkCollision(walls);
 		drawer.stroke(0);
