@@ -4,14 +4,13 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import Level.*;
-import Level.Menu;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
+import screens.*;
 import shapes.Line;
 import sprites.Player;
-
+import screens.Menu;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
