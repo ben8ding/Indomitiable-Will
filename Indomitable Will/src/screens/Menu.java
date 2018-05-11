@@ -1,4 +1,4 @@
-package Level;
+package screens;
 
 import processing.core.PApplet;
 

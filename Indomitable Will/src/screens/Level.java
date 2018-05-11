@@ -1,4 +1,4 @@
-package Level;
+package screens;
 
 import java.util.ArrayList;
 
