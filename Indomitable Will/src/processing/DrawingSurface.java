@@ -28,7 +28,8 @@ public class DrawingSurface extends PApplet {
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
 	public static final int ySize = 700;
-
+	private enum State {PAUSED, MENU, GAME, INSTRUCTIONS};
+	private State state;
 	public DrawingSurface() {
 		keys = new ArrayList<Integer>();
 		testLevel = new Level();
@@ -37,6 +38,7 @@ public class DrawingSurface extends PApplet {
 		menu = new Menu();
 		howToPlay = false;
 		haveDrawn = false;
+		state = State.MENU;
 	}
 
 	public void settings() {
