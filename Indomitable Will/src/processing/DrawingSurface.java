@@ -88,7 +88,7 @@ public class DrawingSurface extends PApplet {
 			// stroke(0);
 			// textSize(100);
 			// System.out.println("HI");
-			// text("II", width - 300,height + 500);
+			// text("II", width - 300,height - 500);
 			// System.out.println("BAI");
 			if (keys.contains((int) 'B')) {
 				testLevel.getPlayer().startFiring();
