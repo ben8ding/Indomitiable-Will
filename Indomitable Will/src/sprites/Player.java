@@ -13,6 +13,8 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
+	private int moveIndex = 0;
+
 	public Player() {
 		super(350, 300, 22);
 		wall = false;
@@ -23,32 +25,37 @@ public class Player extends Basic {
 	public void setup(PApplet drawer) {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
+
 	public void draw(PApplet drawer) {
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
-		drawer.image(img, xLoc-24, yLoc-24);
+		drawer.image(img, xLoc - 24, yLoc - 24);
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
-		
-//		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-//		hB.draw(drawer);
-		move();
+
+		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+		// hB.draw(drawer);
+
+		if (moveIndex % 2 == 0) {
+			move();
+		}
+		moveIndex++;
 		hB.refreshLoc(this);
 		drawer.popStyle();
-		
-	}
 
+	}
 
 	public boolean checkCollision(ArrayList<Line> walls) {
 		boolean result = false;
-		for(Line l : walls) {
-			if(hB.checkCollision(l)) {
+		for (Line l : walls) {
+			if (hB.checkCollision(l)) {
 				result = true;
+
 				break;
 			}
 		}
@@ -93,10 +100,12 @@ public class Player extends Basic {
 		angle = 90;
 		dx2 = -cs;
 	}
+
 	public void mRight() {
 		angle = 270;
 		dx2 = cs;
 	}
+
 	public void stopY() {
 		if (dy2 != 0) {
 			dy2 = 0;
@@ -130,6 +139,7 @@ public class Player extends Basic {
 	}
 
 	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle+90))*15, Math.sin(Math.toRadians(angle+90))*15);
+		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle + 90)) * 15,
+				Math.sin(Math.toRadians(angle + 90)) * 15);
 	}
 }
