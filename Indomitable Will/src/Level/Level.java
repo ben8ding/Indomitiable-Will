@@ -41,7 +41,8 @@ public class Level {
 		drawer.pushStyle();
 		drawer.clear();
 		drawer.background(255);
-
+//		drawer.rect(drawer.width-20,drawer.height,20,20);
+//		drawer.textSize(10);
 		player.draw(drawer);
 		drawer.stroke(0);
 
