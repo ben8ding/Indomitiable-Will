@@ -22,6 +22,7 @@ import java.util.Random;
 public class DrawingSurface extends PApplet {
 
 	private Menu menu;
+	private PauseMenu pauseMenu;
 	private Level testLevel;
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
@@ -38,6 +39,7 @@ public class DrawingSurface extends PApplet {
 		testLevel = new Level();
 		menu = new Menu();
 		state = State.MENU;
+		pauseMenu = new PauseMenu();
 	}
 
 	public void settings() {
@@ -92,7 +94,7 @@ public class DrawingSurface extends PApplet {
 					&& state == State.GAME&&mousePressed) {
 				state = State.PAUSED;
 				background(255);
-				menu.draw(this);
+				pauseMenu.draw(this);
 			}
 			if (keys.contains((int) 'B')) {
 				testLevel.getPlayer().startFiring();
