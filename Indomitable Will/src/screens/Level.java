@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import shapes.Line;
+import sprites.Capsule;
 import sprites.Enemy;
+import sprites.Gun;
 import sprites.Player;
 import sprites.Projectile;
 
@@ -15,6 +17,7 @@ public class Level {
 	private ArrayList<Line> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Enemy> enemies;
+	private ArrayList<Capsule> drops;
 	private int timer;
 	
 	public Level()
@@ -24,7 +27,9 @@ public class Level {
 		walls = new ArrayList<Line>();
 		bullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
+		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy());
+		drops.add(new Capsule(40,40, new Gun()));
 		walls.add(new Line(500, 0, 500, 700));
 		walls.add(new Line(0, 350, 1000, 350));
 		//bullets.add(new Projectile());
@@ -33,6 +38,9 @@ public class Level {
 	}
 	public void setup(PApplet drawer) {
 		player.setup(drawer);
+		for (Capsule object : drops) {
+			object.getItem().setup(drawer);
+		}
 	}
 	public void draw(PApplet drawer) {
 		
@@ -41,10 +49,8 @@ public class Level {
 		drawer.pushStyle();
 		drawer.clear();
 		drawer.background(255);
-//		drawer.rect(drawer.width-20,drawer.height,20,20);
-//		drawer.textSize(10);
+
 		player.draw(drawer);
-		player.checkCollision(walls);
 		drawer.stroke(0);
 
 		for (Line object : walls) {
@@ -56,18 +62,19 @@ public class Level {
 		for (Enemy object : enemies) {
 			object.draw(drawer);
 		}
+		for (Capsule object : drops) {
+			object.draw(drawer);
+		}
 		if(player.isFiring()) {
-			bullets.add(player.fire());
+			bullets.addAll(player.fire());
+		}
+		
+		if(timer%100==0) {
 			for (Enemy object : enemies) {
 				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 			}
 		}
-		
-		/*if(timer%100==0) {
-			for (Enemy object : enemies) {
-				object.fire(player.getXLoc(), player.getYLoc());
-			}
-		}*/
+	
 		
 		for (Projectile object : bullets) {
 			for (Enemy object2 : enemies) {

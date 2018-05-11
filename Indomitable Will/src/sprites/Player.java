@@ -15,8 +15,12 @@ public class Player extends Basic {
 	private boolean firing;
 	private int moveIndex = 0;
 	private int blockedDir;
+	private ArrayList<Weapon> weapons;
+
 	public Player() {
 		super(350, 300, 22);
+		weapons = new ArrayList<Weapon>();
+		weapons.add(new Weapon());
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -32,7 +36,7 @@ public class Player extends Basic {
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
 
-		drawer.image(img, xLoc-size, yLoc-size);
+		drawer.image(img, xLoc - size, yLoc - size);
 
 		drawer.popMatrix();
 		drawer.pushStyle();
@@ -43,7 +47,7 @@ public class Player extends Basic {
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		// hB.draw(drawer);
 
-			move();
+		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
 		drawer.popStyle();
@@ -53,7 +57,7 @@ public class Player extends Basic {
 	public boolean checkCollision(ArrayList<Line> walls) {
 		boolean result = false;
 		for (Line l : walls) {
-			if(blockedDir != hB.checkCollision(l)) {
+			if (blockedDir != hB.checkCollision(l)) {
 				blockedDir = hB.checkCollision(l);
 			}
 		}
@@ -63,8 +67,8 @@ public class Player extends Basic {
 
 	private void move() {
 		// if (!wall) {
-		xVel = (int) (xVel + 0.3 * ((double) dx2*1.01 - 0.02 * (double) xVel));
-		yVel = (int) (yVel + 0.3 * ((double) dy2*1.01 - 0.02 * (double) yVel));
+		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
+		yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 
 		xLoc += xVel;
 		yLoc += yVel;
@@ -137,8 +141,7 @@ public class Player extends Basic {
 		firing = true;
 	}
 
-	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15);
+	public ArrayList<Projectile> fire() {
+		return this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
 	}
 }
