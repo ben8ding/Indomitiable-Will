@@ -63,18 +63,18 @@ public class Player extends Basic {
 		xLoc += xVel;
 		yLoc += yVel;
 
-		if (xLoc < -11) {
-			xLoc = -11;
+		if (xLoc < 20) {
+			xLoc = 20;
 		}
 
-		if (yLoc < -11) {
-			yLoc = -11;
+		if (yLoc < 20) {
+			yLoc = 20;
 		}
-		if (yLoc > 661) {
-			yLoc = 661;
+		if (yLoc > 650) {
+			yLoc = 650;
 		}
-		if (xLoc > 1011) {
-			xLoc = 1011;
+		if (xLoc > 980) {
+			xLoc = 980;
 		}
 		// }
 	}
