@@ -14,7 +14,7 @@ public class Player extends Basic {
 	private static final double cs = 3.5;
 	private boolean firing;
 	private int moveIndex = 0;
-
+	private int blockedDir;
 	public Player() {
 		super(350, 300, 22);
 		wall = false;
@@ -42,6 +42,7 @@ public class Player extends Basic {
 		// hB.draw(drawer);
 
 			move();
+		hB.draw(drawer);
 		hB.refreshLoc(this);
 		drawer.popStyle();
 
@@ -50,13 +51,11 @@ public class Player extends Basic {
 	public boolean checkCollision(ArrayList<Line> walls) {
 		boolean result = false;
 		for (Line l : walls) {
-			if (hB.checkCollision(l)) {
-				//needs to be edited to include with side of the player
-				result = true;
-				break;
+			if(blockedDir != hB.checkCollision(l)) {
+				blockedDir = hB.checkCollision(l);
 			}
 		}
-		System.out.println(result);
+		System.out.println(blockedDir);
 		return result;
 	}
 

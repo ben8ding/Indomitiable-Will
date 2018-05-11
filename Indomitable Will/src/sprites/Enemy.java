@@ -32,8 +32,6 @@ public class Enemy extends Basic{
 	}
 
 	public boolean checkCollision(Line other) {
-
-		
 		return hB.checkCollision(other);
 	}
 
