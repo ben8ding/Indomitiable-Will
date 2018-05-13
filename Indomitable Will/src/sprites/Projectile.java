@@ -40,5 +40,7 @@ public class Projectile extends Basic {
 		act();
 		drawer.popStyle();
 	}
-
+	public HitBox getBox() {
+		return this.hB;
+	}
 }

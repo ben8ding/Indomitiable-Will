@@ -52,5 +52,7 @@ public class Capsule extends Basic {
 	public Pickup getItem() {
 		return this.item;
 	}
-
+	public HitBox getBox() {
+		return this.hB;
+	}
 }

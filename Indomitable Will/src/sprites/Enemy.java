@@ -11,11 +11,14 @@ public class Enemy extends Basic{
 	
 	public Enemy() {
 		super(500, 350, 15);
-
 		health = 3;
 		hB = new HitBox(this);
-		
-		
+	}
+	
+	public Enemy(int x, int y) {
+		super(y, x, 15);
+		health = 3;
+		hB = new HitBox(this);
 	}
 	
 	@Override
@@ -50,5 +53,7 @@ public class Enemy extends Basic{
 		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-x)*-0.1,(getYLoc()-y)*-0.1);
 		//return new Projectile(getXLoc(),getYLoc(),10,0);
 	}
-	
+	public HitBox getBox() {
+		return this.hB;
+	}
 }

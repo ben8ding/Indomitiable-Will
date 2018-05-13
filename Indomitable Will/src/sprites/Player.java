@@ -30,7 +30,7 @@ public class Player extends Basic {
 	private ArrayList<Integer> blockedDir = new ArrayList<Integer>(4);
 
 	public Player() {
-		super(350, 300, 22);
+		super(350, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		weapons.add(new Weapon());
 		wall = false;
@@ -68,9 +68,17 @@ public class Player extends Basic {
 
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
+		for (Rectangle wall : walls) {
+			if (this.hB.checkCollision(wall))
+				return true;
+		}
+		return result;
+	}
 
-		
-		//System.out.println(blockedDir);
+	public boolean checkCollision(Rectangle wall) {
+		boolean result = false;
+		if (this.hB.checkCollision(wall))
+			return true;
 		return result;
 	}
 
@@ -165,4 +173,9 @@ public class Player extends Basic {
 	public ArrayList<Projectile> fire() {
 		return this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
 	}
+
+	public HitBox getBox() {
+		return this.hB;
+	}
+
 }
