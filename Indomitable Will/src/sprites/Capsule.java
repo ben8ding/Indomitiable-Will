@@ -1,5 +1,7 @@
 package sprites;
 
+import java.awt.Rectangle;
+
 import processing.core.PApplet;
 import shapes.Line;
 
@@ -36,7 +38,7 @@ public class Capsule extends Basic {
 		drawer.popStyle();
 	}
 
-	public int checkCollision(Line other) {
+	public boolean checkCollision(Rectangle other) {
 
 		return hB.checkCollision(other);
 	}

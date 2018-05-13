@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import shapes.Line;
-<<<<<<< HEAD
+
 import sprites.Capsule;
-=======
-import shapes.Rectangle;
->>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
+
+import java.awt.Rectangle;
+
 import sprites.Enemy;
 import sprites.Gun;
 import sprites.Player;
@@ -33,15 +33,13 @@ public class Level {
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy());
-<<<<<<< HEAD
+
 		drops.add(new Capsule(40,40, new Gun()));
-		walls.add(new Line(500, 0, 500, 700));
-		walls.add(new Line(0, 350, 1000, 350));
-=======
+
 		walls.add(new Rectangle(500, 0, 20, 700));
 		walls.add(new Rectangle(0, 350, 1000, 20));
->>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
-		//bullets.add(new Projectile());
+
+		
 		timer = 0;
 		
 	}
@@ -50,27 +48,25 @@ public class Level {
 		for (Capsule object : drops) {
 			object.getItem().setup(drawer);
 		}
+		
 	}
 	public void draw(PApplet drawer) {
 		
 		timer++;
-		
-		drawer.pushStyle();
 		drawer.clear();
+		drawer.pushStyle();
 		drawer.background(255);
-<<<<<<< HEAD
-=======
 		drawer.rect(drawer.width-20,0,20,20);
 		drawer.textSize(15);
 		drawer.fill(0);
 		drawer.text("II", drawer.width - 14,17);
->>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
 
 		player.draw(drawer);
-		drawer.stroke(0);
+		drawer.stroke(255);
 
 		for (Rectangle object : walls) {
-			object.draw(drawer);
+			drawer.rect(object.x, object.y, object.width, object.height);
+			
 		}
 		for (Projectile object : bullets) {
 			object.draw(drawer);
@@ -92,10 +88,8 @@ public class Level {
 		}
 	
 		
-		for (Projectile object : bullets) {
-			for (Enemy object2 : enemies) {
-				
-			}
+		if(player.checkCollision(walls)) {
+			System.out.println("ping");
 		}
 		
 		drawer.popStyle();

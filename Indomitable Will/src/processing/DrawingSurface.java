@@ -47,7 +47,7 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void setup() {
-		background(255);
+		//background(255);
 		testLevel.setup(this);
 	}
 

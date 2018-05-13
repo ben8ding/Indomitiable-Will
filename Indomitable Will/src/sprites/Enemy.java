@@ -2,6 +2,7 @@ package sprites;
 
 import processing.core.PApplet;
 import shapes.Line;
+import java.awt.Rectangle;
 
 public class Enemy extends Basic{
 
@@ -30,7 +31,7 @@ public class Enemy extends Basic{
 		drawer.popStyle();
 	}
 
-	public int checkCollision(Line other) {
+	public boolean checkCollision(Rectangle other) {
 		return hB.checkCollision(other);
 	}
 
