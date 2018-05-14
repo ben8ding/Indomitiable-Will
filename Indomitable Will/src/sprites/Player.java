@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shapes.Line;
-import shapes.Rectangle;
+import java.awt.Rectangle;
 
 /**
  * 
@@ -19,13 +19,20 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
+
+	private int moveIndex = 0;
+	// private int blockedDir;
+	private ArrayList<Weapon> weapons;
+
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
 	private ArrayList<Integer> blockedDir = new ArrayList<Integer>(4);
 
 	public Player() {
-		super(350, 300, 22);
+		super(350, 350, 22);
+		weapons = new ArrayList<Weapon>();
+		weapons.add(new Weapon());
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -40,7 +47,9 @@ public class Player extends Basic {
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
-		drawer.image(img, xLoc - 24, yLoc - 24);
+
+		drawer.image(img, xLoc - size, yLoc - size);
+
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
@@ -59,20 +68,17 @@ public class Player extends Basic {
 
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
-		blockedDir.clear();
-		for (Rectangle r : walls) {
-			if(Math.abs(r.getLeft().getX() - hB.getRXBox().getX()) < 5) {
-				if(!blockedDir.contains(2)) {
-					blockedDir.add(2);
-				}
-			}
-			if(Math.abs(r.getRight().getX() - hB.getLXBox().getX())< 5) {
-				if(!blockedDir.contains(4)) {
-					blockedDir.add(4);
-				}
-			}
+		for (Rectangle wall : walls) {
+			if (this.hB.checkCollision(wall))
+				return true;
 		}
-		System.out.println(blockedDir);
+		return result;
+	}
+
+	public boolean checkCollision(Rectangle wall) {
+		boolean result = false;
+		if (this.hB.checkCollision(wall))
+			return true;
 		return result;
 	}
 
@@ -163,8 +169,12 @@ public class Player extends Basic {
 		firing = true;
 	}
 
-	public Projectile fire() {
-		return new Projectile(getXLoc(), getYLoc(), Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15);
+	public ArrayList<Projectile> fire() {
+		return this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
 	}
+
+	public HitBox getBox() {
+		return this.hB;
+	}
+
 }

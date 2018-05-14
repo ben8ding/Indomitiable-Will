@@ -11,6 +11,7 @@ public class Menu {
 		
 	}
 	public void draw(PApplet drawer) {
+		
 		drawer.pushMatrix();
 		drawer.pushStyle();
 		drawer.fill(220);
