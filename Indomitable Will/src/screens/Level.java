@@ -85,7 +85,7 @@ public class Level {
 
 
 		if(player.checkCollision(walls)) {
-			System.out.println("ping");
+			//System.out.println("ping");
 		}
 
 //		for(Projectile bullet : bullets) {

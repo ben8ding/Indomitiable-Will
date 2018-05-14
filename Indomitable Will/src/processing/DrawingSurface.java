@@ -47,7 +47,7 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void setup() {
-		//background(255);
+		// background(255);
 		testLevel.setup(this);
 	}
 
@@ -78,8 +78,14 @@ public class DrawingSurface extends PApplet {
 			} else if (getMouseX() > width / 2 - 200 && getMouseX() < width / 2 + 200 && getMouseY() > height / 2 - 115
 					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU) {
 				state = State.GAME;
+			} else if (getMouseX() > width / 2 - 75 && getMouseX() < width / 2 + 75 && getMouseY() > height / 2 - 200
+					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {
+				System.out.println("HIHIHIHI");
+				state = State.GAME;
+				testLevel.draw(this);
 			}
 		} else {
+
 			testLevel.draw(this);
 			// these booleans track if the player is moving in a certain direction
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
@@ -87,14 +93,12 @@ public class DrawingSurface extends PApplet {
 			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
 			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
 
-			// textSize(100);
-			// System.out.println("HI");
-			// System.out.println("BAI");
 			if (getMouseX() > width - 20 && getMouseX() < width && getMouseY() > 0 && getMouseY() < 20
-					&& state == State.GAME&&mousePressed) {
+					&& state == State.GAME && mousePressed) {
 				state = State.PAUSED;
 				background(255);
 				pauseMenu.draw(this);
+
 			}
 			if (keys.contains((int) 'B')) {
 				testLevel.getPlayer().startFiring();
