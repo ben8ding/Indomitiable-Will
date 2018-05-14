@@ -94,22 +94,26 @@ public class Player extends Basic {
 				blockedDir.add(Direction.UP);
 				yVel = 0;
 				dy2 = 0;
+				yLoc = wall.y + wall.height + 23;
 			} else if(yVel > 0) {
 				if(!blockedDir.contains(Direction.DOWN))
 				blockedDir.add(Direction.DOWN);
 				yVel = 0;
 				dy2 = 0;
+				yLoc = wall.y - 23;
 			}
 			if(xVel > 0) {
 				if(!blockedDir.contains(Direction.RIGHT))
 				blockedDir.add(Direction.RIGHT);
 				xVel = 0;
 				dx2 = 0;
+				xLoc = wall.x - 23;
 			} else if(xVel < 0) {
 				if(!blockedDir.contains(Direction.LEFT))
 				blockedDir.add(Direction.LEFT);
 				xVel = 0;
 				dx2 = 0;
+				xLoc = wall.x + wall.width + 23;
 			}
 		}
 		return result;
