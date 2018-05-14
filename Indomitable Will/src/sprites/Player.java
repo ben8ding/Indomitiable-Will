@@ -19,7 +19,9 @@ public class Player extends Basic {
 	private boolean wall;
 	private static final double cs = 3.5;
 	private boolean firing;
-
+	private enum Direction{
+			UP, RIGHT, DOWN, LEFT
+	}
 	private int moveIndex = 0;
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
@@ -27,10 +29,9 @@ public class Player extends Basic {
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
-	private ArrayList<Integer> blockedDir = new ArrayList<Integer>(4);
-
+	private ArrayList<Direction> blockedDir =  new ArrayList<Direction>(4);
 	public Player() {
-		super(350, 350, 22);
+		super(350, 300, 22);
 		weapons = new ArrayList<Weapon>();
 		weapons.add(new Weapon());
 		wall = false;
@@ -55,10 +56,19 @@ public class Player extends Basic {
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
-
+		System.out.println(blockedDir);
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		// hB.draw(drawer);
-
+		if(blockedDir.contains(Direction.UP) && dy2 > 0) {
+			blockedDir.remove(blockedDir.indexOf(Direction.UP));
+		} else if(blockedDir.contains(Direction.DOWN) && dy2 < 0) {
+			blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
+		}
+		if(blockedDir.contains(Direction.RIGHT) && dx2 < 0) {
+			blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+		} else if(blockedDir.contains(Direction.RIGHT) && dx2 > 0) {
+			blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+		}
 		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
@@ -69,16 +79,39 @@ public class Player extends Basic {
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
-			if (this.hB.checkCollision(wall))
-				return true;
+			if (checkCollision(wall))
+				result = true;
 		}
 		return result;
 	}
 
 	public boolean checkCollision(Rectangle wall) {
 		boolean result = false;
-		if (this.hB.checkCollision(wall))
-			return true;
+		if (hB.checkCollision(wall)) {
+			result = true;
+			if(yVel < 0) {
+				if(!blockedDir.contains(Direction.UP))
+				blockedDir.add(Direction.UP);
+				yVel = 0;
+				dy2 = 0;
+			} else if(yVel > 0) {
+				if(!blockedDir.contains(Direction.DOWN))
+				blockedDir.add(Direction.DOWN);
+				yVel = 0;
+				dy2 = 0;
+			}
+			if(xVel > 0) {
+				if(!blockedDir.contains(Direction.RIGHT))
+				blockedDir.add(Direction.RIGHT);
+				xVel = 0;
+				dx2 = 0;
+			} else if(xVel < 0) {
+				if(!blockedDir.contains(Direction.LEFT))
+				blockedDir.add(Direction.LEFT);
+				xVel = 0;
+				dx2 = 0;
+			}
+		}
 		return result;
 	}
 
@@ -86,7 +119,6 @@ public class Player extends Basic {
 		// if (!wall) {
 		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 		yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
-
 		xLoc += xVel;
 		yLoc += yVel;
 
@@ -108,32 +140,43 @@ public class Player extends Basic {
 
 	public void mUp() {
 		angle = 180;
-		if (!blockedDir.contains(1)) {
+		if (!blockedDir.contains(Direction.UP)) {
 			dy2 = -cs;
+		
 		}
-
+		if(blockedDir.contains(Direction.DOWN)) {
+	
+		}
 	}
 
 	public void mDown() {
 		angle = 0;
-		if (!blockedDir.contains(3)) {
+		if (!blockedDir.contains(Direction.DOWN)) {
 			dy2 = cs;
 		}
-
+		if(blockedDir.contains(Direction.UP)) {
+		
+		}
 	}
 
 	public void mLeft() {
 		angle = 90;
-		if (!blockedDir.contains(4)) {
+		if (!blockedDir.contains(Direction.LEFT)) {
 			dx2 = -cs;
+			
 		}
-
+		if(blockedDir.contains(Direction.RIGHT)) {
+	
+		}
 	}
 
 	public void mRight() {
 		angle = 270;
-		if (!blockedDir.contains(2)) {
+		if (!blockedDir.contains(Direction.RIGHT)) {
 			dx2 = cs;
+		}
+		if(blockedDir.contains(Direction.LEFT)) {
+		
 		}
 
 	}
