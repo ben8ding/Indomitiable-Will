@@ -58,10 +58,9 @@ public class Level {
 		drawer.text("II", drawer.width - 14,17);
 
 		
-		player.checkCollision(walls);
+		player.checkCollision(walls, drops);
 		player.draw(drawer);
 		drawer.stroke(0);
-
 		for (Rectangle object : walls) {
 			drawer.rect(object.x, object.y, object.width, object.height);
 

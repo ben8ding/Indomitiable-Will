@@ -32,7 +32,7 @@ public class Player extends Basic {
 	public Player() {
 		super(350, 300, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Weapon());
+		weapons.add(new Weapon(Weapon.weaponType.SHOTGUN));
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -74,11 +74,19 @@ public class Player extends Basic {
 
 	}
 
-	public boolean checkCollision(ArrayList<Rectangle> walls) {
+	public boolean checkCollision(ArrayList<Rectangle> walls, ArrayList<Capsule> drops) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
 			if (checkCollision(wall))
 				result = true;
+		}
+		for(Capsule drop: drops) {
+			if(checkCollision(drop.getBox())) {
+				if(drop.getItem()) {
+					weapons.add(drop.getItem());
+				}
+				weapons.add(drop.getItem());
+			}
 		}
 		return result;
 	}
@@ -128,7 +136,7 @@ public class Player extends Basic {
 		}
 		return result;
 	}
-
+	public boolean 
 	private void move() {
 		// if (!wall) {
 		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));

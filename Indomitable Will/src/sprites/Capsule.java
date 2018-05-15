@@ -39,14 +39,11 @@ public class Capsule extends Basic {
 	}
 
 	public boolean checkCollision(Rectangle other) {
-
 		return hB.checkCollision(other);
 	}
 
 	public void act() {
-
 		hB.refreshLoc(this);
-
 	}
 	
 	public Pickup getItem() {
