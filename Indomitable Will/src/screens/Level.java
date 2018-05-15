@@ -58,9 +58,7 @@ public class Level {
 		drawer.text("II", drawer.width - 14,17);
 
 		
-		if(player.checkCollision(walls)) {
-			System.out.println("ping");
-		}
+		player.checkCollision(walls);
 		player.draw(drawer);
 		drawer.stroke(0);
 
@@ -88,9 +86,6 @@ public class Level {
 		}
 
 
-		if(player.checkCollision(walls)) {
-			//System.out.println("ping");
-		}
 		
 
 //		for(Projectile bullet : bullets) {

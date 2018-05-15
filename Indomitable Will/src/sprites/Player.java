@@ -22,7 +22,6 @@ public class Player extends Basic {
 	private enum Direction{
 			UP, RIGHT, DOWN, LEFT
 	}
-	private int moveIndex = 0;
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
 
@@ -56,7 +55,6 @@ public class Player extends Basic {
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
-		System.out.println(blockedDir);
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		// hB.draw(drawer);
 		if(blockedDir.contains(Direction.UP) && dy2 > 0) {
@@ -90,30 +88,42 @@ public class Player extends Basic {
 		if (hB.checkCollision(wall)) {
 			result = true;
 			if(yVel < 0) {
-				if(!blockedDir.contains(Direction.UP))
-				blockedDir.add(Direction.UP);
-				yVel = 0;
-				dy2 = 0;
-				yLoc = wall.y + wall.height + 23;
+				if(wall.getWidth() > wall.getHeight()) {
+					yLoc = (int) (wall.getMaxY() + 23);
+					if(!blockedDir.contains(Direction.UP))
+						blockedDir.add(Direction.UP);
+					yVel = 0;
+					dy2 = 0;
+				}
+				
 			} else if(yVel > 0) {
+				
+				if(wall.getWidth() > wall.getHeight()) {
+					yLoc = (int) (wall.getMinY() - 23);
 				if(!blockedDir.contains(Direction.DOWN))
 				blockedDir.add(Direction.DOWN);
 				yVel = 0;
 				dy2 = 0;
-				yLoc = wall.y - 23;
+				}
+				
 			}
 			if(xVel > 0) {
-				if(!blockedDir.contains(Direction.RIGHT))
-				blockedDir.add(Direction.RIGHT);
-				xVel = 0;
-				dx2 = 0;
+				if(wall.getWidth() > wall.getHeight()) {
+					xLoc = (int) (wall.getMinX() - 23);
+					if(!blockedDir.contains(Direction.RIGHT))
+						blockedDir.add(Direction.RIGHT);
+						xVel = 0;
+						dx2 = 0;
+				}
 				xLoc = wall.x - 23;
 			} else if(xVel < 0) {
-				if(!blockedDir.contains(Direction.LEFT))
-				blockedDir.add(Direction.LEFT);
-				xVel = 0;
-				dx2 = 0;
-				xLoc = wall.x + wall.width + 23;
+				if(wall.getWidth() > wall.getHeight()) {
+					xLoc = (int) (wall.getMaxX() + 23);
+					if(!blockedDir.contains(Direction.LEFT))
+						blockedDir.add(Direction.LEFT);
+						xVel = 0;
+						dx2 = 0;
+				}
 			}
 		}
 		return result;
