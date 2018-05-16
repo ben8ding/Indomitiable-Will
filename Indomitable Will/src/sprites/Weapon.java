@@ -3,19 +3,22 @@ package sprites;
 import java.util.ArrayList;
 
 import processing.core.PImage;
-
-public class Weapon {
-	private enum weaponType {SHOTGUN, RIFLE, SWORD};
-	
-	public int getWeaponType() {
-		return 1;
+import processing.core.PApplet;
+public class Weapon extends Pickup {
+	public enum weaponType {SHOTGUN, RIFLE, SWORD};
+	private weaponType weapon;
+	public weaponType getWeaponType() {
+		return weapon;
 	}
 	
-	
+	public Weapon(PImage image, weaponType weaponType) {
+		super(image);
+		this.weapon = weaponType;
+	}
 	
 	public ArrayList<Projectile> fire(int xLoc,int yLoc, double angle) {
-		
-		ArrayList<Projectile> fire = new ArrayList<Projectile>();
+		if(weapon == weaponType.SHOTGUN) {
+			ArrayList<Projectile> fire = new ArrayList<Projectile>();
 		
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
 				Math.sin(Math.toRadians(angle + 90)) * 15));
@@ -31,6 +34,10 @@ public class Weapon {
 				Math.sin(Math.toRadians(angle + 90)) * 15));
 		
 		return fire;
+		} else if (weapon == weaponType.RIFLE) {
+			return null;
+		} 
+		return null;
 	}
 }
  
