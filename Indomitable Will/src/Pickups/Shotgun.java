@@ -36,6 +36,7 @@ public class Shotgun extends Weapon {
 	public void setup(PApplet drawer) {
 		// TODO Auto-generated method stub
 
+		
 	}
 
 	@Override
