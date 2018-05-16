@@ -113,10 +113,40 @@ public class Player extends Basic {
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
-			if (checkCollision(wall)) {
-				result = true;
+			double predictedY = yLoc + 2*yVel;
+			double predictedX = xLoc + 2*xVel;
+			if(predictedY > wall.getMinY() && predictedY < wall.getMinY() + 23 || (predictedX > wall.getMinX() && predictedX + hB.getWidth() < wall.getMinX())|| (predictedX < wall.getMaxX() && predictedX -hB.getWidth() > wall.getMaxX())) {	
+//			yLoc = (int) (wall.getMinY() - 23);
+			if(!blockedDir.contains(Direction.DOWN))
+				blockedDir.add(Direction.DOWN);
+			yVel = 0;
+			dy2 = 0;
+			} else if(predictedY < wall.getMaxY() && predictedY > wall.getMaxY()-23 && predictedX > wall.getMinX() && predictedX < wall.getMaxX()) {
+//			yLoc = (int) (wall.getMinY() - 23);
+			if(!blockedDir.contains(Direction.DOWN))
+			blockedDir.add(Direction.DOWN);
+			yVel = 0;
+			dy2 = 0;
 			}
+<<<<<<< HEAD
 
+=======
+			
+			if(predictedX > wall.getMinX() && predictedX < wall.getMaxX() && predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
+//			xLoc = (int) (wall.getMinX() - 23);
+			if(!blockedDir.contains(Direction.RIGHT))
+				blockedDir.add(Direction.RIGHT);
+				xVel = 0;
+				dx2 = 0;
+			} else if(predictedX < wall.getMaxX() && predictedX > wall.getMaxX()-23 && predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
+//			xLoc = (int) (wall.getMaxX() + 23);
+			if(!blockedDir.contains(Direction.LEFT))
+				blockedDir.add(Direction.LEFT);
+				xVel = 0;
+				dx2 = 0;
+		}
+				
+>>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
 		}
 		return result;
 	}

@@ -23,8 +23,9 @@ public class DrawingSurface extends PApplet {
 
 	private Menu menu;
 	private PauseMenu pauseMenu;
-	private Level testLevel;
-
+	//private Level testLevel,level1,level2,level3,level4;
+	private int currentLevel;
+	private ArrayList<Level> levels;
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
 	public static final int ySize = 700;
@@ -37,8 +38,14 @@ public class DrawingSurface extends PApplet {
 
 	public DrawingSurface() {
 		keys = new ArrayList<Integer>();
-		testLevel = new Level();
+		levels = new ArrayList<Level>();
 		menu = new Menu();
+		currentLevel = 0;
+	//	testLevel = new Level();
+		for(int i = 0; i < 5; i++) {
+			Level level = new Level();
+			levels.add(level);
+		}
 		state = State.MENU;
 		pauseMenu = new PauseMenu();
 	}
@@ -49,13 +56,22 @@ public class DrawingSurface extends PApplet {
 
 	public void setup() {
 		// background(255);
-		testLevel.addObstacle(new Rectangle(500, 0, 20, 350));
-		testLevel.addObstacle(new Rectangle(0, 350, 300, 20));
-		testLevel.setup(this);
+		for(Level level : levels) {
+			level.addObstacle(new Rectangle((int)(Math.random()*1000), (int)(Math.random()*700),(int)(Math.random()*1000), (int)(Math.random()*700)));
+			level.addObstacle(new Rectangle((int)(Math.random()*1000), (int)(Math.random()*700),(int)(Math.random()*1000), (int)(Math.random()*700)));
+			level.setup(this);
+		}
+//		testLevel.addObstacle(new Rectangle(500, 0, 20, 350));
+//		testLevel.addObstacle(new Rectangle(0, 350, 300, 20));
+//		level1.addObstacle(new Rectangle(100,100,350,350));
+//		level1.addObstacle(new Rectangle(500,200, 100,302));
+//		
+	//	testLevel.setup(this);
 	}
 
 	public void draw() {
 		pushStyle();
+		Level current = levels.get(currentLevel);
 		if (state == State.MENU) {
 			menu.draw(this);
 		}
@@ -84,42 +100,40 @@ public class DrawingSurface extends PApplet {
 			} else if (getMouseX() > width / 2 - 75 && getMouseX() < width / 2 + 75 && getMouseY() > height / 2 - 200
 					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {
 				state = State.GAME;
-				testLevel.draw(this);
+				current.draw(this);
 			}
 		} else {
 
-			testLevel.draw(this);
+			current.draw(this);
 			// these booleans track if the player is moving in a certain direction
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);
 			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
 			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
-
 			if (getMouseX() > width - 20 && getMouseX() < width && getMouseY() > 0 && getMouseY() < 20
 					&& state == State.GAME && mousePressed) {
 				state = State.PAUSED;
 				background(255);
 				pauseMenu.draw(this);
-
 			}
 			if (keys.contains((int) 'B')) {
-				testLevel.getPlayer().startFiring();
+				current.getPlayer().startFiring();
 			} else {
-				testLevel.getPlayer().stopFiring();
+				current.getPlayer().stopFiring();
 			}
 			if (up) {
-				testLevel.getPlayer().mUp();
+				current.getPlayer().mUp();
 			} else if (down) {
-				testLevel.getPlayer().mDown();
+				current.getPlayer().mDown();
 			} else {
-				testLevel.getPlayer().stopY();
+				current.getPlayer().stopY();
 			}
 			if (left) {
-				testLevel.getPlayer().mLeft();
+				current.getPlayer().mLeft();
 			} else if (right) {
-				testLevel.getPlayer().mRight();
+				current.getPlayer().mRight();
 			} else {
-				testLevel.getPlayer().stopX();
+				current.getPlayer().stopX();
 			}
 		}
 		popStyle();
