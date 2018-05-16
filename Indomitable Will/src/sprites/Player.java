@@ -98,8 +98,10 @@ public class Player extends Basic {
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
-			if (checkCollision(wall))
+			if (checkCollision(wall)) {
 				result = true;
+			}
+				
 		}
 		return result;
 	}
