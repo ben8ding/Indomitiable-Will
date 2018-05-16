@@ -24,6 +24,7 @@ public class DrawingSurface extends PApplet {
 	private Menu menu;
 	private PauseMenu pauseMenu;
 	private Level testLevel;
+
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
 	public static final int ySize = 700;
@@ -48,6 +49,8 @@ public class DrawingSurface extends PApplet {
 
 	public void setup() {
 		// background(255);
+		testLevel.addObstacle(new Rectangle(500, 0, 20, 350));
+		testLevel.addObstacle(new Rectangle(0, 350, 300, 20));
 		testLevel.setup(this);
 	}
 
@@ -80,7 +83,6 @@ public class DrawingSurface extends PApplet {
 				state = State.GAME;
 			} else if (getMouseX() > width / 2 - 75 && getMouseX() < width / 2 + 75 && getMouseY() > height / 2 - 200
 					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {
-				System.out.println("HIHIHIHI");
 				state = State.GAME;
 				testLevel.draw(this);
 			}
