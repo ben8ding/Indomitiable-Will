@@ -1,4 +1,4 @@
-package sprites;
+package Pickups;
 import processing.core.PApplet;
 import processing.core.PImage;
 

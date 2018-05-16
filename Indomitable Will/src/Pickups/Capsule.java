@@ -1,8 +1,10 @@
-package sprites;
+package Pickups;
 
 import java.awt.Rectangle;
 
 import processing.core.PApplet;
+import sprites.Basic;
+import sprites.HitBox;
 
 public class Capsule extends Basic {
 

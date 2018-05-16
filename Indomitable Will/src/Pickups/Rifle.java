@@ -1,51 +1,37 @@
-package sprites;
+package Pickups;
 
 import java.util.ArrayList;
 
+import Pickups.Weapon;
 import processing.core.PImage;
+import sprites.Projectile;
 import processing.core.PApplet;
-public class Weapon implements Obtainable {
-	public enum weaponType {SHOTGUN, RIFLE, SWORD};
-	private weaponType weapon;
-	public weaponType getWeaponType() {
-		return weapon;
-	}
+
+public class Rifle extends Weapon {
+
 	
-	public Weapon(weaponType weaponType) {
-		this.weapon = weaponType;
+	public Rifle() {
+		ROF = 2;
 	}
-	
-	public ArrayList<Projectile> fire(int xLoc,int yLoc, double angle) {
-		if(weapon == weaponType.SHOTGUN) {
-			ArrayList<Projectile> fire = new ArrayList<Projectile>();
-		
+
+	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
+
+		ArrayList<Projectile> fire = new ArrayList<Projectile>();
+
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
 				Math.sin(Math.toRadians(angle + 90)) * 15));
-		
-		angle+=10;
-		
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
 				Math.sin(Math.toRadians(angle + 90)) * 15));
-		
-		angle-=20;
-		
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
 				Math.sin(Math.toRadians(angle + 90)) * 15));
-		
+
 		return fire;
-		} else if (weapon == weaponType.RIFLE) {
-			//needs to be added
-			return null;
-		} else if (weapon == weaponType.SWORD) {
-			//needs to be added
-			return null;
-		}
-		return null;
+
 	}
 
 	public void setup(PApplet drawer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -59,8 +45,8 @@ public class Weapon implements Obtainable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	public void draw(PApplet drawer) {
-		
+
 	}
 }
- 

@@ -1,7 +1,8 @@
-package sprites;
+package Pickups;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import sprites.Player;
 
 public class PowerUp implements Obtainable {
 	private PImage img;
