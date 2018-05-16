@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import sprites.Capsule;
 import sprites.Enemy;
-import sprites.Gun;
+import sprites.Weapon;
 import sprites.Player;
+import sprites.PowerUp;
 import sprites.Projectile;
+import sprites.Weapon;
 
 public class Level {
 
@@ -30,10 +32,10 @@ public class Level {
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(400,250));
 
-		drops.add(new Capsule(40,40, new Gun()));
-
-		walls.add(new Rectangle(500, 0, 20, 700));
-		walls.add(new Rectangle(0, 350, 1000, 20));
+//		drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
+		drops.add(new Capsule(400, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
+		walls.add(new Rectangle(500, 0, 20, 350));
+		walls.add(new Rectangle(0, 350, 300, 20));
 		bullets.add(new Projectile());
 
 		timer = 0;
@@ -47,7 +49,7 @@ public class Level {
 
 	}
 	public void draw(PApplet drawer) {
-
+		
 		timer++;
 		drawer.clear();
 		drawer.pushStyle();

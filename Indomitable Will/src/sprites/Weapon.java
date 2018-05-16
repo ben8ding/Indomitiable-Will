@@ -11,7 +11,7 @@ public class Weapon implements Obtainable {
 		return weapon;
 	}
 	
-	public Weapon(PImage image, weaponType weaponType) {
+	public Weapon(weaponType weaponType) {
 		this.weapon = weaponType;
 	}
 	
@@ -43,7 +43,6 @@ public class Weapon implements Obtainable {
 		return null;
 	}
 
-	@Override
 	public void setup(PApplet drawer) {
 		// TODO Auto-generated method stub
 		
@@ -59,6 +58,9 @@ public class Weapon implements Obtainable {
 	public Obtainable getDrop() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public void draw(PApplet drawer) {
+		
 	}
 }
  

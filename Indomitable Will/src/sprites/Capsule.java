@@ -3,7 +3,6 @@ package sprites;
 import java.awt.Rectangle;
 
 import processing.core.PApplet;
-import shapes.Line;
 
 public class Capsule extends Basic {
 
@@ -19,10 +18,8 @@ public class Capsule extends Basic {
 
 	public Capsule(int x, int y, Obtainable z) {
 		super(x, y, 10);
-
 		this.item = z;
 		hB = new HitBox(this);
-
 	}
 
 	@Override
@@ -33,6 +30,8 @@ public class Capsule extends Basic {
 		drawer.fill(120,255,10);
 		//drawer.image(item.getImg(), xLoc-size, yLoc-size);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+		item.draw(drawer);
+		drawer.image(item.getImg(), xLoc, yLoc);
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();

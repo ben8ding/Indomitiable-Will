@@ -32,7 +32,7 @@ public class Player extends Basic {
 	public Player() {
 		super(350, 300, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Weapon(Weapon.weaponType.SHOTGUN));
+		
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -85,7 +85,7 @@ public class Player extends Basic {
 				if(drop.getItem() instanceof Weapon) {
 					weapons.add((Weapon) drop.getItem());
 				} else {
-					weapons.add(drop.getItem());
+					
 				}
 				
 			}

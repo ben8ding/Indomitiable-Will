@@ -4,10 +4,9 @@ import processing.core.PImage;
 
 public interface Obtainable {
 	
-	
-	void setup(PApplet drawer);
 	Obtainable getDrop();
 	PImage getImg();
-	
+	void draw(PApplet drawer);
+	void setup(PApplet drawer);
 	
 }
