@@ -11,7 +11,7 @@ public class Rifle extends Weapon {
 
 	
 	public Rifle() {
-		ROF = 2;
+		ROF =15;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
