@@ -36,6 +36,8 @@ public class PowerUp implements Obtainable {
 	public void use(Player p) {
 		if(powerUp == powerUpType.SPEED) {
 			p.speedUp(240);
+		} else if (powerUp == powerUpType.FIRERATE) {
+			
 		}
 	}
 	
