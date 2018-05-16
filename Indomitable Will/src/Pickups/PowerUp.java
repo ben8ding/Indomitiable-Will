@@ -1,8 +1,8 @@
-package sprites;
+package Pickups;
 
-import Pickups.Obtainable;
 import processing.core.PApplet;
 import processing.core.PImage;
+import sprites.Player;
 
 public class PowerUp implements Obtainable {
 	private PImage img;
@@ -17,11 +17,16 @@ public class PowerUp implements Obtainable {
 		// TODO Auto-generated method stub
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Icons.png");
 	}
+	@Override
 	public PImage getImg() {
 		// TODO Auto-generated method stub
 		return img;
 	}
-	
+	@Override
+	public Obtainable getDrop() {
+		// TODO Auto-generated method stub
+		return this;
+	}
 	public void draw(PApplet drawer) {
 		if(powerUp == powerUpType.SPEED) {
 			img = img.get(0, 0, 18, 18);
@@ -32,14 +37,7 @@ public class PowerUp implements Obtainable {
 	public void use(Player p) {
 		if(powerUp == powerUpType.SPEED) {
 			p.speedUp(240);
-		} else if (powerUp == powerUpType.FIRERATE) {
-			
 		}
-	}
-	@Override
-	public Obtainable getDrop() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

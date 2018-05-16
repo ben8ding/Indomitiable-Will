@@ -3,15 +3,14 @@ package screens;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import Pickups.Capsule;
+import Pickups.Obtainable;
+import Pickups.PowerUp;
+import Pickups.Weapon;
 import processing.core.PApplet;
-import sprites.Capsule;
 import sprites.Enemy;
-import sprites.Obtainable;
-import sprites.Weapon;
 import sprites.Player;
-import sprites.PowerUp;
 import sprites.Projectile;
-import sprites.Weapon;
 
 public class Level {
 
@@ -103,12 +102,7 @@ public class Level {
 		//
 		// }
 
-		if (bullets.get(0) != null) {
-			if (player.checkCollision(bullets.get(0).getBox())) {
-				System.out.println("pong");
-				// bullets.remove(i);
-			}
-		}
+		
 
 		drawer.popStyle();
 
