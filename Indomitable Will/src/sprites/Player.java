@@ -378,7 +378,7 @@ public class Player extends Basic {
 
 		if (timer % this.weapons.get(0).getROF() == 0 || timer <=this.weapons.get(0).getROF())
 			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
-
+		System.out.println(fire + "hi");
 		return fire;
 	}
 

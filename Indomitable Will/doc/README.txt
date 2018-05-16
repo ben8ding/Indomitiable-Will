@@ -28,7 +28,8 @@ Stretch Goals:
 
 Class List:
 -Main - contains the main method and runs the program
--OptionPanel - title screen
+-Menu - title screen
+-PauseMenu - Pause screen
 -InstructionPanel - how to play
 -DrawingSurface - the graphics window
 -Level - a standard level in the game
@@ -37,12 +38,32 @@ Class List:
 -Player - user controlled player and the object for other players (multiplayer mode)
 -Enemy - base model for an enemy
 -Weapon - model for a weapon
+-Shotgun - model for a shotgun
+-Rifle - model for a rifle
+-Capsule - checks for collisions
 -Projectile - model for a projectile
--Special 
--Powerup
+-Powerup - creates different powerups users can use
 -Pickup - base class for obtainable object
--Menu
+-Obtainable - interface for weapons and powerups
+-HitBox - creates hitboxes of AI and players
+
+
 Responsibility List:
-Matthew-GUI design, Menu, timing, sprite finding, playtesting executive, uml
-Nathaniel-Readme, quality of life, balancing, interface design, subclass design
-Ben-enemy design, pseudo-AI,  superclass designer, class templates
+Matthew
+-GUI design, Menus and Levels, timing, sprite finding, playtesting executive, uml
+Nathaniel
+-Readme, quality of life, balancing, interface design, subclass design
+Ben
+-enemy design, pseudo-AI,  superclass designer, class templates
+
+Feedback given by: Dante Rella and Arjun Sampath
+
+UML:
+Pickup, Projectile, Bot, Boss, BossLevel, Weapon, Powerups, Obtainable, are islands because they are never instantiated or referenced in any other classes
+Player and enemy are aspects of a level and levels should have players and enemies instead of the drawing surface having them
+
+ReadMe:
+AI is extremely ambitious as a must-have, especially with variable levels of intelligence
+Need 5 want-to haves and 5 stretch goals
+A lot of classes in the class list are not included in the UML
+Obtainable interface is not needed because it’s the same thing as pickup so you can make pickup abstract instead
