@@ -30,7 +30,10 @@ public class Level {
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(400, 250));
-
+		walls.add(new Rectangle(0,0,1000,0));
+		walls.add(new Rectangle(0,0,0,700));
+		walls.add(new Rectangle(1000,0,0,700));
+		walls.add(new Rectangle(0,700,1000,0));
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 //		walls.add(new Rectangle(500, 0, 20, 350));
