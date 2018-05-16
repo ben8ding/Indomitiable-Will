@@ -49,7 +49,7 @@ public class Player extends Basic {
 		drawer.translate(-xLoc, -yLoc);
 
 		drawer.image(img, xLoc - size, yLoc - size);
-
+		System.out.println(blockedDir);
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
@@ -87,44 +87,34 @@ public class Player extends Basic {
 		boolean result = false;
 		if (hB.checkCollision(wall)) {
 			result = true;
-			if(yVel < 0) {
-				if(wall.getWidth() > wall.getHeight()) {
-					yLoc = (int) (wall.getMaxY() + 23);
-					if(!blockedDir.contains(Direction.UP))
-						blockedDir.add(Direction.UP);
+			if(yLoc + 2*yVel > wall.getMinY() && yLoc + 2*yVel < wall.getMinY() + wall.getHeight()) {	
+					yLoc = (int) (wall.getMinY() - 23);
+					if(!blockedDir.contains(Direction.DOWN))
+						blockedDir.add(Direction.DOWN);
 					yVel = 0;
 					dy2 = 0;
-				}
 				
-			} else if(yVel > 0) {
-				
-				if(wall.getWidth() > wall.getHeight()) {
+			} else if(yLoc + 2*yVel < wall.getMaxY() + 5) {
 					yLoc = (int) (wall.getMinY() - 23);
 				if(!blockedDir.contains(Direction.DOWN))
 				blockedDir.add(Direction.DOWN);
 				yVel = 0;
 				dy2 = 0;
-				}
 				
 			}
-			if(xVel > 0) {
-				if(wall.getWidth() > wall.getHeight()) {
+			if(xLoc + 2*xVel > wall.getMinX() + 5) {
 					xLoc = (int) (wall.getMinX() - 23);
 					if(!blockedDir.contains(Direction.RIGHT))
 						blockedDir.add(Direction.RIGHT);
 						xVel = 0;
 						dx2 = 0;
-				}
-				xLoc = wall.x - 23;
-			} else if(xVel < 0) {
-				if(wall.getWidth() > wall.getHeight()) {
+			} else if(xLoc + 2*xVel < wall.getMaxX()) {
 					xLoc = (int) (wall.getMaxX() + 23);
 					if(!blockedDir.contains(Direction.LEFT))
 						blockedDir.add(Direction.LEFT);
 						xVel = 0;
 						dx2 = 0;
 				}
-			}
 		}
 		return result;
 	}
