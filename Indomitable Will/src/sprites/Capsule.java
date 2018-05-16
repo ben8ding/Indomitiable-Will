@@ -8,7 +8,7 @@ import shapes.Line;
 public class Capsule extends Basic {
 
 	private HitBox hB;
-	private Pickup item;
+	private Obtainable item;
 
 	public Capsule() {
 		super(600, 450, 10);
@@ -17,7 +17,7 @@ public class Capsule extends Basic {
 
 	}
 
-	public Capsule(int x, int y, Pickup z) {
+	public Capsule(int x, int y, Obtainable z) {
 		super(x, y, 10);
 
 		this.item = z;
@@ -46,7 +46,7 @@ public class Capsule extends Basic {
 		hB.refreshLoc(this);
 	}
 	
-	public Pickup getItem() {
+	public Obtainable getItem() {
 		return this.item;
 	}
 	public HitBox getBox() {

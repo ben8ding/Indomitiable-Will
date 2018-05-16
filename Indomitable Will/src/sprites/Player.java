@@ -24,7 +24,7 @@ public class Player extends Basic {
 	}
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
-
+	private ArrayList<PowerUp> powerups;
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
@@ -82,10 +82,12 @@ public class Player extends Basic {
 		}
 		for(Capsule drop: drops) {
 			if(checkCollision(drop.getBox())) {
-				if(drop.getItem()) {
+				if(drop.getItem() instanceof Weapon) {
+					weapons.add((Weapon) drop.getItem());
+				} else {
 					weapons.add(drop.getItem());
 				}
-				weapons.add(drop.getItem());
+				
 			}
 		}
 		return result;
@@ -125,8 +127,7 @@ public class Player extends Basic {
 				}
 		}
 		return result;
-	}
-	public boolean 
+	} 
 	private void move() {
 		// if (!wall) {
 		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));

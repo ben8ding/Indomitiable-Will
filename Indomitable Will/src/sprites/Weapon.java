@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import processing.core.PImage;
 import processing.core.PApplet;
-public class Weapon extends Pickup {
+public class Weapon implements Obtainable {
 	public enum weaponType {SHOTGUN, RIFLE, SWORD};
 	private weaponType weapon;
 	public weaponType getWeaponType() {
@@ -12,7 +12,6 @@ public class Weapon extends Pickup {
 	}
 	
 	public Weapon(PImage image, weaponType weaponType) {
-		super(image);
 		this.weapon = weaponType;
 	}
 	
@@ -35,8 +34,30 @@ public class Weapon extends Pickup {
 		
 		return fire;
 		} else if (weapon == weaponType.RIFLE) {
+			//needs to be added
 			return null;
-		} 
+		} else if (weapon == weaponType.SWORD) {
+			//needs to be added
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public void setup(PApplet drawer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PImage getImg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Obtainable getDrop() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
