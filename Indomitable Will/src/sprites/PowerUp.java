@@ -1,5 +1,6 @@
 package sprites;
 
+import Pickups.Obtainable;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -34,6 +35,11 @@ public class PowerUp implements Obtainable {
 		} else if (powerUp == powerUpType.FIRERATE) {
 			
 		}
+	}
+	@Override
+	public Obtainable getDrop() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
