@@ -63,11 +63,14 @@ public class Player extends Basic {
 		} else if (spedTime == 0) {
 			isFast = false;
 		}
+		timer++;
+		System.out.println(blockedDir);
 		//System.out.println(timer);
 	//		if (firing)
 	//			timer++;
 	//		else
 	//			timer = 0;
+
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
@@ -81,7 +84,6 @@ public class Player extends Basic {
 		drawer.fill(255);
 		// basic tank is just circle :P
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		// hB.draw(drawer);
 		if (blockedDir.contains(Direction.UP) && dy2 > 0) {
 			blockedDir.remove(blockedDir.indexOf(Direction.UP));
 		} else if (blockedDir.contains(Direction.DOWN) && dy2 < 0) {
@@ -154,6 +156,65 @@ public class Player extends Basic {
 		// }
 
 		// }
+		for (Rectangle wall : walls) {
+			double predictedY = yLoc + yVel;
+			double predictedX = xLoc + xVel;
+			boolean up = predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY + hB.getHeight() / 2 < wall.getMaxY()
+					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel > 0;
+			boolean down = predictedY - hB.getHeight() / 2 < wall.getMinY()
+					&& predictedY > wall.getMaxY() - hB.getHeight() / 2
+					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel < 0;
+			boolean right = predictedX - hB.getWidth() / 2 < wall.getMaxX()
+					&& predictedX - hB.getWidth() / 2 > wall.getMinX()
+					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel < 0;
+			boolean left = predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX + hB.getWidth()/2 < wall.getMaxX()
+					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel > 0;
+			if (up) {
+				if (!blockedDir.contains(Direction.DOWN))
+					blockedDir.add(Direction.DOWN);
+				yVel = 0;
+				dy2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.DOWN))
+					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
+			}
+			if (down) {
+				if (!blockedDir.contains(Direction.UP))
+					blockedDir.add(Direction.UP);
+				yVel = 0;
+				dy2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.UP))
+					blockedDir.remove(blockedDir.indexOf(Direction.UP));
+			}
+
+			if (right) {
+				if (!blockedDir.contains(Direction.RIGHT))
+					blockedDir.add(Direction.RIGHT);
+				xVel = 0;
+				dx2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.RIGHT))
+					blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+			}
+			if (left) {
+				// xLoc = (int) (wall.getMaxX() + 23);
+				if (!blockedDir.contains(Direction.LEFT))
+					blockedDir.add(Direction.LEFT);
+				xVel = 0;
+				dx2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.LEFT))
+					blockedDir.remove(blockedDir.indexOf(Direction.LEFT));
+			}
+
+		}
 		return result;
 	}
 
@@ -305,7 +366,10 @@ public class Player extends Basic {
 	}
 
 	public void startFiring() {
+		// System.out.println("ping");
+		if (timer % weapons.get(0).getROF() == 0)
 		firing = true;
+
 	}
 
 	public ArrayList<Projectile> fire() {

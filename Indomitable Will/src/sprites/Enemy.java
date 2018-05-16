@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import shapes.Line;
 import java.awt.Rectangle;
 
-public class Enemy extends Basic{
+public class Enemy extends Basic {
 
 	private HitBox hB;
 	private int health;

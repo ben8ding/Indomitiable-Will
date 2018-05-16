@@ -58,6 +58,7 @@ public class DrawingSurface extends PApplet {
 
 	public void setup() {
 		// background(255);
+		
 		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
 		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
 		levels.get(0).addObstacle(new Rectangle( 700, (int) 350, 50, 300));
