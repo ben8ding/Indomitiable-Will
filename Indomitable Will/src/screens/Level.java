@@ -33,7 +33,7 @@ public class Level {
 		enemies.add(new Enemy(400,250));
 
 //		drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
-		drops.add(new Capsule(400, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
+		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 		walls.add(new Rectangle(500, 0, 20, 350));
 		walls.add(new Rectangle(0, 350, 300, 20));
 		bullets.add(new Projectile());
@@ -58,14 +58,15 @@ public class Level {
 		drawer.textSize(15);
 		drawer.fill(0);
 		drawer.text("II", drawer.width - 14,17);
-
 		
-		player.checkCollision(walls, drops);
+		if(player.checkCollection(drops) != null) {
+			drops.remove(player.checkCollection(drops));
+		}
+		player.checkCollision(walls);
 		player.draw(drawer);
 		drawer.stroke(0);
 		for (Rectangle object : walls) {
 			drawer.rect(object.x, object.y, object.width, object.height);
-
 		}
 		for (Projectile object : bullets) {
 			object.draw(drawer);

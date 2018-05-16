@@ -24,7 +24,7 @@ public class Player extends Basic {
 	}
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
-	private ArrayList<PowerUp> powerups;
+	private PowerUp powerup;
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
@@ -41,7 +41,6 @@ public class Player extends Basic {
 	public void setup(PApplet drawer) {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
-
 	public void draw(PApplet drawer) {
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
@@ -73,22 +72,26 @@ public class Player extends Basic {
 		drawer.popStyle();
 
 	}
-
-	public boolean checkCollision(ArrayList<Rectangle> walls, ArrayList<Capsule> drops) {
+	public Capsule checkCollection(ArrayList<Capsule> drops) {
+		Capsule result = null;
+		for(Capsule drop: drops) {
+			if(checkCollision(drop.getBox())) {
+				result = drop;
+				if(drop.getItem() instanceof Weapon) {
+					weapons.add((Weapon) drop.getItem());
+				} else if (drop.getItem() instanceof PowerUp){
+					powerup = (PowerUp)drop.getItem();
+				}
+				
+			}
+		}
+		return result;
+	}
+	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
 			if (checkCollision(wall))
 				result = true;
-		}
-		for(Capsule drop: drops) {
-			if(checkCollision(drop.getBox())) {
-				if(drop.getItem() instanceof Weapon) {
-					weapons.add((Weapon) drop.getItem());
-				} else {
-					
-				}
-				
-			}
 		}
 		return result;
 	}
