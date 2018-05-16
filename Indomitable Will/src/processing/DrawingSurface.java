@@ -25,6 +25,7 @@ public class DrawingSurface extends PApplet {
 	private PauseMenu pauseMenu;
 	// private Level testLevel,level1,level2,level3,level4;
 	private int currentLevel;
+	private long startTime;
 	private ArrayList<Level> levels;
 	private ArrayList<Integer> keys;
 	public static final int xSize = 1000;
@@ -48,6 +49,7 @@ public class DrawingSurface extends PApplet {
 		}
 		state = State.MENU;
 		pauseMenu = new PauseMenu();
+		startTime= 0;
 	}
 
 	public void settings() {
@@ -139,9 +141,12 @@ public class DrawingSurface extends PApplet {
 				background(255);
 				pauseMenu.draw(this);
 			}
-			if (keys.contains((int) 'B')) {
+			if (keys.contains((int) 'B')&&startTime == 0) {
+				startTime = System.nanoTime();
 				current.getPlayer().startFiring();
-			} else {
+			} else if(System.nanoTime()>=startTime + 1500000000) {
+				startTime = 0;
+			}else {
 				current.getPlayer().stopFiring();
 			}
 			if (up) {
