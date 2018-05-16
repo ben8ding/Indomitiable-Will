@@ -36,8 +36,8 @@ public class Level {
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 		bullets.add(new Projectile());
-		walls.add(new Rectangle(500, 0, 100, 350));
-		walls.add(new Rectangle(60, 350, 300, 100));
+//		walls.add(new Rectangle(500, 0, 100, 350));
+//		walls.add(new Rectangle(60, 350, 300, 100));
 		timer = 0;
 
 	}

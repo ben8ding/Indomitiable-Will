@@ -162,19 +162,19 @@ public class Player extends Basic {
 			boolean up = predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY + hB.getHeight() / 2 < wall.getMaxY()
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel < 0;
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel > 0;
 			boolean down = predictedY - hB.getHeight() / 2 < wall.getMinY()
 					&& predictedY > wall.getMaxY() - hB.getHeight() / 2
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel > 0;
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel < 0;
 			boolean right = predictedX - hB.getWidth() / 2 < wall.getMaxX()
 					&& predictedX - hB.getWidth() / 2 > wall.getMinX()
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel < 0;
 			boolean left = predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX + hB.getWidth()/2 < wall.getMaxX()
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel > 0;
 			if (up) {
 				if (!blockedDir.contains(Direction.DOWN))
 					blockedDir.add(Direction.DOWN);
