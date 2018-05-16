@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import sprites.Capsule;
 import sprites.Enemy;
+import sprites.Obtainable;
 import sprites.Weapon;
 import sprites.Player;
 import sprites.PowerUp;
@@ -58,9 +59,14 @@ public class Level {
 		drawer.textSize(15);
 		drawer.fill(0);
 		drawer.text("II", drawer.width - 14,17);
-		
-		if(player.checkCollection(drops) != null) {
-			drops.remove(player.checkCollection(drops));
+		Capsule used = player.checkCollection(drops);
+		if(used != null) {
+			Obtainable drop = used.getItem();
+			if(drop instanceof PowerUp) {
+				((PowerUp) drop).use(player);
+				drops.remove(used);
+			}
+			
 		}
 		player.checkCollision(walls);
 		player.draw(drawer);

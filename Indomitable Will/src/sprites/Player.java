@@ -18,6 +18,7 @@ public class Player extends Basic {
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
+	private static final double sped = 4.0;
 	private boolean firing;
 	private enum Direction{
 			UP, RIGHT, DOWN, LEFT
@@ -25,6 +26,8 @@ public class Player extends Basic {
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
 	private PowerUp powerup;
+	private boolean isFast;
+	private int spedTime;
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
@@ -42,6 +45,12 @@ public class Player extends Basic {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
 	public void draw(PApplet drawer) {
+		if(spedTime > 0) {
+			isFast = true;
+			spedTime--;
+		} else if (spedTime == 0) {
+			isFast = false;
+		} 
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
@@ -82,7 +91,6 @@ public class Player extends Basic {
 				} else if (drop.getItem() instanceof PowerUp){
 					powerup = (PowerUp)drop.getItem();
 				}
-				
 			}
 		}
 		return result;
@@ -95,46 +103,50 @@ public class Player extends Basic {
 		}
 		return result;
 	}
-
-	public boolean checkCollision(Rectangle wall) {
-		boolean result = false;
-		if (hB.checkCollision(wall)) {
-			result = true;
-			if(yLoc + 2*yVel > wall.getMinY() && yLoc + 2*yVel < wall.getMinY() + wall.getHeight()) {	
-					yLoc = (int) (wall.getMinY() - 23);
-					if(!blockedDir.contains(Direction.DOWN))
-						blockedDir.add(Direction.DOWN);
-					yVel = 0;
-					dy2 = 0;
-				
-			} else if(yLoc + 2*yVel < wall.getMaxY() + 5) {
-					yLoc = (int) (wall.getMinY() - 23);
-				if(!blockedDir.contains(Direction.DOWN))
-				blockedDir.add(Direction.DOWN);
-				yVel = 0;
-				dy2 = 0;
-				
-			}
-			if(xLoc + 2*xVel > wall.getMinX() + 5) {
-					xLoc = (int) (wall.getMinX() - 23);
-					if(!blockedDir.contains(Direction.RIGHT))
-						blockedDir.add(Direction.RIGHT);
-						xVel = 0;
-						dx2 = 0;
-			} else if(xLoc + 2*xVel < wall.getMaxX()) {
-					xLoc = (int) (wall.getMaxX() + 23);
-					if(!blockedDir.contains(Direction.LEFT))
-						blockedDir.add(Direction.LEFT);
-						xVel = 0;
-						dx2 = 0;
-				}
-		}
-		return result;
+	
+	public boolean checkCollision(Rectangle hitbox) {
+//		if (hB.checkCollision(wall)) {
+//			result = true;
+//			if(yLoc + 2*yVel > wall.getMinY() && yLoc + 2*yVel < wall.getMinY() + wall.getHeight()) {	
+//					yLoc = (int) (wall.getMinY() - 23);
+//					if(!blockedDir.contains(Direction.DOWN))
+//						blockedDir.add(Direction.DOWN);
+//					yVel = 0;
+//					dy2 = 0;
+//				
+//			} else if(yLoc + 2*yVel < wall.getMaxY() + 5) {
+//					yLoc = (int) (wall.getMinY() - 23);
+//				if(!blockedDir.contains(Direction.DOWN))
+//				blockedDir.add(Direction.DOWN);
+//				yVel = 0;
+//				dy2 = 0;
+//				
+//			}
+//			if(xLoc + 2*xVel > wall.getMinX() + 5) {
+//					xLoc = (int) (wall.getMinX() - 23);
+//					if(!blockedDir.contains(Direction.RIGHT))
+//						blockedDir.add(Direction.RIGHT);
+//						xVel = 0;
+//						dx2 = 0;
+//			} else if(xLoc + 2*xVel < wall.getMaxX()) {
+//					xLoc = (int) (wall.getMaxX() + 23);
+//					if(!blockedDir.contains(Direction.LEFT))
+//						blockedDir.add(Direction.LEFT);
+//						xVel = 0;
+//						dx2 = 0;
+//				}
+//		}
+		return hB.checkCollision(hitbox);
 	} 
 	private void move() {
 		// if (!wall) {
-		xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
-		yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
+		if(!isFast) {
+			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
+			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
+		} else {
+			xVel = (int) (xVel + 0.5 * ((double) dx2 * 1.01 - 0.01 * (double) xVel));
+			yVel = (int) (yVel + 0.5 * ((double) dy2 * 1.01 - 0.01 * (double) yVel));
+		}
 		xLoc += xVel;
 		yLoc += yVel;
 
@@ -157,7 +169,10 @@ public class Player extends Basic {
 	public void mUp() {
 		angle = 180;
 		if (!blockedDir.contains(Direction.UP)) {
+			if(!isFast)
 			dy2 = -cs;
+			else
+			dy2 = -sped;
 		
 		}
 		if(blockedDir.contains(Direction.DOWN)) {
@@ -168,7 +183,10 @@ public class Player extends Basic {
 	public void mDown() {
 		angle = 0;
 		if (!blockedDir.contains(Direction.DOWN)) {
+			if(!isFast)
 			dy2 = cs;
+			else
+			dy2 = sped;
 		}
 		if(blockedDir.contains(Direction.UP)) {
 		
@@ -178,7 +196,10 @@ public class Player extends Basic {
 	public void mLeft() {
 		angle = 90;
 		if (!blockedDir.contains(Direction.LEFT)) {
+			if(!isFast)
 			dx2 = -cs;
+			else
+			dx2 = -sped;
 			
 		}
 		if(blockedDir.contains(Direction.RIGHT)) {
@@ -189,7 +210,10 @@ public class Player extends Basic {
 	public void mRight() {
 		angle = 270;
 		if (!blockedDir.contains(Direction.RIGHT)) {
+			if(!isFast)
 			dx2 = cs;
+			else
+			dx2 = sped;
 		}
 		if(blockedDir.contains(Direction.LEFT)) {
 		
@@ -236,5 +260,7 @@ public class Player extends Basic {
 	public HitBox getBox() {
 		return this.hB;
 	}
-
+	public void speedUp(int time) {
+		spedTime = time;
+	}
 }

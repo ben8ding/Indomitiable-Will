@@ -33,5 +33,10 @@ public class PowerUp implements Obtainable {
 			img = img.get(72, 0, 90, 18);
 		}
 	}
+	public void use(Player p) {
+		if(powerUp == powerUpType.SPEED) {
+			p.speedUp(240);
+		}
+	}
 	
 }
