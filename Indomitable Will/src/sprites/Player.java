@@ -45,10 +45,11 @@ public class Player extends Basic {
 	public Player() {
 		super(350, 300, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Rifle());
+		weapons.add(new Shotgun());
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
+		timer = 0;
 	}
 
 	public void setup(PApplet drawer) {
@@ -64,6 +65,12 @@ public class Player extends Basic {
 		}
 		timer++;
 		System.out.println(blockedDir);
+		//System.out.println(timer);
+	//		if (firing)
+	//			timer++;
+	//		else
+	//			timer = 0;
+
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
@@ -361,13 +368,18 @@ public class Player extends Basic {
 	public void startFiring() {
 		// System.out.println("ping");
 		if (timer % weapons.get(0).getROF() == 0)
-			;
 		firing = true;
 
 	}
 
 	public ArrayList<Projectile> fire() {
-		return this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+
+		ArrayList<Projectile> fire = new ArrayList<Projectile>();
+
+		if (timer % this.weapons.get(0).getROF() == 0 || timer <=this.weapons.get(0).getROF())
+			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+
+		return fire;
 	}
 
 	public HitBox getBox() {

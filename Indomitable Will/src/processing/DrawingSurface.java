@@ -23,7 +23,7 @@ public class DrawingSurface extends PApplet {
 
 	private Menu menu;
 	private PauseMenu pauseMenu;
-	//private Level testLevel,level1,level2,level3,level4;
+	// private Level testLevel,level1,level2,level3,level4;
 	private int currentLevel;
 	private ArrayList<Level> levels;
 	private ArrayList<Integer> keys;
@@ -40,9 +40,9 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		levels = new ArrayList<Level>();
 		menu = new Menu();
-		currentLevel = 0;
-	//	testLevel = new Level();
-		for(int i = 0; i < 5; i++) {
+		currentLevel = 4;
+		// testLevel = new Level();
+		for (int i = 0; i < 5; i++) {
 			Level level = new Level();
 			levels.add(level);
 		}
@@ -57,17 +57,40 @@ public class DrawingSurface extends PApplet {
 	public void setup() {
 		// background(255);
 		
-		for(Level level : levels) {
-//			level.addObstacle(new Rectangle((int)(Math.random()*1000), (int)(Math.random()*700),(int)(Math.random()*1000), (int)(Math.random()*700)));
-//			level.addObstacle(new Rectangle((int)(Math.random()*1000), (int)(Math.random()*700),(int)(Math.random()*1000), (int)(Math.random()*700)));
+		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
+		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
+		levels.get(0).addObstacle(new Rectangle( 700, (int) 350, 50, 300));
+		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
+		
+		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (200), 300, 50));
+		levels.get(1).addObstacle(new Rectangle((int) (50), (int) (340), 300, 50));
+		levels.get(1).addObstacle(new Rectangle( 900, (int) 400, 50, 300));
+		levels.get(1).addObstacle(new Rectangle(500, (int) (310), 50, 300));
+
+		levels.get(2).addObstacle(new Rectangle((int) (300), (int) (630), 300, 50));
+		levels.get(2).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
+		levels.get(2).addObstacle(new Rectangle( 900, (int) 100, 50, 300));
+		levels.get(2).addObstacle(new Rectangle(530, (int) (350), 50, 300));
+		
+		levels.get(3).addObstacle(new Rectangle((int) (700), (int) (350), 300, 50));
+		levels.get(3).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
+		levels.get(3).addObstacle(new Rectangle( 500, (int) 80, 50, 300));
+		levels.get(3).addObstacle(new Rectangle(175, (int) (200), 50, 300));
+
+		levels.get(4).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
+		levels.get(4).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
+		levels.get(4).addObstacle(new Rectangle( 100, (int) 230, 50, 300));
+		levels.get(4).addObstacle(new Rectangle(400, (int) (20), 50, 300));
+
+		for (Level level : levels) {
 			level.setup(this);
 		}
-//		testLevel.addObstacle(new Rectangle(500, 0, 20, 350));
-//		testLevel.addObstacle(new Rectangle(0, 350, 300, 20));
-//		level1.addObstacle(new Rectangle(100,100,350,350));
-//		level1.addObstacle(new Rectangle(500,200, 100,302));
-//		
-	//	testLevel.setup(this);
+		// testLevel.addObstacle(new Rectangle(500, 0, 20, 350));
+		// testLevel.addObstacle(new Rectangle(0, 350, 300, 20));
+		// level1.addObstacle(new Rectangle(100,100,350,350));
+		// level1.addObstacle(new Rectangle(500,200, 100,302));
+		//
+		// testLevel.setup(this);
 	}
 
 	public void draw() {
@@ -111,7 +134,7 @@ public class DrawingSurface extends PApplet {
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);
 			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
 			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
-			if (getMouseX() > width - 20 && getMouseX() < width && getMouseY() > 0 && getMouseY() < 20
+			if (getMouseX() > width - 30 && getMouseX() < width-10 && getMouseY() > 0 && getMouseY() < 20
 					&& state == State.GAME && mousePressed) {
 				state = State.PAUSED;
 				background(255);

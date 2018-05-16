@@ -9,7 +9,7 @@ import processing.core.PApplet;
 public class Shotgun extends Weapon {
 
 	public Shotgun() {
-		ROF = 4;
+		ROF = 20;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {

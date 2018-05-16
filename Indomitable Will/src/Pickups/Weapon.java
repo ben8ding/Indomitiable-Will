@@ -11,7 +11,7 @@ public class Weapon implements Obtainable {
 	protected int ROF;
 	
 	public Weapon() {
-		ROF = 3;
+		ROF = 20;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
