@@ -29,16 +29,15 @@ public class Level {
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(400, 250));
-		walls.add(new Rectangle(0,0,1000,0));
-		walls.add(new Rectangle(0,0,0,700));
-		walls.add(new Rectangle(1000,0,0,700));
-		walls.add(new Rectangle(0,700,1000,0));
+//		walls.add(new Rectangle(0,0,1000,10));
+//		walls.add(new Rectangle(0,0,10,700));
+//		walls.add(new Rectangle(990,0,-10,700));
+//		walls.add(new Rectangle(0,690,1000,-20));
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
-//		walls.add(new Rectangle(500, 0, 20, 350));
-//		walls.add(new Rectangle(0, 350, 300, 20));
 		bullets.add(new Projectile());
-
+		walls.add(new Rectangle(500, 0, 100, 350));
+		walls.add(new Rectangle(60, 350, 300, 100));
 		timer = 0;
 
 	}
@@ -71,8 +70,9 @@ public class Level {
 			}
 
 		}
-		player.checkCollision(walls);
+		
 		player.draw(drawer);
+		player.checkCollision(walls);
 		drawer.stroke(0);
 		for (Rectangle object : walls) {
 			drawer.rect(object.x, object.y, object.width, object.height);

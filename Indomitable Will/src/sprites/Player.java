@@ -63,20 +63,20 @@ public class Player extends Basic {
 			isFast = false;
 		}
 		timer++;
+		System.out.println(blockedDir);
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
 
 		drawer.image(img, xLoc - size, yLoc - size);
-		//System.out.println(blockedDir);
+		// System.out.println(blockedDir);
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		// hB.draw(drawer);
 		if (blockedDir.contains(Direction.UP) && dy2 > 0) {
 			blockedDir.remove(blockedDir.indexOf(Direction.UP));
 		} else if (blockedDir.contains(Direction.DOWN) && dy2 < 0) {
@@ -90,7 +90,7 @@ public class Player extends Basic {
 		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
-		
+
 		drawer.popStyle();
 
 	}
@@ -112,37 +112,102 @@ public class Player extends Basic {
 
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
-//		for (Rectangle wall : walls) {
-//			double predictedY = yLoc + 2*yVel;
-//			double predictedX = xLoc + 2*xVel;
-//			if(predictedY > wall.getMinY() && predictedY < wall.getMinY() + 23 || (predictedX > wall.getMinX() && predictedX + hB.getWidth() < wall.getMinX())|| (predictedX < wall.getMaxX() && predictedX -hB.getWidth() > wall.getMaxX())) {	
-////			yLoc = (int) (wall.getMinY() - 23);
-//			if(!blockedDir.contains(Direction.DOWN))
-//				blockedDir.add(Direction.DOWN);
-//			yVel = 0;
-//			dy2 = 0;
-//			} else if(predictedY < wall.getMaxY() && predictedY > wall.getMaxY()-23 && predictedX > wall.getMinX() && predictedX < wall.getMaxX()) {
-////			yLoc = (int) (wall.getMinY() - 23);
-//			if(!blockedDir.contains(Direction.DOWN))
-//			blockedDir.add(Direction.DOWN);
-//			yVel = 0;
-//			dy2 = 0;
-//			}	
-//			if(predictedX > wall.getMinX() && predictedX < wall.getMaxX() && predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
-////			xLoc = (int) (wall.getMinX() - 23);
-//			if(!blockedDir.contains(Direction.RIGHT))
-//				blockedDir.add(Direction.RIGHT);
-//				xVel = 0;
-//				dx2 = 0;
-//			} else if(predictedX < wall.getMaxX() && predictedX > wall.getMaxX()-23 && predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
-////			xLoc = (int) (wall.getMaxX() + 23);
-//			if(!blockedDir.contains(Direction.LEFT))
-//				blockedDir.add(Direction.LEFT);
-//				xVel = 0;
-//				dx2 = 0;
-//		}
-				
-//		}
+		// for (Rectangle wall : walls) {
+		// double predictedY = yLoc + 2*yVel;
+		// double predictedX = xLoc + 2*xVel;
+		// if(predictedY > wall.getMinY() && predictedY < wall.getMinY() + 23 ||
+		// (predictedX > wall.getMinX() && predictedX + hB.getWidth() <
+		// wall.getMinX())|| (predictedX < wall.getMaxX() && predictedX -hB.getWidth() >
+		// wall.getMaxX())) {
+		//// yLoc = (int) (wall.getMinY() - 23);
+		// if(!blockedDir.contains(Direction.DOWN))
+		// blockedDir.add(Direction.DOWN);
+		// yVel = 0;
+		// dy2 = 0;
+		// } else if(predictedY < wall.getMaxY() && predictedY > wall.getMaxY()-23 &&
+		// predictedX > wall.getMinX() && predictedX < wall.getMaxX()) {
+		//// yLoc = (int) (wall.getMinY() - 23);
+		// if(!blockedDir.contains(Direction.DOWN))
+		// blockedDir.add(Direction.DOWN);
+		// yVel = 0;
+		// dy2 = 0;
+		// }
+		// if(predictedX > wall.getMinX() && predictedX < wall.getMaxX() && predictedY >
+		// wall.getMinY() && predictedY < wall.getMaxY()) {
+		//// xLoc = (int) (wall.getMinX() - 23);
+		// if(!blockedDir.contains(Direction.RIGHT))
+		// blockedDir.add(Direction.RIGHT);
+		// xVel = 0;
+		// dx2 = 0;
+		// } else if(predictedX < wall.getMaxX() && predictedX > wall.getMaxX()-23 &&
+		// predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
+		//// xLoc = (int) (wall.getMaxX() + 23);
+		// if(!blockedDir.contains(Direction.LEFT))
+		// blockedDir.add(Direction.LEFT);
+		// xVel = 0;
+		// dx2 = 0;
+		// }
+
+		// }
+		for (Rectangle wall : walls) {
+			double predictedY = yLoc + yVel;
+			double predictedX = xLoc + xVel;
+			boolean up = predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY + hB.getHeight() / 2 < wall.getMaxY()
+					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel < 0;
+			boolean down = predictedY - hB.getHeight() / 2 < wall.getMinY()
+					&& predictedY > wall.getMaxY() - hB.getHeight() / 2
+					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel > 0;
+			boolean right = predictedX - hB.getWidth() / 2 < wall.getMaxX()
+					&& predictedX - hB.getWidth() / 2 > wall.getMinX()
+					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+			boolean left = predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX + hB.getWidth()/2 < wall.getMaxX()
+					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+			if (up) {
+				if (!blockedDir.contains(Direction.DOWN))
+					blockedDir.add(Direction.DOWN);
+				yVel = 0;
+				dy2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.DOWN))
+					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
+			}
+			if (down) {
+				if (!blockedDir.contains(Direction.UP))
+					blockedDir.add(Direction.UP);
+				yVel = 0;
+				dy2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.UP))
+					blockedDir.remove(blockedDir.indexOf(Direction.UP));
+			}
+
+			if (right) {
+				if (!blockedDir.contains(Direction.RIGHT))
+					blockedDir.add(Direction.RIGHT);
+				xVel = 0;
+				dx2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.RIGHT))
+					blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+			}
+			if (left) {
+				// xLoc = (int) (wall.getMaxX() + 23);
+				if (!blockedDir.contains(Direction.LEFT))
+					blockedDir.add(Direction.LEFT);
+				xVel = 0;
+				dx2 = 0;
+			} else {
+				if (blockedDir.contains(Direction.LEFT))
+					blockedDir.remove(blockedDir.indexOf(Direction.LEFT));
+			}
+
+		}
 		return result;
 	}
 
@@ -294,10 +359,11 @@ public class Player extends Basic {
 	}
 
 	public void startFiring() {
-		//System.out.println("ping");
-		if(timer%weapons.get(0).getROF()==0);
-			firing = true;
-		
+		// System.out.println("ping");
+		if (timer % weapons.get(0).getROF() == 0)
+			;
+		firing = true;
+
 	}
 
 	public ArrayList<Projectile> fire() {
