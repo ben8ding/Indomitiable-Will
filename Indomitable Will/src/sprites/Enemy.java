@@ -8,7 +8,7 @@ public class Enemy extends Basic {
 
 	private HitBox hB;
 	private int health;
-	
+	private final int PROJ_SPEED = 3;
 	public Enemy() {
 		super(500, 350, 15);
 		health = 3;
@@ -50,7 +50,13 @@ public class Enemy extends Basic {
 	}
 	
 	public Projectile fire(int x, int y) {
-		return new Projectile(getXLoc(),getYLoc(),(getXLoc()-x)*-0.1,(getYLoc()-y)*-0.1);
+		double angle = Math.atan((double)(y-getYLoc()) / (double)(x-getXLoc()));
+		System.out.println(angle);
+		angle = -angle;
+		if(angle < 0) {
+			angle += Math.toRadians(90);
+		}
+		return new Projectile(getXLoc(),getYLoc(), Math.cos(angle) * PROJ_SPEED, Math.sin(angle) * PROJ_SPEED);
 		//return new Projectile(getXLoc(),getYLoc(),10,0);
 	}
 	public HitBox getBox() {

@@ -16,8 +16,8 @@ public class Projectile extends Basic {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param xDir
-	 * @param yDir
+	 * @param xDir xVelocity
+	 * @param yDir yVelocity
 	 */
 	public Projectile(int x, int y, double xDir, double yDir) {
 		super(x, y, 10);

@@ -64,12 +64,11 @@ public class Player extends Basic {
 			isFast = false;
 		}
 		timer++;
-		System.out.println(blockedDir);
-		//System.out.println(timer);
-	//		if (firing)
-	//			timer++;
-	//		else
-	//			timer = 0;
+		// System.out.println(timer);
+		// if (firing)
+		// timer++;
+		// else
+		// timer = 0;
 
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
@@ -77,23 +76,22 @@ public class Player extends Basic {
 		drawer.translate(-xLoc, -yLoc);
 
 		drawer.image(img, xLoc - size, yLoc - size);
-		// System.out.println(blockedDir);
 		drawer.popMatrix();
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
 		// basic tank is just circle :P
 		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		if (blockedDir.contains(Direction.UP) && dy2 > 0) {
-			blockedDir.remove(blockedDir.indexOf(Direction.UP));
-		} else if (blockedDir.contains(Direction.DOWN) && dy2 < 0) {
-			blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
-		}
-		if (blockedDir.contains(Direction.RIGHT) && dx2 < 0) {
-			blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-		} else if (blockedDir.contains(Direction.RIGHT) && dx2 > 0) {
-			blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-		}
+		// if (blockedDir.contains(Direction.UP) && dy2 > 0) {
+		// blockedDir.remove(blockedDir.indexOf(Direction.UP));
+		// } else if (blockedDir.contains(Direction.DOWN) && dy2 < 0) {
+		// blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
+		// }
+		// if (blockedDir.contains(Direction.RIGHT) && dx2 < 0) {
+		// blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+		// } else if (blockedDir.contains(Direction.RIGHT) && dx2 > 0) {
+		// blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
+		// }
 		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
@@ -159,61 +157,62 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-			boolean up = predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY + hB.getHeight() / 2 < wall.getMaxY()
+			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY < wall.getMinY()
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel > 0;
-			boolean down = predictedY - hB.getHeight() / 2 < wall.getMinY()
-					&& predictedY > wall.getMaxY() - hB.getHeight() / 2
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
+			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY()
+					&& predictedY > wall.getMaxY()
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX - hB.getWidth() / 2 < wall.getMaxX() && yVel < 0;
-			boolean right = predictedX - hB.getWidth() / 2 < wall.getMaxX()
-					&& predictedX - hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
+			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX()
+					&& predictedX > wall.getMaxX() 
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel < 0;
-			boolean left = predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX + hB.getWidth()/2 < wall.getMaxX()
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX < wall.getMinX()
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY - hB.getHeight() / 2 < wall.getMaxY() && xVel > 0;
-			if (up) {
+					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+			if (bottomCol) {
 				if (!blockedDir.contains(Direction.DOWN))
 					blockedDir.add(Direction.DOWN);
+				result = true;
 				yVel = 0;
 				dy2 = 0;
-			} else {
-				if (blockedDir.contains(Direction.DOWN))
-					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
 			}
-			if (down) {
+			if (topCol) {
 				if (!blockedDir.contains(Direction.UP))
 					blockedDir.add(Direction.UP);
+				result = true;
 				yVel = 0;
 				dy2 = 0;
-			} else {
-				if (blockedDir.contains(Direction.UP))
-					blockedDir.remove(blockedDir.indexOf(Direction.UP));
 			}
 
-			if (right) {
+			if (rightCol) {
 				if (!blockedDir.contains(Direction.RIGHT))
 					blockedDir.add(Direction.RIGHT);
+				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} else {
-				if (blockedDir.contains(Direction.RIGHT))
-					blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-			}
-			if (left) {
+			} 
+			if (leftCol) {
 				// xLoc = (int) (wall.getMaxX() + 23);
 				if (!blockedDir.contains(Direction.LEFT))
 					blockedDir.add(Direction.LEFT);
+				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} else {
+			} 
+			if(!result) {
+				if (blockedDir.contains(Direction.DOWN))
+					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
+				if (blockedDir.contains(Direction.UP))
+					blockedDir.remove(blockedDir.indexOf(Direction.UP));
 				if (blockedDir.contains(Direction.LEFT))
 					blockedDir.remove(blockedDir.indexOf(Direction.LEFT));
+				if (blockedDir.contains(Direction.RIGHT))
+					blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
 			}
-
 		}
 		return result;
 	}
@@ -266,19 +265,6 @@ public class Player extends Basic {
 		xLoc += xVel;
 		yLoc += yVel;
 
-		if (xLoc < 20) {
-			xLoc = 20;
-		}
-
-		if (yLoc < 20) {
-			yLoc = 20;
-		}
-		if (yLoc > 650) {
-			yLoc = 650;
-		}
-		if (xLoc > 980) {
-			xLoc = 980;
-		}
 		// }
 	}
 
@@ -368,7 +354,7 @@ public class Player extends Basic {
 	public void startFiring() {
 		// System.out.println("ping");
 		if (timer % weapons.get(0).getROF() == 0)
-		firing = true;
+			firing = true;
 
 	}
 
@@ -376,7 +362,7 @@ public class Player extends Basic {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		if (timer % this.weapons.get(0).getROF() == 0 || timer <=this.weapons.get(0).getROF())
+		if (timer % this.weapons.get(0).getROF() == 0 || timer <= this.weapons.get(0).getROF())
 			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
 		System.out.println(fire + "hi");
 		return fire;
