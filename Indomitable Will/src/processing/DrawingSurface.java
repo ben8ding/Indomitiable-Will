@@ -143,6 +143,7 @@ public class DrawingSurface extends PApplet {
 				pauseMenu.draw(this);
 			}
 			if (keys.contains((int) 'B')&&startTime == 0) {
+				System.out.println("hai");
 				startTime = System.nanoTime();
 				current.getPlayer().startFiring();
 			} else if(System.nanoTime()>=startTime + 1500000000) {

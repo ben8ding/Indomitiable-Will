@@ -367,18 +367,21 @@ public class Player extends Basic {
 
 	public void startFiring() {
 		// System.out.println("ping");
-		if (timer % weapons.get(0).getROF() == 0)
-		firing = true;
+		System.out.println(timer%weapons.get(0).getROF());
+		if (timer % weapons.get(0).getROF() == 0) {//problem is on this line
+			firing = true;
+			System.out.println("oopssss");
+		}
 
 	}
 
 	public ArrayList<Projectile> fire() {
+		System.out.println("hi");
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
 		if (timer % this.weapons.get(0).getROF() == 0 || timer <=this.weapons.get(0).getROF())
 			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
-		System.out.println(fire + "hi");
 		return fire;
 	}
 
