@@ -31,6 +31,15 @@ public class Projectile extends Basic {
 		shade = s;
 		
 	}
+	
+	public Projectile(int x, int y, double xDir, double yDir) {
+		super(x, y, 10);
+		xVel = 5*xDir;
+		yVel = 5*yDir;
+		hB = new HitBox(this);
+		
+		
+	}
 
 	public void act() {
 		this.xLoc += this.xVel;
