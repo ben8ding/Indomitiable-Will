@@ -61,7 +61,7 @@ public class DrawingSurface extends PApplet {
 		
 		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
 		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
-		levels.get(0).addObstacle(new Rectangle( 700, (int) 350, 50, 300));
+		levels.get(0).addObstacle(new Rectangle(700, (int) 350, 50, 300));
 		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
 		
 		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (200), 300, 50));
@@ -82,7 +82,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(4).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
 		levels.get(4).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
 		levels.get(4).addObstacle(new Rectangle( 100, (int) 230, 50, 300));
-		levels.get(4).addObstacle(new Rectangle(400, (int) (20), 50, 300));
+		levels.get(4).addObstacle(new Rectangle(400, (int) (70), 50, 300));
 
 		for (Level level : levels) {
 			level.setup(this);

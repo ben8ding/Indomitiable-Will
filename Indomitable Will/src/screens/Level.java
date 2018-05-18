@@ -28,11 +28,11 @@ public class Level {
 		bullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
-		enemies.add(new Enemy(400, 250));
-//		walls.add(new Rectangle(0,0,1000,10));
-//		walls.add(new Rectangle(0,0,10,700));
-//		walls.add(new Rectangle(990,0,-10,700));
-//		walls.add(new Rectangle(0,690,1000,-20));
+		enemies.add(new Enemy(250, 400));
+		walls.add(new Rectangle(0,-190,1000,200));
+		walls.add(new Rectangle(0,0,10,700));
+		walls.add(new Rectangle(985,0,500,700));
+		walls.add(new Rectangle(0,660,1000,20));
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 		bullets.add(new Projectile());
@@ -52,15 +52,14 @@ public class Level {
 	}
 
 	public void draw(PApplet drawer) {
-
 		timer++;
 		drawer.clear();
 		drawer.pushStyle();
 		drawer.background(255);
-		drawer.rect(drawer.width - 30, 0, 20, 20);
+		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 24, 17);
+		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			Obtainable drop = used.getItem();
@@ -70,7 +69,6 @@ public class Level {
 			}
 
 		}
-		
 		player.draw(drawer);
 		player.checkCollision(walls);
 		drawer.stroke(0);
@@ -90,7 +88,7 @@ public class Level {
 			bullets.addAll(player.fire());
 		}
 
-		if (timer % 100 == 0) {
+		if (timer % 40 == 0) {
 			for (Enemy object : enemies) {
 				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 			}
