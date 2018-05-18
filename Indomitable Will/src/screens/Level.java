@@ -112,9 +112,19 @@ public class Level {
 			 }
 		 }
 		 
+		 for(int i = 0; i<playerBullets.size();i++) {
+			 if(enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
+				 	System.out.println("bong");
+				 	playerBullets.remove(i);
+				 	enemies.get(0).takeDamage(1);
+			 }
+			 if(enemies.get(0).getHp() <=0)
+				 enemies.remove(1);
+			 
+		 }
 		 
 		
-		 System.out.println(player.getHp());
+		 //System.out.println(player.getHp());
 		drawer.popStyle();
 
 	}

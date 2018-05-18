@@ -37,6 +37,10 @@ public class Enemy extends Basic {
 		l_rate = 0.01;
 	}
 	
+	public int getHp() {
+		return health;
+	}
+	
 	@Override
 	public void draw(PApplet drawer) {
 		
