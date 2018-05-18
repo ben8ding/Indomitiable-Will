@@ -10,8 +10,6 @@ public class Enemy extends Basic {
 	private int health;
 	private final int PROJ_SPEED = 3;
 	
-	//===== Perceptron stuff==========
-	
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
 	int goal;		// whether hit goal
