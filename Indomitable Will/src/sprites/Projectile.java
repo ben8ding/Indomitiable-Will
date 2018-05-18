@@ -3,8 +3,6 @@ package sprites;
 import processing.core.PApplet;
 
 public class Projectile extends Basic {
-
-	private HitBox hB;
 	
 	public int shade;
 
@@ -34,8 +32,8 @@ public class Projectile extends Basic {
 	
 	public Projectile(int x, int y, double xDir, double yDir) {
 		super(x, y, 10);
-		xVel = 5*xDir;
-		yVel = 5*yDir;
+		xVel = xDir;
+		yVel = yDir;
 		hB = new HitBox(this);
 		
 		
@@ -51,7 +49,8 @@ public class Projectile extends Basic {
 		drawer.stroke(0);
 		drawer.fill(shade);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		// hB.draw(drawer);
+		hB.draw(drawer);
+		hB.refreshLoc(this);
 		act();
 		drawer.popStyle();
 	}
