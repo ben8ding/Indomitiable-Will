@@ -363,6 +363,18 @@ public class Player extends Basic {
 		return this.hB;
 	}
 
+	public void takeDamage() {
+		health--;
+	}
+	
+	public void heal(int amount) {
+		health+=amount;
+	}
+	
+	public int getHp() {
+		return health;
+	}
+	
 	public void speedUp(int time) {
 		spedTime = time;
 	}
