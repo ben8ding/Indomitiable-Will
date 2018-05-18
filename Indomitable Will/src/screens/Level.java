@@ -18,6 +18,7 @@ public class Level {
 	private int hp;
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
+	private ArrayList<Projectile> playerBullets;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Capsule> drops;
 	private int timer;
@@ -28,6 +29,7 @@ public class Level {
 		player = new Player();
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
+		playerBullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(250, 400));
@@ -87,7 +89,7 @@ public class Level {
 			object.draw(drawer);
 		}
 		if (player.isFiring()) {
-			bullets.addAll(player.fire());
+			playerBullets.addAll(player.fire());
 		}
 
 		if (timer % 40 == 0) {
