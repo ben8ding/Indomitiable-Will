@@ -32,9 +32,9 @@ public class Level {
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(250, 400));
 		walls.add(new Rectangle(0,-190,1000,200));
-		walls.add(new Rectangle(0,0,10,700));
+		walls.add(new Rectangle(-40,0,50,700));
 		walls.add(new Rectangle(985,0,500,700));
-		walls.add(new Rectangle(0,660,1000,20));
+		walls.add(new Rectangle(0,660,1000,40));
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 		bullets.add(new Projectile());
@@ -58,10 +58,10 @@ public class Level {
 		drawer.clear();
 		drawer.pushStyle();
 		drawer.background(255);
-		drawer.rect(drawer.width - 30, 0, 20, 20);
+		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 24, 17);
+		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			Obtainable drop = used.getItem();
