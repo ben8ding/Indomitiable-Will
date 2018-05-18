@@ -82,6 +82,9 @@ public class Level {
 		for (Projectile object : bullets) {
 			object.draw(drawer);
 		}
+		for (Projectile object : playerBullets) {
+			object.draw(drawer);
+		}
 		for (Enemy object : enemies) {
 			object.draw(drawer);
 		}
@@ -98,22 +101,20 @@ public class Level {
 			}
 		}
 
-//		 for(Projectile bullet : bullets) {
-//			 if(player.checkCollision(bullet.getBox()))
-//			 	System.out.println("pong");
-//		
-//		 }
+
 
 	
 		 for(int i = 0; i<bullets.size();i++) {
 			 if(player.checkCollision(bullets.get(i).getBox())) {
 				 	System.out.println("pong");
 				 	bullets.remove(i);
-				 	hp--;
+				 	player.takeDamage();
 			 }
 		 }
+		 
+		 
 		
-		 System.out.println(hp);
+		 System.out.println(player.getHp());
 		drawer.popStyle();
 
 	}
