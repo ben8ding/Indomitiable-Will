@@ -259,10 +259,8 @@ public class Player extends Basic {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 		} else {
-			xVel = 3*dx2;
-			yVel = 3*dy2;
-//			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.05 * (double) xVel));
-//			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.05 * (double) yVel));
+			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.03 * (double) xVel));
+			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.03 * (double) yVel));
 		}
 		xLoc += xVel;
 		yLoc += yVel;
