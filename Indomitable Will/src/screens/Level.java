@@ -150,6 +150,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
+		System.out.println("");
 		this.drops = drops;
 	}
 

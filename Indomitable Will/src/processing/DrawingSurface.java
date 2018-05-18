@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import Pickups.Capsule;
+import Pickups.Pistol;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -46,7 +47,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		levels = new ArrayList<Level>();
 		menu = new Menu();
-		currentLevel = 4;
+		currentLevel = 0;
 		// testLevel = new Level();
 		for (int i = 0; i < 5; i++) {
 			Level level = new Level();
@@ -64,7 +65,6 @@ public class DrawingSurface extends PApplet {
 	public void setup() {
 		// background(255);
 		ArrayList<Capsule> drops = new ArrayList<Capsule>();
-//		drops.add(new Capsule(x, y, z))
 		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
 		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
 		levels.get(0).addObstacle(new Rectangle(700, (int) 350, 50, 300));
