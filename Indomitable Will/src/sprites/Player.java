@@ -20,7 +20,6 @@ import java.awt.Rectangle;
  */
 public class Player extends Basic {
 
-	private HitBox hB;
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
