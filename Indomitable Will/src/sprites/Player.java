@@ -14,8 +14,8 @@ import shapes.Line;
 import java.awt.Rectangle;
 
 /**
- * 
- * 
+ * @author Nathaniel,Matthew,Ben
+ * @version 5-18-18 11:08
  *
  */
 public class Player extends Basic {

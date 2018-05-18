@@ -4,6 +4,11 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import sprites.Player;
 
+/**
+ * 
+ * @author Nathaniel
+ * @version 5-12-18
+ */
 public class PowerUp implements Obtainable {
 	private PImage img;
 	public enum powerUpType {
