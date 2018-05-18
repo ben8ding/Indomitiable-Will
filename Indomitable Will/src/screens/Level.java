@@ -56,10 +56,10 @@ public class Level {
 		drawer.clear();
 		drawer.pushStyle();
 		drawer.background(255);
-		drawer.rect(drawer.width - 30, 0, 20, 20);
+		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 24, 17);
+		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			Obtainable drop = used.getItem();

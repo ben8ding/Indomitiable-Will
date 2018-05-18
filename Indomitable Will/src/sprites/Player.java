@@ -157,20 +157,16 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY < wall.getMinY()
+			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY()
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY()
-					&& predictedY > wall.getMaxY()
+			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY() && predictedY > wall.getMaxY()
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX()
-					&& predictedX > wall.getMaxX() 
+			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX() && predictedX > wall.getMaxX()
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
-			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX < wall.getMinX()
+			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX()
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
 			if (bottomCol) {
@@ -194,7 +190,7 @@ public class Player extends Basic {
 				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} 
+			}
 			if (leftCol) {
 				// xLoc = (int) (wall.getMaxX() + 23);
 				if (!blockedDir.contains(Direction.LEFT))
@@ -202,8 +198,8 @@ public class Player extends Basic {
 				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} 
-			if(!result) {
+			}
+			if (!result) {
 				if (blockedDir.contains(Direction.DOWN))
 					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
 				if (blockedDir.contains(Direction.UP))
@@ -353,18 +349,13 @@ public class Player extends Basic {
 
 	public void startFiring() {
 		// System.out.println("ping");
-		if (timer % weapons.get(0).getROF() == 0)
 			firing = true;
-
 	}
 
 	public ArrayList<Projectile> fire() {
-
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		if (timer % this.weapons.get(0).getROF() == 0 || timer <= this.weapons.get(0).getROF())
 			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
-		System.out.println(fire + "hi");
 		return fire;
 	}
 
