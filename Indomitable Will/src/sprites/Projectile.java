@@ -3,8 +3,6 @@ package sprites;
 import processing.core.PApplet;
 
 public class Projectile extends Basic {
-
-	private HitBox hB;
 	
 	public int shade;
 

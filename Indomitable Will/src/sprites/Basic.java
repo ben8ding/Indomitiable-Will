@@ -13,6 +13,7 @@ public abstract class Basic {
 	protected double dx2;
 	protected double dy2;
 	protected double angle;
+	protected HitBox hB;
 	public Basic(int x, int y) {
 		xLoc = x;
 		yLoc = y;

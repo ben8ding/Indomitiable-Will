@@ -14,13 +14,12 @@ import shapes.Line;
 import java.awt.Rectangle;
 
 /**
- * 
- * 
+ * @author Nathaniel,Matthew,Ben
+ * @version 5-18-18 11:08
  *
  */
 public class Player extends Basic {
 
-	private HitBox hB;
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
@@ -43,7 +42,7 @@ public class Player extends Basic {
 	private ArrayList<Direction> blockedDir = new ArrayList<Direction>(4);
 
 	public Player() {
-		super(350, 300, 22);
+		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		weapons.add(new Shotgun());
 		wall = false;
@@ -157,16 +156,16 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY()
+			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY() -hB.getHeight()/4+1
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY() && predictedY > wall.getMaxY()
+			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY() && predictedY > wall.getMaxY() + hB.getHeight()/4-1
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX() && predictedX > wall.getMaxX()
+			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX() && predictedX > wall.getMaxX() + hB.getWidth() /4-1
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
-			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX()
+			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX() - hB.getWidth()/4+1
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
 			if (bottomCol) {
@@ -255,8 +254,8 @@ public class Player extends Basic {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 		} else {
-			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.03 * (double) xVel));
-			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.03 * (double) yVel));
+			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.05 * (double) xVel));
+			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.05 * (double) yVel));
 		}
 		xLoc += xVel;
 		yLoc += yVel;

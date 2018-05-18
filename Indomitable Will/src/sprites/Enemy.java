@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 public class Enemy extends Basic {
 
-	private HitBox hB;
+	
 	private int health;
 	private final int PROJ_SPEED = 3;
 	
