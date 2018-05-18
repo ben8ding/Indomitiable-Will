@@ -15,11 +15,13 @@ import sprites.Projectile;
 public class Level {
 
 	private Player player;
+	private int hp;
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Capsule> drops;
 	private int timer;
+	
 
 	public Level() {
 
@@ -39,7 +41,7 @@ public class Level {
 //		walls.add(new Rectangle(500, 0, 100, 350));
 //		walls.add(new Rectangle(60, 350, 300, 100));
 		timer = 0;
-
+		hp = 10;
 	}
 	
 
@@ -94,14 +96,22 @@ public class Level {
 			}
 		}
 
-		// for(Projectile bullet : bullets) {
-		// if(player.checkCollision(bullet.getBox()));
-		// System.out.println("pong");
-		//
-		// }
+//		 for(Projectile bullet : bullets) {
+//			 if(player.checkCollision(bullet.getBox()))
+//			 	System.out.println("pong");
+//		
+//		 }
 
+	
+		 for(int i = 0; i<bullets.size();i++) {
+			 if(player.checkCollision(bullets.get(i).getBox())) {
+				 	System.out.println("pong");
+				 	bullets.remove(i);
+				 	hp--;
+			 }
+		 }
 		
-
+		 System.out.println(hp);
 		drawer.popStyle();
 
 	}

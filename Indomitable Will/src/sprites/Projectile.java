@@ -51,7 +51,8 @@ public class Projectile extends Basic {
 		drawer.stroke(0);
 		drawer.fill(shade);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		// hB.draw(drawer);
+		hB.draw(drawer);
+		hB.refreshLoc(this);
 		act();
 		drawer.popStyle();
 	}
