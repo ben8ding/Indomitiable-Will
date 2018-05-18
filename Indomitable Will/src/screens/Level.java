@@ -28,7 +28,7 @@ public class Level {
 		bullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
-		enemies.add(new Enemy(400, 250));
+		enemies.add(new Enemy(250, 400));
 		walls.add(new Rectangle(0,-190,1000,200));
 		walls.add(new Rectangle(0,0,10,700));
 		walls.add(new Rectangle(985,0,500,700));
@@ -88,7 +88,7 @@ public class Level {
 			bullets.addAll(player.fire());
 		}
 
-		if (timer % 100 == 0) {
+		if (timer % 40 == 0) {
 			for (Enemy object : enemies) {
 				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 			}
