@@ -9,7 +9,7 @@ import processing.core.PApplet;
 
 public class Rifle extends Weapon {
 
-	
+	private final int BULLET_SPEED = 6;
 	public Rifle() {
 		ROF =15;
 	}
@@ -18,12 +18,12 @@ public class Rifle extends Weapon {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15));
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15));
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
 
 		return fire;
 
@@ -43,10 +43,10 @@ public class Rifle extends Weapon {
 	@Override
 	public Obtainable getDrop() {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public void draw(PApplet drawer) {
-
+		
 	}
 }

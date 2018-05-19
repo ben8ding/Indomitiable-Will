@@ -14,13 +14,12 @@ import shapes.Line;
 import java.awt.Rectangle;
 
 /**
- * 
- * 
+ * @author Nathaniel,Matthew,Ben
+ * @version 5-18-18 11:08
  *
  */
 public class Player extends Basic {
 
-	private HitBox hB;
 	private int health;
 	private boolean wall;
 	private static final double cs = 3.5;
@@ -43,7 +42,7 @@ public class Player extends Basic {
 	private ArrayList<Direction> blockedDir = new ArrayList<Direction>(4);
 
 	public Player() {
-		super(350, 300, 22);
+		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		weapons.add(new Shotgun());
 		wall = false;
@@ -104,20 +103,16 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY()
-					&& predictedY < wall.getMinY()
+			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY() -hB.getHeight()/4+1
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY()
-					&& predictedY > wall.getMaxY()
+			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY() && predictedY > wall.getMaxY() + hB.getHeight()/4-1
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX()
-					&& predictedX > wall.getMaxX() 
+			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX() && predictedX > wall.getMaxX() + hB.getWidth() /4-1
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
-			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX()
-					&& predictedX < wall.getMinX()
+			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX() - hB.getWidth()/4+1
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
 			if (bottomCol) {
@@ -141,7 +136,7 @@ public class Player extends Basic {
 				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} 
+			}
 			if (leftCol) {
 				// xLoc = (int) (wall.getMaxX() + 23);
 				if (!blockedDir.contains(Direction.LEFT))
@@ -149,8 +144,8 @@ public class Player extends Basic {
 				result = true;
 				xVel = 0;
 				dx2 = 0;
-			} 
-			if(!result) {
+			}
+			if (!result) {
 				if (blockedDir.contains(Direction.DOWN))
 					blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
 				if (blockedDir.contains(Direction.UP))
@@ -177,8 +172,8 @@ public class Player extends Basic {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 		} else {
-			xVel = (int) (xVel + 0.5 * ((double) dx2 * 1.01 - 0.01 * (double) xVel));
-			yVel = (int) (yVel + 0.5 * ((double) dy2 * 1.01 - 0.01 * (double) yVel));
+			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.05 * (double) xVel));
+			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.05 * (double) yVel));
 		}
 		xLoc += xVel;
 		yLoc += yVel;
@@ -271,18 +266,13 @@ public class Player extends Basic {
 
 	public void startFiring() {
 		// System.out.println("ping");
-		if (timer % weapons.get(0).getROF() == 0)
 			firing = true;
-
 	}
 
 	public ArrayList<Projectile> fire() {
-
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		if (timer % this.weapons.get(0).getROF() == 0 || timer <= this.weapons.get(0).getROF())
 			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
-		System.out.println(fire + "hi");
 		return fire;
 	}
 
@@ -290,6 +280,18 @@ public class Player extends Basic {
 		return this.hB;
 	}
 
+	public void takeDamage() {
+		health--;
+	}
+	
+	public void heal(int amount) {
+		health+=amount;
+	}
+	
+	public int getHp() {
+		return health;
+	}
+	
 	public void speedUp(int time) {
 		spedTime = time;
 	}

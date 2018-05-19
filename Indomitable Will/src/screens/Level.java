@@ -17,29 +17,31 @@ public class Level {
 	private Player player;
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
+	private ArrayList<Projectile> playerBullets;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Capsule> drops;
 	private int timer;
+	
 
 	public Level() {
 
 		player = new Player();
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
+		playerBullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
-		enemies.add(new Enemy(400, 250));
+		enemies.add(new Enemy(250, 400));
 		walls.add(new Rectangle(0,-190,1000,200));
-		walls.add(new Rectangle(0,0,10,700));
-		walls.add(new Rectangle(985,0,500,700));
-		walls.add(new Rectangle(0,660,1000,20));
+		walls.add(new Rectangle(-40,0,50,700));
+		walls.add(new Rectangle(985,-10,500,710));
+		walls.add(new Rectangle(0,660,1000,40));
 		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
 		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
 		bullets.add(new Projectile());
 //		walls.add(new Rectangle(500, 0, 100, 350));
 //		walls.add(new Rectangle(60, 350, 300, 100));
 		timer = 0;
-
 	}
 	
 
@@ -56,10 +58,10 @@ public class Level {
 		drawer.clear();
 		drawer.pushStyle();
 		drawer.background(255);
-		drawer.rect(drawer.width - 30, 0, 20, 20);
+		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 24, 17);
+		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			Obtainable drop = used.getItem();
@@ -78,6 +80,9 @@ public class Level {
 		for (Projectile object : bullets) {
 			object.draw(drawer);
 		}
+		for (Projectile object : playerBullets) {
+			object.draw(drawer);
+		}
 		for (Enemy object : enemies) {
 			object.draw(drawer);
 		}
@@ -85,23 +90,28 @@ public class Level {
 			object.draw(drawer);
 		}
 		if (player.isFiring()) {
-			bullets.addAll(player.fire());
+			playerBullets.addAll(player.fire());
 		}
 
-		if (timer % 100 == 0) {
+		if (timer % 40 == 0) {
 			for (Enemy object : enemies) {
 				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 			}
 		}
 
-		 for(Projectile bullet : bullets) {
-			 if(player.checkCollision(bullet.getBox()));
-		 		System.out.println("pong");
-		
+
+	
+		 for(int i = 0; i<bullets.size();i++) {
+			 if(player.checkCollision(bullets.get(i).getBox())) {
+				 	System.out.println("pong");
+				 	bullets.remove(i);
+				 	player.takeDamage();
+			 }
 		 }
-
+		 
+		 
 		
-
+		 System.out.println(player.getHp());
 		drawer.popStyle();
 
 	}
@@ -139,6 +149,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
+		System.out.println("");
 		this.drops = drops;
 	}
 
