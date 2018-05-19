@@ -9,7 +9,7 @@ import processing.core.PApplet;
 
 public class Rifle extends Weapon {
 
-	
+	private final int BULLET_SPEED = 6;
 	public Rifle() {
 		ROF =1;
 	}
@@ -18,9 +18,18 @@ public class Rifle extends Weapon {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
+<<<<<<< HEAD
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 10,
 				Math.sin(Math.toRadians(angle + 90)) * 10));
 		
+=======
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
+>>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
 
 		return fire;
 

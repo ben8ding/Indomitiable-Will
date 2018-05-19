@@ -100,7 +100,6 @@ public class Level {
 		}
 
 
-
 	
 		 for(int i = 0; i<bullets.size();i++) {
 			
@@ -189,6 +188,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
+		System.out.println("");
 		this.drops = drops;
 	}
 
