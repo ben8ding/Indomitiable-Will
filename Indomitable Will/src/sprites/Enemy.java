@@ -6,11 +6,9 @@ import java.awt.Rectangle;
 
 public class Enemy extends Basic {
 
-	private HitBox hB;
+	
 	private int health;
 	private final int PROJ_SPEED = 3;
-	
-	//===== Perceptron stuff==========
 	
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
@@ -39,6 +37,10 @@ public class Enemy extends Basic {
 		l_rate = 0.01;
 	}
 	
+	public int getHp() {
+		return health;
+	}
+	
 	@Override
 	public void draw(PApplet drawer) {
 		
@@ -48,8 +50,8 @@ public class Enemy extends Basic {
 	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		
-		if(wy != 0) 
-			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
+		//if(wy != 0) 
+			//drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
 		
 		hB.draw(drawer);
 		act();
@@ -72,14 +74,7 @@ public class Enemy extends Basic {
 	}
 	
 	public Projectile fire(int x, int y) {
-		//double angle = Math.atan((double)(y-getYLoc()) / (double)(x-getXLoc()));
-		//System.out.println(angle);
-		//angle = -angle;
-		//if(angle < 0) {
-		//	angle += Math.toRadians(90);
-		//}
-//		return new Projectile(getXLoc(),getYLoc(), Math.cos(angle) * PROJ_SPEED, Math.sin(angle) * PROJ_SPEED);
-		
+	
 		int shade;
 		
 		if (x + y > 1000) {
@@ -90,23 +85,12 @@ public class Enemy extends Basic {
 			shade = 255;
 			goal = 1;
 		}
-		
-//		System.out.print("Player loc ");
-//		System.out.print(x);
-//		System.out.print(' ');
-//		System.out.println(y);
-		
-		// Perceptron learning
-		
-		
+	
 		for(int i=0; i<10; i++) {
 		
 		double x_s = Math.random();
 		double y_s = Math.random();		// scale x, y
 
-//		double x_s = x * 0.001;
-//		double y_s = y * 0.001;
-		
 		if(x_s + y_s > 1) goal = 1;
 		else goal = 0;
 		
@@ -119,8 +103,8 @@ public class Enemy extends Basic {
 		wy += (goal - pout) * l_rate * y_s;
 		wc += (goal - pout) * l_rate;
 		
-		System.out.printf("weights %f, %f %f", wx, wy, wc);
-		System.out.printf("goal-pout %d, %d\n", goal, pout);
+		//System.out.printf("weights %f, %f %f", wx, wy, wc);
+		//System.out.printf("goal-pout %d, %d\n", goal, pout);
 		}
 		
 		return new Projectile(xLoc,yLoc,(x - xLoc) * 0.01,(y - yLoc) * 0.01, shade);

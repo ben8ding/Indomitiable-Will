@@ -31,4 +31,8 @@ public class HitBox extends Rectangle {
 		return this.intersects(other);
 	}
 
+	public boolean checkCollision(HitBox other) {
+		return this.intersects(other);
+	}
+	
 }
