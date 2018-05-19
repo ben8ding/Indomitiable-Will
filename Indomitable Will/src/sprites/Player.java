@@ -64,12 +64,7 @@ public class Player extends Basic {
 			isFast = false;
 		}
 		timer++;
-		// System.out.println(timer);
-		// if (firing)
-		// timer++;
-		// else
-		// timer = 0;
-
+		
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
@@ -80,18 +75,7 @@ public class Player extends Basic {
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
-		// basic tank is just circle :P
-		// drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		// if (blockedDir.contains(Direction.UP) && dy2 > 0) {
-		// blockedDir.remove(blockedDir.indexOf(Direction.UP));
-		// } else if (blockedDir.contains(Direction.DOWN) && dy2 < 0) {
-		// blockedDir.remove(blockedDir.indexOf(Direction.DOWN));
-		// }
-		// if (blockedDir.contains(Direction.RIGHT) && dx2 < 0) {
-		// blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-		// } else if (blockedDir.contains(Direction.RIGHT) && dx2 > 0) {
-		// blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-		// }
+		
 		move();
 		hB.draw(drawer);
 		hB.refreshLoc(this);
@@ -117,43 +101,6 @@ public class Player extends Basic {
 
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
-		// for (Rectangle wall : walls) {
-		// double predictedY = yLoc + 2*yVel;
-		// double predictedX = xLoc + 2*xVel;
-		// if(predictedY > wall.getMinY() && predictedY < wall.getMinY() + 23 ||
-		// (predictedX > wall.getMinX() && predictedX + hB.getWidth() <
-		// wall.getMinX())|| (predictedX < wall.getMaxX() && predictedX -hB.getWidth() >
-		// wall.getMaxX())) {
-		//// yLoc = (int) (wall.getMinY() - 23);
-		// if(!blockedDir.contains(Direction.DOWN))
-		// blockedDir.add(Direction.DOWN);
-		// yVel = 0;
-		// dy2 = 0;
-		// } else if(predictedY < wall.getMaxY() && predictedY > wall.getMaxY()-23 &&
-		// predictedX > wall.getMinX() && predictedX < wall.getMaxX()) {
-		//// yLoc = (int) (wall.getMinY() - 23);
-		// if(!blockedDir.contains(Direction.DOWN))
-		// blockedDir.add(Direction.DOWN);
-		// yVel = 0;
-		// dy2 = 0;
-		// }
-		// if(predictedX > wall.getMinX() && predictedX < wall.getMaxX() && predictedY >
-		// wall.getMinY() && predictedY < wall.getMaxY()) {
-		//// xLoc = (int) (wall.getMinX() - 23);
-		// if(!blockedDir.contains(Direction.RIGHT))
-		// blockedDir.add(Direction.RIGHT);
-		// xVel = 0;
-		// dx2 = 0;
-		// } else if(predictedX < wall.getMaxX() && predictedX > wall.getMaxX()-23 &&
-		// predictedY > wall.getMinY() && predictedY < wall.getMaxY()) {
-		//// xLoc = (int) (wall.getMaxX() + 23);
-		// if(!blockedDir.contains(Direction.LEFT))
-		// blockedDir.add(Direction.LEFT);
-		// xVel = 0;
-		// dx2 = 0;
-		// }
-
-		// }
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
@@ -218,39 +165,10 @@ public class Player extends Basic {
 	}
 
 	public boolean checkCollision(Rectangle hitbox) {
-		// if (hB.checkCollision(wall)) {
-		// result = true;
-		// if(yLoc + 2*yVel > wall.getMinY() && yLoc + 2*yVel < wall.getMinY() +
-		// wall.getHeight()) {
-		// yLoc = (int) (wall.getMinY() - 23);
-		// if(!blockedDir.contains(Direction.DOWN))
-		// blockedDir.add(Direction.DOWN);
-		// yVel = 0;
-		// dy2 = 0;
-		//
-		// } else if(yLoc + 2*yVel < wall.getMaxY() + 5) {
-		// yLoc = (int) (wall.getMinY() - 23);
-		// if(!blockedDir.contains(Direction.DOWN))
-		// blockedDir.add(Direction.DOWN);
-		// yVel = 0;
-		// dy2 = 0;
-		//
-		// }
-		// if(xLoc + 2*xVel > wall.getMinX() + 5) {
-		// xLoc = (int) (wall.getMinX() - 23);
-		// if(!blockedDir.contains(Direction.RIGHT))
-		// blockedDir.add(Direction.RIGHT);
-		// xVel = 0;
-		// dx2 = 0;
-		// } else if(xLoc + 2*xVel < wall.getMaxX()) {
-		// xLoc = (int) (wall.getMaxX() + 23);
-		// if(!blockedDir.contains(Direction.LEFT))
-		// blockedDir.add(Direction.LEFT);
-		// xVel = 0;
-		// dx2 = 0;
-		// }
-		// }
+		
 		return hB.checkCollision(hitbox);
+		
+		
 	}
 
 	private void move() {

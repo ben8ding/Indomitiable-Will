@@ -94,11 +94,11 @@ public class Level {
 			}
 		}
 
-		// for(Projectile bullet : bullets) {
-		// if(player.checkCollision(bullet.getBox()));
-		// System.out.println("pong");
-		//
-		// }
+		 for(Projectile bullet : bullets) {
+			 if(player.checkCollision(bullet.getBox()));
+		 		System.out.println("pong");
+		
+		 }
 
 		
 
