@@ -44,7 +44,7 @@ public class Player extends Basic {
 	public Player() {
 		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Shotgun());
+		weapons.add(new Rifle());
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);

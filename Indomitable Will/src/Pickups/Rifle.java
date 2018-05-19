@@ -11,19 +11,16 @@ public class Rifle extends Weapon {
 
 	
 	public Rifle() {
-		ROF =15;
+		ROF =1;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 3,
-				Math.sin(Math.toRadians(angle + 90)) * 3));
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 3,
-				Math.sin(Math.toRadians(angle + 90)) * 3));
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 3,
-				Math.sin(Math.toRadians(angle + 90)) * 3));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 10,
+				Math.sin(Math.toRadians(angle + 90)) * 10));
+		
 
 		return fire;
 
