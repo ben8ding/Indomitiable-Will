@@ -10,6 +10,7 @@ public class Weapon implements Obtainable {
 	/**
 	 * 1/ROF = FIRERATE
 	 */
+	protected int bSpeed;
 	protected int ROF;
 	
 	public Weapon() {

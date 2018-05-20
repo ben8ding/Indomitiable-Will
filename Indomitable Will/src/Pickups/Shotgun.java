@@ -10,24 +10,25 @@ public class Shotgun extends Weapon {
 
 	public Shotgun() {
 		ROF = 10;
+		bSpeed =5;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15, 255));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
+				Math.sin(Math.toRadians(angle + 90)) * bSpeed, 255));
 
 		angle += 10;
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15, 255));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
+				Math.sin(Math.toRadians(angle + 90)) * bSpeed, 255));
 
 		angle -= 20;
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 15,
-				Math.sin(Math.toRadians(angle + 90)) * 15, 255));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
+				Math.sin(Math.toRadians(angle + 90)) * bSpeed, 255));
 
 		return fire;
 
