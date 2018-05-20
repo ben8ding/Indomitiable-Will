@@ -9,9 +9,9 @@ import processing.core.PApplet;
 
 public class Rifle extends Weapon {
 
-	private final int BULLET_SPEED = 6;
+	private final int BULLET_SPEED = 10;
 	public Rifle() {
-		ROF =1;
+		ROF =3;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
@@ -20,8 +20,8 @@ public class Rifle extends Weapon {
 
 
 
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * 10,
-				Math.sin(Math.toRadians(angle + 90)) * 10));
+		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * BULLET_SPEED,
+				Math.sin(Math.toRadians(angle + 90)) * BULLET_SPEED));
 
 
 		return fire;

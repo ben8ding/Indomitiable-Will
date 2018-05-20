@@ -265,14 +265,15 @@ public class Player extends Basic {
 	}
 
 	public void startFiring() {
-		// System.out.println("ping");
+		
 			firing = true;
 	}
 
 	public ArrayList<Projectile> fire() {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 
-			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+		fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+		
 		return fire;
 	}
 
@@ -290,6 +291,10 @@ public class Player extends Basic {
 	
 	public int getHp() {
 		return health;
+	}
+	
+	public int getROF() {
+		return this.weapons.get(0).getROF();
 	}
 	
 	public void speedUp(int time) {
