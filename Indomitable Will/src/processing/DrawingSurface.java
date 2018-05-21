@@ -72,10 +72,20 @@ public class DrawingSurface extends PApplet {
 
 		// background(255);
 		ArrayList<Capsule> drops = new ArrayList<Capsule>();
-		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
-		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
-		levels.get(0).addObstacle(new Rectangle(700, (int) 350, 50, 300));
-		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
+/*		levels.get(0).addObstacle(new Rectangle(100, 500, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(200, 400, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(300, 300, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(400, 200, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(500, 100, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(600, 10, 50, 120));
+*/		
+		levels.get(0).addObstacle(new Rectangle(750, 500, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(250, 0, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(350, 100, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(450, 200, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(550, 300, 50, 120));
+		levels.get(0).addObstacle(new Rectangle(650, 400, 50, 120));
+		
 
 		levels.get(0).setDrops(drops);
 		
