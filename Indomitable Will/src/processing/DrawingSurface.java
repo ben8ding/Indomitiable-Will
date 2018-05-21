@@ -114,7 +114,6 @@ public class DrawingSurface extends PApplet {
 		pushStyle();
 		Level current = levels.get(currentLevel);
 		if(current.isCleared() && state == State.GAME) {
-			System.out.println(current);
 			current = levels.get(currentLevel+1);
 			current = new Level(current, levels.get(currentLevel).getPlayer());
 			currentLevel++;
