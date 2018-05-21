@@ -301,4 +301,7 @@ public class Player extends Basic {
 	public void speedUp(int time) {
 		spedTime = time;
 	}
+	public void addWeapon(Weapon newWeapon) {
+		weapons.add(newWeapon);
+	}
 }

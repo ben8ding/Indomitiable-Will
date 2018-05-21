@@ -24,7 +24,7 @@ public class Pistol extends Weapon {
 				Math.sin(Math.toRadians(angle+90)) * bSpeed, 100));
 		return result;
 	}
-	
+
 	public Obtainable getDrop() {
 		return this;
 	}

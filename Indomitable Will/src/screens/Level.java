@@ -21,7 +21,6 @@ public class Level {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Capsule> drops;
 	private int timer;
-	
 
 	public Level() {
 
@@ -32,14 +31,13 @@ public class Level {
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 		enemies.add(new Enemy(250, 400));
-		walls.add(new Rectangle(0,-190,1000,200));
-		walls.add(new Rectangle(-40,0,50,700));
-		walls.add(new Rectangle(985,-10,500,710));
-		walls.add(new Rectangle(0,660,1000,40));
-		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
+		walls.add(new Rectangle(0, -190, 1000, 200));
+		walls.add(new Rectangle(-40, 0, 50, 700));
+		walls.add(new Rectangle(985, -10, 500, 710));
+		walls.add(new Rectangle(0, 660, 1000, 40));
+		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 		timer = 0;
 	}
-	
 
 	public void setup(PApplet drawer) {
 		player.setup(drawer);
@@ -64,6 +62,8 @@ public class Level {
 			if (drop instanceof PowerUp) {
 				((PowerUp) drop).use(player);
 				drops.remove(used);
+			} else if (drop instanceof Weapon) {
+				player.addWeapon((Weapon)drops.remove(drops.indexOf(used)).getItem());
 			}
 
 		}
@@ -95,58 +95,54 @@ public class Level {
 			}
 		}
 
+		for (int i = 0; i < bullets.size(); i++) {
 
-	
-		 for(int i = 0; i<bullets.size();i++) {
-			
-			 boolean remove = false;
-			 if(bullets.size()>0 && bullets.get(0)!=null) {
-			
-				 if(player.checkCollision(bullets.get(i).getBox())) {
-				 	//System.out.println("pong");
-				 	remove = true;
-				 	player.takeDamage();
-			 }
-			 
-				 for(Rectangle wall : walls) {
-					 if(bullets.get(i).getBox().checkCollision(wall)) { 
-						remove = true ;
-					 }
-			 	}
-			
-			 }
-			 if(remove)
-				 bullets.remove(i);
-		 }
-		 
-		 for(int i = 0; i<playerBullets.size();i++) {
-				
-			 boolean remove = false;
-			 if(enemies.size()>0 && enemies.get(0)!=null) {
-			 if(playerBullets.size()>0 && playerBullets.get(0)!=null) {
-			
-				 if(enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
-				 	System.out.println("pong");
-				 	remove = true;
-				 	enemies.get(0).takeDamage(1);
-				 	
-			 }
-			 
-				 for(Rectangle wall : walls) {
-					 if(playerBullets.get(i).getBox().checkCollision(wall)) { 
-						remove = true ;
-					 }
-			 	}
-			
-			 }
-			 if(remove)
-				 playerBullets.remove(i);
-			 if(enemies.get(0).getHp()==0)
-				 enemies.remove(0);
-			 }
-		 }
-		
-		 //System.out.println(player.getHp());
+			boolean remove = false;
+			if (bullets.size() > 0 && bullets.get(0) != null) {
+
+				if (player.checkCollision(bullets.get(i).getBox())) {
+					// System.out.println("pong");
+					remove = true;
+					player.takeDamage();
+				}
+
+				for (Rectangle wall : walls) {
+					if (bullets.get(i).getBox().checkCollision(wall)) {
+						remove = true;
+					}
+				}
+
+			}
+			if (remove)
+				bullets.remove(i);
+		}
+
+		for (int i = 0; i < playerBullets.size(); i++) {
+
+			boolean remove = false;
+			if (enemies.size() > 0 && enemies.get(0) != null) {
+				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
+
+					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
+						System.out.println("pong");
+						remove = true;
+						enemies.get(0).takeDamage(1);
+
+					}
+
+					for (Rectangle wall : walls) {
+						if (playerBullets.get(i).getBox().checkCollision(wall)) {
+							remove = true;
+						}
+					}
+
+				}
+				if (remove)
+				if (enemies.get(0).getHp() == 0)
+					enemies.remove(0);
+			}
+		}
+		// System.out.println(player.getHp());
 		drawer.popStyle();
 
 	}
@@ -159,9 +155,9 @@ public class Level {
 		return walls;
 	}
 
-//	public void setWalls(ArrayList<Rectangle> walls) {
-//		this.walls = walls;
-//	}
+	// public void setWalls(ArrayList<Rectangle> walls) {
+	// this.walls = walls;
+	// }
 
 	public ArrayList<Projectile> getBullets() {
 		return bullets;
