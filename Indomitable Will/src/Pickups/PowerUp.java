@@ -10,6 +10,7 @@ import sprites.Player;
  * @version 5-12-18
  */
 public class PowerUp implements Obtainable {
+	private PImage original;
 	private PImage img;
 	public enum powerUpType {
 		SPEED, FIRERATE
@@ -20,7 +21,7 @@ public class PowerUp implements Obtainable {
 	}
 	public void setup(PApplet drawer) {
 		// TODO Auto-generated method stub
-		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Icons.png");
+		original = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Icons.png");
 	}
 	@Override
 	public PImage getImg() {
@@ -34,9 +35,9 @@ public class PowerUp implements Obtainable {
 	}
 	public void draw(PApplet drawer) {
 		if(powerUp == powerUpType.SPEED) {
-			img = img.get(0, 0, 18, 18);
+			img = original.get(0, 0, 18, 18);
 		} else if (powerUp == powerUpType.FIRERATE) {
-			img = img.get(72, 0, 90, 18);
+			img = original.get(72, 0, 18, 18);
 		}
 	}
 	public void use(Player p) {
