@@ -37,6 +37,10 @@ public class Enemy extends Basic {
 		l_rate = 0.01;
 	}
 	
+	public int getHp() {
+		return health;
+	}
+	
 	@Override
 	public void draw(PApplet drawer) {
 		
@@ -46,9 +50,9 @@ public class Enemy extends Basic {
 	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		
-		//if(wy != 0) 
-			//drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
-		
+//		if(wy != 0) 
+//			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
+
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();
@@ -57,7 +61,6 @@ public class Enemy extends Basic {
 	public boolean checkCollision(Rectangle other) {
 		return hB.checkCollision(other);
 	}
-
 	public void takeDamage(int power) {
 		health-=power;
 	}
@@ -99,11 +102,19 @@ public class Enemy extends Basic {
 		wy += (goal - pout) * l_rate * y_s;
 		wc += (goal - pout) * l_rate;
 		
-		//System.out.printf("weights %f, %f %f", wx, wy, wc);
-		//System.out.printf("goal-pout %d, %d\n", goal, pout);
+//		System.out.printf("weights %f, %f %f", wx, wy, wc);
+//		System.out.printf("goal-pout %d, %d\n", goal, pout);
 		}
 		
-		return new Projectile(xLoc,yLoc,(x - xLoc) * 0.01,(y - yLoc) * 0.01, shade);
+		double vx = (double)(x - xLoc);
+		double vy = (double)(y - yLoc);
+		
+		double v = Math.sqrt(vx*vx + vy*vy);
+		
+		vx = 3 * vx / v;
+		vy = 3 * vy / v;
+		
+		return new Projectile(xLoc,yLoc,vx,vy, shade);
 	}
 	public HitBox getBox() {
 		return this.hB;

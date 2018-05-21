@@ -33,7 +33,9 @@ public class Capsule extends Basic {
 		//drawer.image(item.getImg(), xLoc-size, yLoc-size);
 //		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		item.draw(drawer);
-		drawer.image(item.getImg(), xLoc-item.getImg().width/2, yLoc-item.getImg().width/2);
+		if(!(item instanceof Pistol)) {
+			drawer.image(item.getImg(), xLoc-item.getImg().width/2, yLoc-item.getImg().width/2);
+		}
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();
