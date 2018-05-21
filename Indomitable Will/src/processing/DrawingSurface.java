@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+
 /**
  * 
  * @author Matthew,Nathaniel,Ben
@@ -31,7 +32,7 @@ public class DrawingSurface extends PApplet {
 	private Menu menu;
 	private PauseMenu pauseMenu;
 	private Instructions instructions;
-	// private Level testLevel,level1,level2,level3,level4;
+	private LoseScreen lose;
 	private int currentLevel;
 	private long startTime;
 	private State previousState;
@@ -42,12 +43,13 @@ public class DrawingSurface extends PApplet {
 	private long waitTime;
 
 	private enum State {
-		PAUSED, MENU, GAME, INSTRUCTIONS, WIN
+		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE
 	};
 
 	private State state;
 
 	public DrawingSurface() {
+		lose = new LoseScreen();
 		ws = new WinScreen();
 		previousState = State.MENU;
 		instructions = new Instructions();
@@ -80,25 +82,25 @@ public class DrawingSurface extends PApplet {
 		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
 		drops.add(new Capsule(50, 300, new Pistol()));
 		levels.get(0).setDrops(drops);
-		
+
 		drops = new ArrayList<Capsule>();
 		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (200), 300, 50));
 		levels.get(1).addObstacle(new Rectangle((int) (60), (int) (340), 300, 50));
 		levels.get(1).addObstacle(new Rectangle(900, (int) 400, 50, 300));
 		levels.get(1).addObstacle(new Rectangle(500, (int) (310), 50, 300));
-		
+
 		drops = new ArrayList<Capsule>();
 		levels.get(2).addObstacle(new Rectangle((int) (300), (int) (630), 300, 50));
 		levels.get(2).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
 		levels.get(2).addObstacle(new Rectangle(900, (int) 100, 50, 300));
 		levels.get(2).addObstacle(new Rectangle(530, (int) (350), 50, 300));
 		drops = new ArrayList<Capsule>();
-		
+
 		levels.get(3).addObstacle(new Rectangle((int) (700), (int) (350), 300, 50));
 		levels.get(3).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
 		levels.get(3).addObstacle(new Rectangle(500, (int) 80, 50, 300));
 		levels.get(3).addObstacle(new Rectangle(175, (int) (200), 50, 300));
-		
+
 		drops = new ArrayList<Capsule>();
 		drops.add(new Capsule(600, 300, new Rifle()));
 		levels.get(4).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
@@ -114,10 +116,24 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		pushStyle();
 		Level current = levels.get(currentLevel);
-		if(current.isCleared() && state == State.GAME) {
-			if(currentLevel != 4) {
+		if (levels.get(currentLevel).getPlayer().getHp() == 0 && state == State.GAME) {
+			state = State.LOSE;
+			background(255);
+			lose.draw(this);
+		}
+		if (state == State.LOSE && getMouseX() > width / 2 - 200 && getMouseX() < width + 200
+				&& getMouseY() > height / 2 - 115 && getMouseY() < height / 2 - 15 && mousePressed) {
+			// System.out.println("hallo from the far east side");
+			previousState = state;
+			state = State.MENU;
+			currentLevel = 0;
+			background(255);
+			waitTime = System.nanoTime();
+		}
+		if (current.isCleared() && state == State.GAME) {
+			if (currentLevel != 4) {
 				System.out.println(currentLevel);
-				current = levels.get(currentLevel+1);
+				current = levels.get(currentLevel + 1);
 				current = new Level(current, levels.get(currentLevel).getPlayer());
 				currentLevel++;
 				levels.set(currentLevel, current);
@@ -147,9 +163,12 @@ public class DrawingSurface extends PApplet {
 				state = previousState;
 				previousState = State.INSTRUCTIONS;
 			} else if (getMouseX() > width / 2 - 200 && getMouseX() < width / 2 + 200 && getMouseY() > height / 2 - 115
-					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU &&System.nanoTime() - waitTime >=1000000000) {
+					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU
+					&& System.nanoTime() - waitTime >= 100000000) {
 				previousState = state;
 				state = State.GAME;
+				levels.get(0).draw(this);
+				System.out.println("hallo from the far east side");
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 200
 					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {
 				previousState = state;
@@ -160,7 +179,7 @@ public class DrawingSurface extends PApplet {
 				previousState = state;
 				state = State.INSTRUCTIONS;
 				instructions.draw(this);
-			}else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height/2-80
+			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 80
 					&& getMouseY() < height / 2 - 30 && state == State.PAUSED && mousePressed) {
 				previousState = state;
 				state = State.MENU;
@@ -185,10 +204,10 @@ public class DrawingSurface extends PApplet {
 				pauseMenu.draw(this);
 			}
 			if (keys.contains((int) 'B') && startTime == 0) {
-				//System.out.println("hai");
+				// System.out.println("hai");
 				startTime = System.nanoTime();
 				current.getPlayer().startFiring();
-			} else if (System.nanoTime() >= startTime + 100000000*current.getPlayer().getROF()) {
+			} else if (System.nanoTime() >= startTime + 100000000 * current.getPlayer().getROF()) {
 				startTime = 0;
 			} else {
 				current.getPlayer().stopFiring();
