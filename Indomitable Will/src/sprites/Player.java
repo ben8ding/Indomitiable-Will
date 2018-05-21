@@ -310,7 +310,7 @@ public class Player extends Basic {
 	
 	public int getROF() {
 		if(currentWeapon != null)
-		return this.weapons.get(0).getROF();
+		return currentWeapon.getROF();
 		else 
 		return 0;
 	}

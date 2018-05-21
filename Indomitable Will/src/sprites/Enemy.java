@@ -7,9 +7,9 @@ import java.awt.Rectangle;
 public class Enemy extends Basic {
 
 	
-	private int health;
+	protected int health;
 	private final int PROJ_SPEED = 3;
-	
+	protected final int maxHealth;
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
 	int goal;		// whether hit goal
@@ -19,6 +19,7 @@ public class Enemy extends Basic {
 	public Enemy() {
 		super(500, 350, 15);
 		health = 3;
+		maxHealth = 3;
 		hB = new HitBox(this);
 		
 		init();
@@ -27,11 +28,15 @@ public class Enemy extends Basic {
 	public Enemy(int x, int y) {
 		super(x, y, 15);
 		health = 3;
+		maxHealth = 3;
 		hB = new HitBox(this);
 		
 		init();
 	}
-	
+	protected Enemy(int x, int y, int hp) {
+		maxHealth = hp;
+		health = maxHealth;
+	}
 	public void init() {
 		wx = wy = wc = 0;
 		l_rate = 0.01;
@@ -46,10 +51,14 @@ public class Enemy extends Basic {
 		
 		drawer.pushStyle();
 		drawer.stroke(0);
-		drawer.fill(255);
-	
+		drawer.fill(255);	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		
+		drawer.fill(0);
+		drawer.textAlign(drawer.CENTER);
+		drawer.textSize(12);
+		drawer.text(health + "/" + maxHealth, xLoc,  yLoc-size/3+3);
+		drawer.textSize(8);
+	
 //		if(wy != 0) 
 //			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
 

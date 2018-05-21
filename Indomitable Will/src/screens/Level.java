@@ -37,12 +37,12 @@ public class Level {
 		walls.add(new Rectangle(-40, 0, 50, 700));
 		walls.add(new Rectangle(985, -10, 500, 710));
 		walls.add(new Rectangle(0, 660, 1000, 40));
-		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 		timer = 0;
 		cleared = false;
 		for(Enemy e : enemies) {
 			walls.add(e.getBox());
 		}
+		drops.add(new Capsule(600,50, new PowerUp(PowerUp.powerUpType.FIRERATE)));
 	}
 	public Level(Level l, Player p) {
 		this();

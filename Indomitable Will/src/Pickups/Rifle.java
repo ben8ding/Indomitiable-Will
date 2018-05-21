@@ -20,8 +20,6 @@ public class Rifle extends Weapon {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
 				Math.sin(Math.toRadians(angle + 90)) * bSpeed));
-
-
 		return fire;
 
 	}
