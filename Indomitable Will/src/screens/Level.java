@@ -15,12 +15,15 @@ import sprites.Projectile;
 public class Level {
 
 	private Player player;
+
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Projectile> playerBullets;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Capsule> drops;
 	private int timer;
+	private boolean cleared;
+
 
 	public Level() {
 
@@ -37,6 +40,7 @@ public class Level {
 		walls.add(new Rectangle(0, 660, 1000, 40));
 		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 		timer = 0;
+		cleared = false;
 	}
 
 	public void setup(PApplet drawer) {
@@ -95,54 +99,58 @@ public class Level {
 			}
 		}
 
-		for (int i = 0; i < bullets.size(); i++) {
-
-			boolean remove = false;
-			if (bullets.size() > 0 && bullets.get(0) != null) {
-
-				if (player.checkCollision(bullets.get(i).getBox())) {
-					// System.out.println("pong");
-					remove = true;
-					player.takeDamage();
-				}
-
-				for (Rectangle wall : walls) {
-					if (bullets.get(i).getBox().checkCollision(wall)) {
-						remove = true;
-					}
-				}
-
-			}
-			if (remove)
-				bullets.remove(i);
-		}
-
-		for (int i = 0; i < playerBullets.size(); i++) {
-
-			boolean remove = false;
-			if (enemies.size() > 0 && enemies.get(0) != null) {
-				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
-
-					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
-						System.out.println("pong");
-						remove = true;
-						enemies.get(0).takeDamage(1);
-
-					}
-
-					for (Rectangle wall : walls) {
-						if (playerBullets.get(i).getBox().checkCollision(wall)) {
-							remove = true;
-						}
-					}
-
-				}
-				if (remove)
-				if (enemies.get(0).getHp() == 0)
-					enemies.remove(0);
-			}
-		}
-		// System.out.println(player.getHp());
+		for (int i = 0; i < bullets.size(); i++  ) {
+			 
+			 			boolean remove = false;
+			 			if (bullets.size() > 0 && bullets.get(0) != null) {
+			 
+			 				if (player.checkCollision(bullets.get(i).getBox())) {
+			 					// System.out.println("pong");
+			 					remove = true;
+			 					player.takeDamage();
+			 				}
+			 
+			 				for (Rectangle wall : walls) {
+			 					if (bullets.get(i).getBox().checkCollision(wall)) {
+			 						remove = true;
+			 					}
+			 				}
+			 
+			 			}
+			 			if (remove)
+			 				bullets.remove(i);
+			 		}
+			 
+			 		for (int i = 0; i < playerBullets.size(); i++  ) {
+			 
+			 			boolean remove = false;
+			 			if (enemies.size() > 0 && enemies.get(0) != null) {
+			 				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
+			 
+			 					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
+			 						System.out.println("pong");
+			 						remove = true;
+			 						enemies.get(0).takeDamage(1);
+			 
+			 					}
+			 
+			 					for (Rectangle wall : walls) {
+			 						if (playerBullets.get(i).getBox().checkCollision(wall)) {
+			 							remove = true;
+			 						}
+			 					}
+			 
+			 				}
+			 				if (remove)
+			 					playerBullets.remove(i);
+			 				if (enemies.get(0).getHp() == 0)
+			 					enemies.remove(0);
+			 			}
+			 		}
+			 
+			 		if (enemies.size() == 0)
+				cleared = true;
+			// System.out.println(player.getHp());
 		drawer.popStyle();
 
 	}
@@ -198,6 +206,26 @@ public class Level {
 
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
+	}
+
+	public ArrayList<Projectile> getPlayerBullets() {
+		return playerBullets;
+	}
+
+	public void setPlayerBullets(ArrayList<Projectile> playerBullets) {
+		this.playerBullets = playerBullets;
+	}
+
+	public boolean isCleared() {
+		return cleared;
+	}
+
+	public void setCleared(boolean cleared) {
+		this.cleared = cleared;
+	}
+
+	public void setWalls(ArrayList<Rectangle> walls) {
+		this.walls = walls;
 	}
 
 }
