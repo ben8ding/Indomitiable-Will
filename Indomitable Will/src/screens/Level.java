@@ -40,6 +40,9 @@ public class Level {
 		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 		timer = 0;
 		cleared = false;
+		for(Enemy e : enemies) {
+			walls.add(e.getBox());
+		}
 	}
 	public Level(Level l, Player p) {
 		this();
@@ -79,6 +82,7 @@ public class Level {
 		player.checkCollision(walls);
 		drawer.stroke(0);
 		for (Rectangle object : walls) {
+			if(object.getSize().getWidth() > 40)
 			drawer.rect(object.x, object.y, object.width, object.height);
 		}
 		for (Projectile object : bullets) {
@@ -97,14 +101,13 @@ public class Level {
 			playerBullets.addAll(player.fire());
 		}
 
-		if (timer % 40 == 0) {
+		if (timer % 100 == 0) {
 			for (Enemy object : enemies) {
 				bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 			}
 		}
 
 		for (int i = 0; i < bullets.size(); i++  ) {
-			 
 			 			boolean remove = false;
 			 			if (bullets.size() > 0 && bullets.get(0) != null) {
 			 
@@ -116,6 +119,7 @@ public class Level {
 			 
 			 				for (Rectangle wall : walls) {
 			 					if (bullets.get(i).getBox().checkCollision(wall)) {
+			 						if(wall.getSize().getWidth() > 40)
 			 						remove = true;
 			 					}
 			 				}

@@ -61,7 +61,6 @@ public class Enemy extends Basic {
 	public boolean checkCollision(Rectangle other) {
 		return hB.checkCollision(other);
 	}
-
 	public void takeDamage(int power) {
 		health-=power;
 	}

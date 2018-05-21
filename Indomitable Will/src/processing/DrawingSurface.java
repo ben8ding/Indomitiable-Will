@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import Pickups.Capsule;
 import Pickups.Pistol;
+import Pickups.Rifle;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -26,7 +27,7 @@ import java.util.Random;
  * 
  */
 public class DrawingSurface extends PApplet {
-
+	private WinScreen ws;
 	private Menu menu;
 	private PauseMenu pauseMenu;
 	private Instructions instructions;
@@ -41,12 +42,13 @@ public class DrawingSurface extends PApplet {
 	private long waitTime;
 
 	private enum State {
-		PAUSED, MENU, GAME, INSTRUCTIONS
+		PAUSED, MENU, GAME, INSTRUCTIONS, WIN
 	};
 
 	private State state;
 
 	public DrawingSurface() {
+		ws = new WinScreen();
 		previousState = State.MENU;
 		instructions = new Instructions();
 		keys = new ArrayList<Integer>();
@@ -79,26 +81,31 @@ public class DrawingSurface extends PApplet {
 		drops.add(new Capsule(50, 300, new Pistol()));
 		levels.get(0).setDrops(drops);
 		
+		drops = new ArrayList<Capsule>();
 		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (200), 300, 50));
-		levels.get(1).addObstacle(new Rectangle((int) (50), (int) (340), 300, 50));
+		levels.get(1).addObstacle(new Rectangle((int) (60), (int) (340), 300, 50));
 		levels.get(1).addObstacle(new Rectangle(900, (int) 400, 50, 300));
 		levels.get(1).addObstacle(new Rectangle(500, (int) (310), 50, 300));
-
+		
+		drops = new ArrayList<Capsule>();
 		levels.get(2).addObstacle(new Rectangle((int) (300), (int) (630), 300, 50));
 		levels.get(2).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
 		levels.get(2).addObstacle(new Rectangle(900, (int) 100, 50, 300));
 		levels.get(2).addObstacle(new Rectangle(530, (int) (350), 50, 300));
-
+		drops = new ArrayList<Capsule>();
+		
 		levels.get(3).addObstacle(new Rectangle((int) (700), (int) (350), 300, 50));
 		levels.get(3).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
 		levels.get(3).addObstacle(new Rectangle(500, (int) 80, 50, 300));
 		levels.get(3).addObstacle(new Rectangle(175, (int) (200), 50, 300));
-
+		
+		drops = new ArrayList<Capsule>();
+		drops.add(new Capsule(600, 300, new Rifle()));
 		levels.get(4).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
 		levels.get(4).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
 		levels.get(4).addObstacle(new Rectangle(100, (int) 230, 50, 300));
 		levels.get(4).addObstacle(new Rectangle(400, (int) (70), 50, 300));
-
+		levels.get(4).setDrops(drops);
 		for (Level level : levels) {
 			level.setup(this);
 		}
@@ -114,11 +121,17 @@ public class DrawingSurface extends PApplet {
 		pushStyle();
 		Level current = levels.get(currentLevel);
 		if(current.isCleared() && state == State.GAME) {
-			current = levels.get(currentLevel+1);
-			current = new Level(current, levels.get(currentLevel).getPlayer());
-			currentLevel++;
-			levels.set(currentLevel, current);
-			
+			if(currentLevel != 4) {
+				System.out.println(currentLevel);
+				current = levels.get(currentLevel+1);
+				current = new Level(current, levels.get(currentLevel).getPlayer());
+				currentLevel++;
+				levels.set(currentLevel, current);
+			} else {
+				state = State.WIN;
+				clear();
+				ws.draw(this);
+			}
 		}
 		if (state == State.MENU) {
 			menu.draw(this);

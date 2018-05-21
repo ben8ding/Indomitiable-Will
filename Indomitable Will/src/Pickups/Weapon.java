@@ -6,7 +6,7 @@ import processing.core.PImage;
 import sprites.Projectile;
 import processing.core.PApplet;
 
-public class Weapon implements Obtainable {
+public abstract class Weapon implements Obtainable {
 	/**
 	 * 1/ROF = FIRERATE
 	 */

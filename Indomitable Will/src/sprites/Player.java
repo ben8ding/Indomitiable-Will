@@ -82,7 +82,7 @@ public class Player extends Basic {
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
 		drawer.image(img, xLoc - size, yLoc - size);
-		drawer.popMatrix();
+		
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
@@ -92,7 +92,7 @@ public class Player extends Basic {
 		hB.refreshLoc(this);
 
 		drawer.popStyle();
-
+		drawer.popMatrix();
 	}
 
 	public Capsule checkCollection(ArrayList<Capsule> drops) {
