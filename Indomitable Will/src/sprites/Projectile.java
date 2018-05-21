@@ -32,8 +32,8 @@ public class Projectile extends Basic {
 	
 	public Projectile(int x, int y, double xDir, double yDir) {
 		super(x, y, 10);
-		xVel = xDir;
-		yVel = yDir;
+		xVel = 5*xDir;
+		yVel = 5*yDir;
 		hB = new HitBox(this);
 		
 		

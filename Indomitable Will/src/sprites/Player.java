@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import Pickups.Capsule;
+import Pickups.Pistol;
 import Pickups.PowerUp;
 import Pickups.Rifle;
 import Pickups.Shotgun;
@@ -44,7 +45,7 @@ public class Player extends Basic {
 	public Player() {
 		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Shotgun());
+		weapons.add(new Pistol());
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);

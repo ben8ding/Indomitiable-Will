@@ -10,7 +10,7 @@ public class Shotgun extends Weapon {
 
 	public Shotgun() {
 		ROF = 10;
-		bSpeed =5;
+		bSpeed = 3;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
