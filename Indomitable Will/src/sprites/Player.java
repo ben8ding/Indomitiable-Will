@@ -312,4 +312,12 @@ public class Player extends Basic {
 	public void speedUp(int time) {
 		spedTime = time;
 	}
+	public boolean switchWeapon(Weapon w) {
+		boolean result = false;
+		if(weapons.contains(w)) {
+			result = true;
+			currentWeapon = w;
+		} 
+		return result;
+	}
 }

@@ -42,7 +42,10 @@ public class Level {
 		timer = 0;
 		cleared = false;
 	}
-
+	public Level(Player p) {
+		this();
+		player = p;
+	}
 	public void setup(PApplet drawer) {
 		player.setup(drawer);
 		for (Capsule object : drops) {
