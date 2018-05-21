@@ -113,6 +113,8 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		pushStyle();
 		Level current = levels.get(currentLevel);
+		if(current.isCleared())
+			current = levels.get(currentLevel+1);
 		if (state == State.MENU) {
 			menu.draw(this);
 		}
