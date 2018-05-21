@@ -62,14 +62,11 @@ public class Level {
 		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
-			Obtainable drop = used.getItem();
-			if (drop instanceof PowerUp) {
-				((PowerUp) drop).use(player);
-				drops.remove(used);
-			} else if (drop instanceof Weapon) {
-				player.addWeapon((Weapon)drops.remove(drops.indexOf(used)).getItem());
+			if(used.getItem() instanceof PowerUp) {
+				PowerUp pu = (PowerUp)used.getItem();
+				pu.use(player);
 			}
-
+			drops.remove(used);
 		}
 		player.draw(drawer);
 		player.checkCollision(walls);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import Pickups.Capsule;
+import Pickups.Obtainable;
 import Pickups.Pistol;
 import Pickups.PowerUp;
 import Pickups.Rifle;
@@ -16,7 +17,7 @@ import java.awt.Rectangle;
 
 /**
  * @author Nathaniel,Matthew,Ben
- * @version 5-18-18 11:08
+ * @version 5-20-18 20:25
  *
  */
 public class Player extends Basic {
@@ -27,7 +28,7 @@ public class Player extends Basic {
 	private static final double sped = 4.0;
 	private boolean firing;
 	private int timer;
-
+	private Weapon currentWeapon = null;
 	private enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
@@ -45,7 +46,7 @@ public class Player extends Basic {
 	public Player() {
 		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
-		weapons.add(new Pistol());
+	
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
@@ -57,6 +58,10 @@ public class Player extends Basic {
 	}
 
 	public void draw(PApplet drawer) {
+		
+		if(weapons.size() == 1) {
+			currentWeapon = weapons.get(0);
+		} 
 		if (spedTime > 0) {
 			isFast = true;
 			spedTime--;
@@ -89,9 +94,10 @@ public class Player extends Basic {
 		for (Capsule drop : drops) {
 			if (checkCollision(drop.getBox())) {
 				result = drop;
-				if (drop.getItem() instanceof Weapon) {
+				Obtainable o = drop.getItem();
+				if (o instanceof Weapon && !weapons.contains(o)) {
 					weapons.add((Weapon) drop.getItem());
-				} else if (drop.getItem() instanceof PowerUp) {
+				} else if (o instanceof PowerUp) {
 					powerup = (PowerUp) drop.getItem();
 				}
 			}
@@ -272,8 +278,10 @@ public class Player extends Basic {
 
 	public ArrayList<Projectile> fire() {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
-
-		fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+		if(currentWeapon != null) {
+			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+		}
+		
 		
 		return fire;
 	}
@@ -295,13 +303,13 @@ public class Player extends Basic {
 	}
 	
 	public int getROF() {
+		if(currentWeapon != null)
 		return this.weapons.get(0).getROF();
+		else 
+		return 0;
 	}
 	
 	public void speedUp(int time) {
 		spedTime = time;
-	}
-	public void addWeapon(Weapon newWeapon) {
-		weapons.add(newWeapon);
 	}
 }
