@@ -9,7 +9,7 @@ public class Enemy extends Basic {
 	
 	private int health;
 	private final int PROJ_SPEED = 3;
-	
+	private final int maxHealth = 3;
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
 	int goal;		// whether hit goal
@@ -46,10 +46,14 @@ public class Enemy extends Basic {
 		
 		drawer.pushStyle();
 		drawer.stroke(0);
-		drawer.fill(255);
-	
+		drawer.fill(255);	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		
+		drawer.fill(0);
+		drawer.textAlign(drawer.CENTER);
+		drawer.textSize(12);
+		drawer.text(health + "/" + maxHealth, xLoc,  yLoc-size/3+3);
+		drawer.textSize(8);
+	
 //		if(wy != 0) 
 //			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
 
