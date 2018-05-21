@@ -113,13 +113,18 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		pushStyle();
 		Level current = levels.get(currentLevel);
-		if(current.isCleared())
+		if(current.isCleared() && state == State.GAME) {
+			System.out.println(current);
 			current = levels.get(currentLevel+1);
+			current = new Level(current, levels.get(currentLevel).getPlayer());
+			currentLevel++;
+			levels.set(currentLevel, current);
+			
+		}
 		if (state == State.MENU) {
 			menu.draw(this);
 		}
 		if (state != State.GAME) {
-
 			if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 + 15
 					&& getMouseY() < height / 2 + 50 && mousePressed && state == State.MENU) {
 				previousState = state;
@@ -136,7 +141,7 @@ public class DrawingSurface extends PApplet {
 				state = previousState;
 				previousState = State.INSTRUCTIONS;
 			} else if (getMouseX() > width / 2 - 200 && getMouseX() < width / 2 + 200 && getMouseY() > height / 2 - 115
-					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU&&System.nanoTime() - waitTime >=1000000000) {
+					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU &&System.nanoTime() - waitTime >=1000000000) {
 				previousState = state;
 				state = State.GAME;
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 200
@@ -161,6 +166,7 @@ public class DrawingSurface extends PApplet {
 		} else {
 
 			current.draw(this);
+			System.out.println(current);
 			// these booleans track if the player is moving in a certain direction
 			boolean down = keys.contains((int) 'S') || keys.contains(DOWN);
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);

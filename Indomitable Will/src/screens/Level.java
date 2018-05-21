@@ -26,7 +26,6 @@ public class Level {
 
 
 	public Level() {
-
 		player = new Player();
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
@@ -42,9 +41,14 @@ public class Level {
 		timer = 0;
 		cleared = false;
 	}
-	public Level(Player p) {
+	public Level(Level l, Player p) {
 		this();
+		walls = l.getWalls();
+		enemies = l.getEnemies();
+		drops = l.getDrops();
 		player = p;
+		player.setXLoc(50);
+		player.setYLoc(300);
 	}
 	public void setup(PApplet drawer) {
 		player.setup(drawer);
@@ -227,5 +231,4 @@ public class Level {
 	public void setWalls(ArrayList<Rectangle> walls) {
 		this.walls = walls;
 	}
-
 }

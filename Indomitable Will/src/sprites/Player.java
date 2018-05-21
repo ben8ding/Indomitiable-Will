@@ -44,21 +44,28 @@ public class Player extends Basic {
 	private ArrayList<Direction> blockedDir = new ArrayList<Direction>(4);
 
 	public Player() {
+		
 		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
-	
 		wall = false;
 		health = 5;
 		hB = new HitBox(this);
 		timer = 0;
 	}
-
+	public Player(Player p) {
+		super(30, 350, 22);
+		img = p.img;
+		weapons = p.weapons;
+		currentWeapon = p.currentWeapon;
+		health = p.health;
+		hB = p.hB;
+		wall = p.wall;
+	}
 	public void setup(PApplet drawer) {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player.png");
 	}
 
 	public void draw(PApplet drawer) {
-		
 		if(weapons.size() == 1) {
 			currentWeapon = weapons.get(0);
 		} 
@@ -74,7 +81,6 @@ public class Player extends Basic {
 		drawer.translate(xLoc, yLoc);
 		drawer.rotate((float) Math.toRadians(angle));
 		drawer.translate(-xLoc, -yLoc);
-
 		drawer.image(img, xLoc - size, yLoc - size);
 		drawer.popMatrix();
 		drawer.pushStyle();
@@ -272,7 +278,7 @@ public class Player extends Basic {
 	}
 
 	public void startFiring() {
-		
+		if(weapons.size() > 0)
 			firing = true;
 	}
 
@@ -319,5 +325,8 @@ public class Player extends Basic {
 			currentWeapon = w;
 		} 
 		return result;
+	}
+	public ArrayList<Weapon> getWeapons(){
+		return weapons;
 	}
 }
