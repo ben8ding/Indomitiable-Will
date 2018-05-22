@@ -23,6 +23,7 @@ public class Level {
 	private ArrayList<Capsule> drops;
 	private int timer;
 	private boolean cleared;
+	private int lid;
 
 
 	public Level() {
@@ -34,6 +35,7 @@ public class Level {
 		drops = new ArrayList<Capsule>();
 
 		enemies.add(new Enemy(40, 40));
+		
 		walls.add(new Rectangle(0,-190,1000,200));
 		walls.add(new Rectangle(-40,0,50,700));
 		walls.add(new Rectangle(985,-10,500,710));
@@ -49,13 +51,16 @@ public class Level {
 		walls.add(new Rectangle(-40, 0, 50, 700));
 		walls.add(new Rectangle(985, -10, 500, 710));
 		walls.add(new Rectangle(0, 660, 1000, 40));
+<<<<<<< HEAD
 		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 */
+
 		timer = 0;
 		cleared = false;
 		for(Enemy e : enemies) {
 			walls.add(e.getBox());
 		}
+		drops.add(new Capsule(600,50, new PowerUp(PowerUp.powerUpType.FIRERATE)));
 	}
 	public Level(Level l, Player p) {
 		this();
@@ -72,6 +77,10 @@ public class Level {
 			object.getItem().setup(drawer);
 		}
 
+	}
+	
+	public void setID(int i) {
+		lid = i;
 	}
 
 	public void draw(PApplet drawer) {
@@ -133,7 +142,7 @@ public class Level {
 
 		if (timer % 5 == 0) {
 			for (Enemy object : enemies) {
-				object.trainPerceptron();
+				object.trainPerceptron(lid);
 			}
 		}
 	

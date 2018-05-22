@@ -7,10 +7,14 @@ import java.awt.Rectangle;
 public class Enemy extends Basic {
 
 	
-	private int health;
+	protected int health;
 	private final int PROJ_SPEED = 3;
+
 	private int MAX_AMMO = 30;
 	
+
+	protected final int maxHealth;
+
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
 	int goal;		// whether hit goal
@@ -22,6 +26,7 @@ public class Enemy extends Basic {
 	public Enemy() {
 		super(500, 350, 15);
 		health = 3;
+		maxHealth = 3;
 		hB = new HitBox(this);
 		
 		ammo_cnt = MAX_AMMO / 5;
@@ -32,13 +37,17 @@ public class Enemy extends Basic {
 	public Enemy(int x, int y) {
 		super(x, y, 15);
 		health = 3;
+		maxHealth = 3;
 		hB = new HitBox(this);
 		
 		init();
 		
 		ammo_cnt = MAX_AMMO / 5;
 	}
-	
+	protected Enemy(int x, int y, int hp) {
+		maxHealth = hp;
+		health = maxHealth;
+	}
 	public void init() {
 //		wx = wy = wc = 0;
 		
@@ -68,9 +77,9 @@ public class Enemy extends Basic {
 		
 		drawer.pushStyle();
 		drawer.stroke(0);
-		drawer.fill(255);
-	
+		drawer.fill(255);	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+
 		
 
 		if(wy != 0) {
@@ -78,6 +87,13 @@ public class Enemy extends Basic {
 		}
 		
 
+
+		drawer.fill(0);
+		drawer.textAlign(drawer.CENTER);
+		drawer.textSize(12);
+		drawer.text(health + "/" + maxHealth, xLoc,  yLoc-size/3+3);
+		drawer.textSize(8);
+	
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();
@@ -94,7 +110,7 @@ public class Enemy extends Basic {
 		hB.refreshLoc(this);
 	}
 	
-	public void trainPerceptron() {
+	public void trainPerceptron(int lid) {
 		
 		
 		for(int i=0; i<5; i++) {
@@ -102,12 +118,14 @@ public class Enemy extends Basic {
 			double x_s = Math.random();
 			double y_s = Math.random();		// scale x, y
 	
-//			if(x_s + y_s > 1) goal = 0;
-//			else goal = 1;
-			
-			if(x_s - y_s > 0.25) goal = 0;
-			else goal = 1;
-			
+			if(lid == 0) {
+				if(x_s + y_s > 1) goal = 0;
+				else goal = 1;
+			}
+			else if(lid == 1) {
+				if(x_s - y_s > 0.25) goal = 0;
+				else goal = 1;
+			}			
 			
 			double p = wx * x_s + wy * y_s + wc * 1.0;
 			
