@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 /**
  * 
- * @author Matthew
+ * @author matthewli
  *
  */
 public class LoseScreen {

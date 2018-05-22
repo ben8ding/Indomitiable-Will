@@ -110,7 +110,9 @@ public class Player extends Basic {
 		}
 		return result;
 	}
-
+	public void setHealth(int health) {
+		this.health= health;
+	}
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {

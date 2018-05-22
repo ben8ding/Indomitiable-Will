@@ -11,7 +11,11 @@ import processing.core.PApplet;
 import sprites.Enemy;
 import sprites.Player;
 import sprites.Projectile;
-
+/**
+ * 
+ * @author matthewli
+ *
+ */
 public class Level {
 
 	private Player player;

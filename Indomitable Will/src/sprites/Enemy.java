@@ -3,7 +3,11 @@ package sprites;
 import processing.core.PApplet;
 import shapes.Line;
 import java.awt.Rectangle;
-
+/**
+ * 
+ * @author
+ *
+ */
 public class Enemy extends Basic {
 
 	

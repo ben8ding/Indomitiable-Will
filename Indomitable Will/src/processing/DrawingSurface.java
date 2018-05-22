@@ -43,7 +43,7 @@ public class DrawingSurface extends PApplet {
 	private long waitTime;
 
 	private enum State {
-		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE
+		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE,STARTUP
 	};
 
 	private State state;
@@ -51,7 +51,7 @@ public class DrawingSurface extends PApplet {
 	public DrawingSurface() {
 		lose = new LoseScreen();
 		ws = new WinScreen();
-		previousState = State.MENU;
+		state = previousState = State.STARTUP;
 		instructions = new Instructions();
 		keys = new ArrayList<Integer>();
 		levels = new ArrayList<Level>();
@@ -62,7 +62,6 @@ public class DrawingSurface extends PApplet {
 			Level level = new Level();
 			levels.add(level);
 		}
-		state = State.MENU;
 		pauseMenu = new PauseMenu();
 		startTime = 0;
 	}
@@ -125,22 +124,23 @@ public class DrawingSurface extends PApplet {
 
 	public void draw() {
 		pushStyle();
+		//draw menu on first play
+		if (state == State.STARTUP) {
+			menu.draw(this);
+			previousState = state;
+			state = State.MENU;
+		}
 		Level current = levels.get(currentLevel);
 		current.setID(currentLevel);
+		System.out.println(levels.get(currentLevel).getPlayer().getHp());
+		//if player dies, then send to main menu
 		if (levels.get(currentLevel).getPlayer().getHp() == 0 && state == State.GAME) {
 			state = State.LOSE;
 			background(255);
 			lose.draw(this);
 		}
-		if (state == State.LOSE && getMouseX() > width / 2 - 200 && getMouseX() < width + 200
-				&& getMouseY() > height / 2 - 115 && getMouseY() < height / 2 - 15 && mousePressed) {
-			// System.out.println("hallo from the far east side");
-			previousState = state;
-			state = State.MENU;
-			currentLevel = 0;
-			background(255);
-			waitTime = System.nanoTime();
-		}
+		
+		// if player clears a level
 		if (current.isCleared() && state == State.GAME) {
 			if (currentLevel != 4) {
 				System.out.println(currentLevel);
@@ -154,9 +154,7 @@ public class DrawingSurface extends PApplet {
 				ws.draw(this);
 			}
 		}
-		if (state == State.MENU) {
-			menu.draw(this);
-		}
+//		stuff that happens if player is not in game
 		if (state != State.GAME) {
 			if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 + 15
 					&& getMouseY() < height / 2 + 50 && mousePressed && state == State.MENU) {
@@ -164,38 +162,54 @@ public class DrawingSurface extends PApplet {
 				state = State.INSTRUCTIONS;
 				instructions.draw(this);
 			} else if (getMouseX() > width - 150 && getMouseX() < width - 50 && getMouseY() > height - 50
-					&& getMouseY() < height - 20 && mousePressed && state == State.INSTRUCTIONS) {
+					&& getMouseY() < height - 20 && mousePressed && state == State.INSTRUCTIONS) {// if at instructions and want to click back
 
 				background(255);
-				if (previousState == State.PAUSED)
+				if (previousState == State.PAUSED)//goes back to pause
 					pauseMenu.draw(this);
-				else
+				else//go back to main menu
 					menu.draw(this);
 				state = previousState;
 				previousState = State.INSTRUCTIONS;
 			} else if (getMouseX() > width / 2 - 200 && getMouseX() < width / 2 + 200 && getMouseY() > height / 2 - 115
 					&& getMouseY() < height / 2 - 15 && mousePressed && state == State.MENU
-					&& System.nanoTime() - waitTime >= 100000000) {
+					&& System.nanoTime() - waitTime >= 100000000) {//if at menu and want to play game
 				previousState = state;
 				state = State.GAME;
 				levels.get(0).draw(this);
-				System.out.println("hallo from the far east side");
+//				System.out.println("hallo from the far east side");
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 200
-					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {
+					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {// if paused and wants to continue playing duh game
 				previousState = state;
 				state = State.GAME;
 				current.draw(this);
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 140
-					&& getMouseY() < height / 2 - 90 && state == State.PAUSED && mousePressed) {
+					&& getMouseY() < height / 2 - 90 && state == State.PAUSED && mousePressed) {//if paused and wants to see instructions
 				previousState = state;
 				state = State.INSTRUCTIONS;
 				instructions.draw(this);
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 80
-					&& getMouseY() < height / 2 - 30 && state == State.PAUSED && mousePressed) {
+					&& getMouseY() < height / 2 - 30 && state == State.PAUSED && mousePressed) { //if pause menu and presses return to main menu
 				previousState = state;
 				state = State.MENU;
 				background(255);
 				menu.draw(this);
+				for(Level level :levels) {
+					level.getPlayer().setHealth(5);
+				}
+				currentLevel = 0;
+				waitTime = System.nanoTime();
+			}// if player is at death menu and clicks play again
+			if (state == State.LOSE && getMouseX() > width / 2 - 200 && getMouseX() < width + 200
+					&& getMouseY() > height / 2 - 115 && getMouseY() < height / 2 - 15 && mousePressed) {
+				// System.out.println("hallo from the far east side");
+				previousState = state;
+				state = State.MENU;
+				background(255);
+				menu.draw(this);
+				for(Level level :levels) {
+					level.getPlayer().setHealth(5);
+				}
 				currentLevel = 0;
 				waitTime = System.nanoTime();
 			}
