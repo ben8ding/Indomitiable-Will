@@ -11,7 +11,6 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
 import screens.*;
-import shapes.Line;
 import sprites.Player;
 import screens.Menu;
 import java.awt.*;

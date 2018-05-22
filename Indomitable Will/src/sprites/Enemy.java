@@ -1,7 +1,6 @@
 package sprites;
 
 import processing.core.PApplet;
-import shapes.Line;
 import java.awt.Rectangle;
 
 /**

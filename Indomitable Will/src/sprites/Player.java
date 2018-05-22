@@ -16,7 +16,6 @@ import Pickups.Shotgun;
 import Pickups.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
-import shapes.Line;
 import java.awt.Rectangle;
 
 /**
