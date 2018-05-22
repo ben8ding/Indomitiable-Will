@@ -10,15 +10,16 @@ public class Enemy extends Basic {
 	protected int health;
 	private final int PROJ_SPEED = 3;
 
-	private int MAX_AMMO = 30;
+	private int MAX_AMMO = 50;
 	
-
 	protected final int maxHealth;
 
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;		// perceptron output
 	int goal;		// whether hit goal
 	double l_rate;	// learning rate
+	
+	int lid;		// level id
 	
 	int ammo_cnt;
 	
@@ -49,9 +50,8 @@ public class Enemy extends Basic {
 		health = maxHealth;
 	}
 	public void init() {
-//		wx = wy = wc = 0;
 		
-		wx = 0.1 * (Math.random() - 0.5);
+		wx = 0.1 * (Math.random() - 0.5);			// randomize the initial weight
 		wy = 0.1 * (Math.random() - 0.5);
 		wc = 0.1 * (Math.random() - 0.5);
 		
@@ -80,13 +80,9 @@ public class Enemy extends Basic {
 		drawer.fill(255);	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 
-		
-
-		if(wy != 0) {
+		if(wy != 0 && lid >= 3) {
 			drawer.line(0.0f, (float)(- 600 * wc/wy), 900.0f, (float)(900 * (-wx - wc)/wy));
-		}
-		
-
+		}		
 
 		drawer.fill(0);
 		drawer.textAlign(drawer.CENTER);
@@ -110,7 +106,12 @@ public class Enemy extends Basic {
 		hB.refreshLoc(this);
 	}
 	
-	public void trainPerceptron(int lid) {
+	public void trainPerceptron(int level) {			// Generate trainig data to learn where the boundary is.
+		
+		lid = level;
+		
+		if(lid < 3) 
+			return;
 		
 		
 		for(int i=0; i<5; i++) {
@@ -118,11 +119,11 @@ public class Enemy extends Basic {
 			double x_s = Math.random();
 			double y_s = Math.random();		// scale x, y
 	
-			if(lid == 0) {
+			if(lid == 3) {
 				if(x_s + y_s > 1) goal = 0;
 				else goal = 1;
 			}
-			else if(lid == 1) {
+			else if(lid == 4) {
 				if(x_s - y_s > 0.25) goal = 0;
 				else goal = 1;
 			}			
@@ -148,21 +149,18 @@ public class Enemy extends Basic {
 
 	
 	public int inferPerceptron(int x, int y) {
+		
 		double x_s = (float)x / (float)600;
 		double y_s = (float)y / (float)600;
 		
-		double p = wx * x_s + wy * y_s + wc * 1.0;
-		
+		double p = wx * x_s + wy * y_s + wc * 1.0;		
 
-		if(p > 0) {
+		if(p > 0 || lid < 3) {
 			pout = 1;
-
-		if(p > 0) pout = 1;
-		else pout = 0;
 		
-		wx += (goal - pout) * l_rate * x_s;
-		wy += (goal - pout) * l_rate * y_s;
-		wc += (goal - pout) * l_rate;
+			wx += (goal - pout) * l_rate * x_s;
+			wy += (goal - pout) * l_rate * y_s;
+			wc += (goal - pout) * l_rate;
 		
 //		System.out.printf("weights %f, %f %f", wx, wy, wc);
 //		System.out.printf("goal-pout %d, %d\n", goal, pout);
@@ -172,23 +170,14 @@ public class Enemy extends Basic {
 			pout = 0;
 		}	
 		
-		return pout;
+		return pout;			// perceptron output indicate whether it can hit or not
 	}
 	
 	public Projectile fire(int x, int y) {
 		
 		ammo_cnt--;
 		
-		int shade;
-		
-		if (x + y > 600) {
-//			shade = 128;
-//			goal = 0;
-		}
-		else {
-//			shade = 255;
-//			goal = 1;
-		}
+		int shade;	
 		
 		if(inferPerceptron(x, y) > 0) 
 			shade = 255;

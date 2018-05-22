@@ -74,70 +74,50 @@ public class DrawingSurface extends PApplet {
 	public void setup() {
 		// background(255);
 
-
-		// background(255);
 		ArrayList<Capsule> drops = new ArrayList<Capsule>();
 
-		levels.get(0).addObstacle(new Rectangle(100, 500, 50, 120));
-		levels.get(0).addObstacle(new Rectangle(200, 400, 50, 120));
-		levels.get(0).addObstacle(new Rectangle(300, 300, 50, 120));
-		levels.get(0).addObstacle(new Rectangle(400, 200, 50, 120));
-		levels.get(0).addObstacle(new Rectangle(500, 100, 50, 120));
-		levels.get(0).addObstacle(new Rectangle(600, 10, 50, 120));
-		
-//		levels.get(0).setID(0);
-
-
-//		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
-//		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
-//		levels.get(0).addObstacle(new Rectangle(700, (int) 350, 50, 300));
-//		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
-		
-
-		// background(255);
-//		ArrayList<Capsule> drops = new ArrayList<Capsule>();
-//		levels.get(0).addObstacle(new Rectangle((int) (100), (int) (100), 300, 50));
-//		levels.get(0).addObstacle(new Rectangle((int) (500), (int) (600), 300, 50));
-//		levels.get(0).addObstacle(new Rectangle(700, (int) 350, 50, 300));
-//		levels.get(0).addObstacle(new Rectangle(150, (int) (200), 50, 300));
+		levels.get(0).addObstacle(new Rectangle((int) (700), (int) (350), 300, 50));
+		levels.get(0).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
+		levels.get(0).addObstacle(new Rectangle(500, (int) 80, 50, 300));
+		levels.get(0).addObstacle(new Rectangle(175, (int) (200), 50, 300));
 
 		drops.add(new Capsule(50, 300, new Pistol()));
-
 		levels.get(0).setDrops(drops);
 
 		drops = new ArrayList<Capsule>();
-//		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (200), 300, 50));
-//		levels.get(1).addObstacle(new Rectangle((int) (60), (int) (340), 300, 50));
-//		levels.get(1).addObstacle(new Rectangle(900, (int) 400, 50, 300));
-//		levels.get(1).addObstacle(new Rectangle(500, (int) (310), 50, 300));
 		
-		levels.get(1).addObstacle(new Rectangle(750, 500, 50, 120));
-		levels.get(1).addObstacle(new Rectangle(250, 0, 50, 120));
-		levels.get(1).addObstacle(new Rectangle(350, 100, 50, 120));
-		levels.get(1).addObstacle(new Rectangle(450, 200, 50, 120));
-		levels.get(1).addObstacle(new Rectangle(550, 300, 50, 120));
-		levels.get(1).addObstacle(new Rectangle(650, 400, 50, 120));
-//		levels.get(1).setID(1);
+		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (630), 300, 50));
+		levels.get(1).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
+		levels.get(1).addObstacle(new Rectangle(900, (int) 100, 50, 300));
+		levels.get(1).addObstacle(new Rectangle(530, (int) (350), 50, 300));
 
 		drops = new ArrayList<Capsule>();
-		levels.get(2).addObstacle(new Rectangle((int) (300), (int) (630), 300, 50));
-		levels.get(2).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
-		levels.get(2).addObstacle(new Rectangle(900, (int) 100, 50, 300));
-		levels.get(2).addObstacle(new Rectangle(530, (int) (350), 50, 300));
+		levels.get(2).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
+		levels.get(2).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
+		levels.get(2).addObstacle(new Rectangle(100, (int) 230, 50, 300));
+		levels.get(2).addObstacle(new Rectangle(400, (int) (70), 50, 300));
 		drops = new ArrayList<Capsule>();
 
-		levels.get(3).addObstacle(new Rectangle((int) (700), (int) (350), 300, 50));
-		levels.get(3).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
-		levels.get(3).addObstacle(new Rectangle(500, (int) 80, 50, 300));
-		levels.get(3).addObstacle(new Rectangle(175, (int) (200), 50, 300));
 
+		levels.get(3).addObstacle(new Rectangle(100, 500, 50, 120));
+		levels.get(3).addObstacle(new Rectangle(200, 400, 50, 120));
+		levels.get(3).addObstacle(new Rectangle(300, 300, 50, 120));
+		levels.get(3).addObstacle(new Rectangle(400, 200, 50, 120));
+		levels.get(3).addObstacle(new Rectangle(500, 100, 50, 120));
+		levels.get(3).addObstacle(new Rectangle(600, 10, 50, 120));
 		drops = new ArrayList<Capsule>();
 		drops.add(new Capsule(600, 300, new Rifle()));
-		levels.get(4).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
-		levels.get(4).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
-		levels.get(4).addObstacle(new Rectangle(100, (int) 230, 50, 300));
-		levels.get(4).addObstacle(new Rectangle(400, (int) (70), 50, 300));
+		
+		
+		levels.get(4).addObstacle(new Rectangle(750, 500, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(250, 0, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(350, 100, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(450, 200, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(550, 300, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(650, 400, 50, 120));
+
 		levels.get(4).setDrops(drops);
+
 		for (Level level : levels) {
 			level.setup(this);
 		}
