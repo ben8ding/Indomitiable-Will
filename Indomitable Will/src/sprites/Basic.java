@@ -41,7 +41,7 @@ public abstract class Basic {
 		xLoc = set;
 	}
 	
-	public void setyLoc(int set) {
+	public void setYLoc(int set) {
 		yLoc = set;
 	}
 	

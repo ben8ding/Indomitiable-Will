@@ -72,10 +72,12 @@ public class Enemy extends Basic {
 	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		
+
 		if(wy != 0) {
 			drawer.line(0.0f, (float)(- 600 * wc/wy), 900.0f, (float)(900 * (-wx - wc)/wy));
 		}
 		
+
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();
@@ -84,7 +86,6 @@ public class Enemy extends Basic {
 	public boolean checkCollision(Rectangle other) {
 		return hB.checkCollision(other);
 	}
-
 	public void takeDamage(int power) {
 		health-=power;
 	}
@@ -121,8 +122,8 @@ public class Enemy extends Basic {
 		
 		norm = Math.sqrt(norm);
 			
-			System.out.printf("weights %f, %f %f ", wx, wy, wc);
-			System.out.printf("(goal, pout) %d, %d, %f\n", goal, pout, norm);
+//			System.out.printf("weights %f, %f %f ", wx, wy, wc);
+//			System.out.printf("(goal, pout) %d, %d, %f\n", goal, pout, norm);
 		}		
 	}
 	
@@ -134,8 +135,20 @@ public class Enemy extends Basic {
 		
 		double p = wx * x_s + wy * y_s + wc * 1.0;
 		
+
 		if(p > 0) {
 			pout = 1;
+
+		if(p > 0) pout = 1;
+		else pout = 0;
+		
+		wx += (goal - pout) * l_rate * x_s;
+		wy += (goal - pout) * l_rate * y_s;
+		wc += (goal - pout) * l_rate;
+		
+//		System.out.printf("weights %f, %f %f", wx, wy, wc);
+//		System.out.printf("goal-pout %d, %d\n", goal, pout);
+
 		}
 		else {
 			pout = 0;
@@ -164,7 +177,15 @@ public class Enemy extends Basic {
 		else
 			shade = 128;
 		
-		return new Projectile(xLoc,yLoc,(x - xLoc) * 0.01,(y - yLoc) * 0.01, shade);
+		double vx = (double)(x - xLoc);
+		double vy = (double)(y - yLoc);
+		
+		double v = Math.sqrt(vx*vx + vy*vy);
+		
+		vx = 3 * vx / v;
+		vy = 3 * vy / v;
+		
+		return new Projectile(xLoc,yLoc,vx,vy, shade);
 	}
 	
 	public HitBox getBox() {
