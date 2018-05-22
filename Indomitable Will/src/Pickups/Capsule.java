@@ -6,6 +6,10 @@ import processing.core.PApplet;
 import sprites.Basic;
 import sprites.HitBox;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Capsule extends Basic {
 
 	private HitBox hB;
@@ -29,12 +33,10 @@ public class Capsule extends Basic {
 
 		drawer.pushStyle();
 		drawer.stroke(0);
-		drawer.fill(120,255,10);
-		//drawer.image(item.getImg(), xLoc-size, yLoc-size);
-//		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
+		drawer.fill(120, 255, 10);
 		item.draw(drawer);
-		if(!(item instanceof Pistol)) {
-			drawer.image(item.getImg(), xLoc-item.getImg().width/2, yLoc-item.getImg().width/2);
+		if (!(item instanceof Pistol)) {
+			drawer.image(item.getImg(), xLoc - item.getImg().width / 2, yLoc - item.getImg().width / 2);
 		}
 		hB.draw(drawer);
 		act();
@@ -48,12 +50,13 @@ public class Capsule extends Basic {
 	public void act() {
 		hB.refreshLoc(this);
 	}
-	
+
 	public Obtainable getItem() {
 		return this.item;
 	}
+
 	public HitBox getBox() {
 		return this.hB;
 	}
-	
+
 }

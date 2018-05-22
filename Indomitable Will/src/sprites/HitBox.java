@@ -4,6 +4,10 @@ import java.awt.Rectangle;
 
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class HitBox extends Rectangle {
 
 	public HitBox(int set) {

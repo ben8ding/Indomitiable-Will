@@ -2,6 +2,10 @@ package sprites;
 
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Projectile extends Basic {
 	
 	public int shade;

@@ -1,5 +1,9 @@
 package sprites;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 import java.util.ArrayList;
 import java.util.logging.Level;
 

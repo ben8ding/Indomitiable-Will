@@ -4,6 +4,10 @@ import processing.core.PApplet;
 import shapes.Line;
 import java.awt.Rectangle;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Enemy extends Basic {
 
 	

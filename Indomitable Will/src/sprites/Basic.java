@@ -3,6 +3,10 @@ package sprites;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public abstract class Basic {
 	protected PImage img;
 	protected int xLoc;
