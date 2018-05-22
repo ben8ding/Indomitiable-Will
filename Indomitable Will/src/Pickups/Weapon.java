@@ -6,10 +6,12 @@ import processing.core.PImage;
 import sprites.Projectile;
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public abstract class Weapon implements Obtainable {
-	/**
-	 * 1/ROF = FIRERATE
-	 */
+
 	protected int bSpeed;
 	protected int ROF;
 	

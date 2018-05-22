@@ -1,5 +1,9 @@
 package sprites;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -12,7 +16,6 @@ import Pickups.Shotgun;
 import Pickups.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
-import shapes.Line;
 import java.awt.Rectangle;
 
 /**
@@ -48,7 +51,7 @@ public class Player extends Basic {
 		super(30, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		wall = false;
-		health = 5;
+		health = 100;
 		hB = new HitBox(this);
 		timer = 0;
 	}

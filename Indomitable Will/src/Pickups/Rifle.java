@@ -7,6 +7,10 @@ import processing.core.PImage;
 import sprites.Projectile;
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Rifle extends Weapon {
 	private PImage img;
 	
