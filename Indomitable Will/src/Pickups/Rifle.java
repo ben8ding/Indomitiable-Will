@@ -8,7 +8,7 @@ import sprites.Projectile;
 import processing.core.PApplet;
 
 /**
- * @author ben8d,matthewli
+ * @author ben8d,matthewli, Nathaniel
  * @version 5-22-18
  */
 public class Rifle extends Weapon {

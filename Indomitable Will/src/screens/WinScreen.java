@@ -6,7 +6,7 @@ import processing.core.PImage;
 
 /**
  * 
- * @author matthewli
+ * @author matthewli, Nathaniel
  * @version 5-22-18
  */
 public class WinScreen {
@@ -24,16 +24,16 @@ public class WinScreen {
 		drawer.textSize(50);
 		drawer.text("Congradumalations, you win!", drawer.width / 2, 200);
 		drawer.text("Main Menu", drawer.width / 2, drawer.height / 2 - 45);
-		PImage img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Chicken.png");
-		drawer.image(img, 0, 0);
-		drawer.image(img, 120, 634);
-		drawer.image(img, 456, 23);
-		drawer.image(img, 503, 568);
-		drawer.image(img, 593, 45);
-		drawer.image(img, 934, 340);
-		drawer.image(img, 58, 280);
-		drawer.image(img, 200, 343);
-		drawer.image(img, 870, 243);
+		PImage chicken = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Chicken.png");
+		drawer.image(chicken, 0, 0);
+		drawer.image(chicken, 120, 634);
+		drawer.image(chicken, 456, 23);
+		drawer.image(chicken, 503, 568);
+		drawer.image(chicken, 593, 45);
+		drawer.image(chicken, 934, 340);
+		drawer.image(chicken, 58, 280);
+		drawer.image(chicken, 200, 343);
+		drawer.image(chicken, 870, 243);
 	
 
 		drawer.popMatrix();

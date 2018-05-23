@@ -2,7 +2,11 @@ package screens;
 
 import processing.core.*;
 import sprites.Player;
-
+/**
+ * 
+ * @author Nathaniel
+ *
+ */
 public class PlayerHUD {
 	private Player p;
 	private PShape pistol, shotgun, rifle, powerUp, hpBar;

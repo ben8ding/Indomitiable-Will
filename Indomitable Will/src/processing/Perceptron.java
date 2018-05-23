@@ -1,5 +1,9 @@
 package processing;
-
+/**
+ * 
+ * @author Ben
+ *
+ */
 public class Perceptron {
 
 	public double getWx() {

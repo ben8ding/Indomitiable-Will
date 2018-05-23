@@ -15,7 +15,6 @@ import sprites.Projectile;
  * 
  * @author Matthew, Nathaniel, Ben
  * @version 5-22-18
->>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will
  *
  */
 public class Level {
