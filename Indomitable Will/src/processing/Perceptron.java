@@ -1,9 +1,5 @@
 package processing;
-/**
- * 
- * @author Ben
- *
- */
+
 public class Perceptron {
 
 	public double getWx() {
@@ -39,11 +35,11 @@ public class Perceptron {
 	}
 
 
-	int pout;		// perceptron output
-	double wx, wy, wc; 	// weights for x, y, and constant
-	int goal;		// whether hit goal
-	int lid;		// level id
-	double l_rate;	// learning rate
+	int pout;				// perceptron output
+	double wx, wy, wc; 		// weights for x, y, and constant bias
+	int goal;				// whether hit goal
+	int lid;				// level id
+	double l_rate;			// learning rate
 	
 	public Perceptron() {
 		init();
@@ -55,37 +51,36 @@ public class Perceptron {
 		wy = 0.1 * (Math.random() - 0.5);
 		wc = 0.1 * (Math.random() - 0.5);
 		
-		l_rate = 0.002;
+		l_rate = 0.002;								// learning rate fixed to 0.002
 	}
 	
-	public void trainPerceptron(int level) {			// Generate trainig data to learn where the boundary is.
+	public void trainPerceptron(int level) {			// Generate training data to learn where the boundary is.
 		
 		lid = level;
 		
 		if(lid < 3) 
 			return;
-		
-		
+				
 		for(int i=0; i<5; i++) {
 			
-			double x_s = Math.random();
-			double y_s = Math.random();		// scale x, y
+			double x_s = Math.random();	
+			double y_s = Math.random();					// scale x, y, range from 0 to 1
 	
 			if(lid == 3) {
-				if(x_s + y_s > 1) goal = 0;
-				else goal = 1;
+				if(x_s + y_s > 1) goal = 0;				// Depends on level, the boundary of hit/miss is defined as mathematical relationship
+				else goal = 1;							// Use to generate training data. In real application, training data may come from past player saved data.
 			}
-			else if(lid == 4) {
+			else if(lid == 4) {							// We are doing it this way to speed up training, without user play game extensively to collect training data
 				if(x_s - y_s > 0.25) goal = 0;
 				else goal = 1;
 			}			
 			
-			double p = wx * x_s + wy * y_s + wc * 1.0;
+			double p = wx * x_s + wy * y_s + wc * 1.0;	// weighted sum of inputs plus bias (set to 1.0)
 			
-			if(p > 0) pout = 1;
+			if(p > 0) pout = 1;							// step activation function
 			else pout = 0;
 			
-			wx += (goal - pout) * l_rate * x_s;
+			wx += (goal - pout) * l_rate * x_s;			// perceptron learning, see https://en.wikipedia.org/wiki/Perceptron
 			wy += (goal - pout) * l_rate * y_s;
 			wc += (goal - pout) * l_rate;
 			
@@ -93,7 +88,7 @@ public class Perceptron {
 		
 		norm = Math.sqrt(norm);
 			
-//			System.out.printf("weights %f, %f %f ", wx, wy, wc);
+//			System.out.printf("weights %f, %f %f ", wx, wy, wc);					// debug output to observe weights
 //			System.out.printf("(goal, pout) %d, %d, %f\n", goal, pout, norm);
 		}		
 	}
@@ -125,7 +120,7 @@ public class Perceptron {
 	
 	public int inferPerceptron(int x, int y) {
 		
-		double x_s = (float)x / (float)600;
+		double x_s = (float)x / (float)600;				// input is scaled before feeding to perceptron
 		double y_s = (float)y / (float)600;
 		
 		double p = wx * x_s + wy * y_s + wc * 1.0;		
@@ -133,23 +128,15 @@ public class Perceptron {
 		if(p > 0 || lid < 3) {
 			pout = 1;
 		
-			wx += (goal - pout) * l_rate * x_s;
+			wx += (goal - pout) * l_rate * x_s;			// we are doing a little learning when inferring also.
 			wy += (goal - pout) * l_rate * y_s;
 			wc += (goal - pout) * l_rate;
-		
-//		System.out.printf("weights %f, %f %f", wx, wy, wc);
-//		System.out.printf("goal-pout %d, %d\n", goal, pout);
-
 		}
 		else {
 			pout = 0;
 		}	
 		
-		return pout;			// perceptron output indicate whether it can hit or not
-	}
-	
-	
-	
-	
+		return pout;									// perceptron output indicate whether it can hit or not
+	}	
 	
 }

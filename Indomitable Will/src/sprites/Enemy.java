@@ -29,7 +29,7 @@ public class Enemy extends Basic {
 		health = 3;
 		maxHealth = 3;
 		hB = new HitBox(this);
-		perceptron = new Perceptron();
+
 		ammo_cnt = MAX_AMMO / 5;
 	}
 
@@ -62,7 +62,12 @@ public class Enemy extends Basic {
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 
 		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
-			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 900.0f, (float) (900 * (-perceptron.getWx() - perceptron.getWc()) / perceptron.getWy()));
+			drawer.stroke(255, 128, 128);
+			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
+						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+			drawer.fill(255, 128, 128);
+			drawer.text("perceptron boundary", 450, 
+						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
 		}
 
 		drawer.fill(0);
@@ -95,17 +100,17 @@ public class Enemy extends Basic {
 		int shade;
 
 		if (perceptron.inferPerceptron(x, y) > 0)
-			shade = 255;
+			shade = 255;							// The shade changes according to whether AI predict hit or not. 
 		else
 			shade = 128;
 
-		double vx = (double) (x - xLoc);
+		double vx = (double) (x - xLoc);			// Projectile direction is hard coded
 		double vy = (double) (y - yLoc);
 
 		double v = Math.sqrt(vx * vx + vy * vy);
 
 		vx = 3 * vx / v;
-		vy = 3 * vy / v;
+		vy = 3 * vy / v;							// Projectile direction is hard coded
 
 		return new Projectile(xLoc, yLoc, vx, vy, shade);
 	}
@@ -120,5 +125,9 @@ public class Enemy extends Basic {
 
 	public void setPerceptron(Perceptron perceptron) {
 		this.perceptron = perceptron;
+	}
+	
+	public void train(int lid) {
+		perceptron.trainPerceptron(lid);
 	}
 }

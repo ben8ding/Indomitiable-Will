@@ -34,6 +34,7 @@ public class Boss extends Enemy {
 		maxHealth = 20;
 		hB = new HitBox(this);
 
+		perceptron = new Perceptron();
 		ammo_cnt = MAX_AMMO / 5;
 	}
 
@@ -66,7 +67,12 @@ public class Boss extends Enemy {
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 
 		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
-			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 900.0f, (float) (900 * (-perceptron.getWx() - perceptron.getWc()) / perceptron.getWy()));
+			drawer.stroke(255, 128, 128);
+			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
+						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+			drawer.fill(255, 128, 128);
+			drawer.text("perceptron boundary", 450, 
+						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
 		}
 
 		drawer.fill(0);
@@ -124,5 +130,9 @@ public class Boss extends Enemy {
 
 	public void setPerceptron(Perceptron perceptron) {
 		this.perceptron = perceptron;
+	}
+	
+	public void train(int lid) {
+		perceptron.trainPerceptron(lid);
 	}
 }
