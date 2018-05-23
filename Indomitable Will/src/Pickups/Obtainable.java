@@ -10,7 +10,6 @@ public interface Obtainable {
 	
 	Obtainable getDrop();
 	PImage getImg();
-	void draw(PApplet drawer);
 	void setup(PApplet drawer);
 	
 }

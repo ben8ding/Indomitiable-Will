@@ -16,14 +16,14 @@ public class Capsule extends Basic {
 	private Obtainable item;
 
 	public Capsule() {
-		super(600, 450, 10);
+		super(600, 450, 12);
 
 		hB = new HitBox(this);
 
 	}
 
 	public Capsule(int x, int y, Obtainable z) {
-		super(x, y, 10);
+		super(x, y, 12);
 		this.item = z;
 		hB = new HitBox(this);
 	}
@@ -34,10 +34,8 @@ public class Capsule extends Basic {
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(120, 255, 10);
-		item.draw(drawer);
-		if (!(item instanceof Pistol)) {
-			drawer.image(item.getImg(), xLoc - item.getImg().width / 2, yLoc - item.getImg().width / 2);
-		}
+		drawer.image(item.getImg(), (float)(xLoc-hB.getWidth()/2), (float)(yLoc-hB.getHeight()/2));
+		
 		hB.draw(drawer);
 		act();
 		drawer.popStyle();
@@ -52,7 +50,7 @@ public class Capsule extends Basic {
 	}
 
 	public Obtainable getItem() {
-		return this.item;
+		return item;
 	}
 
 	public HitBox getBox() {
