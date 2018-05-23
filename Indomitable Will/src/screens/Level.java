@@ -13,13 +13,13 @@ import sprites.Player;
 import sprites.Projectile;
 /**
  * 
- * @author matthewli
+ * @author Matthew, Nathaniel, Ben
  *
  */
 public class Level {
 
 	private Player player;
-
+	private PlayerHUD hud;
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Projectile> playerBullets;
@@ -39,7 +39,7 @@ public class Level {
 		drops = new ArrayList<Capsule>();
 
 		enemies.add(new Enemy(40, 40));
-		
+		hud = new PlayerHUD(player);
 		walls.add(new Rectangle(-10,-190,1010,200));
 		walls.add(new Rectangle(-40,0,50,700));
 		walls.add(new Rectangle(985,-10,500,710));
@@ -76,6 +76,7 @@ public class Level {
 		player.setYLoc(300);
 	}
 	public void setup(PApplet drawer) {
+		hud.setup(drawer);
 		player.setup(drawer);
 		for (Capsule object : drops) {
 			object.getItem().setup(drawer);
@@ -88,9 +89,12 @@ public class Level {
 	}
 
 	public void draw(PApplet drawer) {
+		
 		timer++;
 		drawer.clear();
 		drawer.pushStyle();
+		hud.draw(drawer);
+		drawer.translate(10, 10);
 		drawer.background(255);
 		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);

@@ -14,11 +14,12 @@ public class PlayerHUD {
 		shotgun = drawer.createShape(drawer.RECT, 60, 710, 30, 30, 5);
 		rifle = drawer.createShape(drawer.RECT, 100, 710, 30, 30, 5);
 		powerUp = drawer.createShape(drawer.RECT, 140, 710, 30, 30, 5);
-		
+//		hpBar = drawer.createShape(drawer.RECT, 10);
 	}
 	public void draw(PApplet drawer) {
 		drawer.pushStyle();
 		drawer.pushMatrix();
+		drawer.background(255);
 		drawer.stroke(0);
 		drawer.strokeWeight(20);
 		drawer.shape(pistol);
