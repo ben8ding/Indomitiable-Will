@@ -67,7 +67,7 @@ public class Level {
 		walls.add(new Rectangle(-40,0,50,660));
 		walls.add(new Rectangle(990,0,10,660));
 		walls.add(new Rectangle(0,660,1000,10));
-		hud = l.hud;
+		hud = new PlayerHUD(l.hud);
 		walls = l.getWalls();
 		enemies = l.getEnemies();
 		drops = l.getDrops();
@@ -286,5 +286,11 @@ public class Level {
 
 	public void setWalls(ArrayList<Rectangle> walls) {
 		this.walls = walls;
+	}
+	public PlayerHUD getHud() {
+		return hud;
+	}
+	public void setHud(PlayerHUD p) {
+		hud = p;
 	}
 }
