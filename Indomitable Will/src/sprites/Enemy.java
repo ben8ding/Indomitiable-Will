@@ -1,7 +1,6 @@
 package sprites;
 
 import processing.core.PApplet;
-import shapes.Line;
 import java.awt.Rectangle;
 
 public class Enemy extends Basic {
@@ -24,7 +23,7 @@ public class Enemy extends Basic {
 		super(500, 350, 15);
 		health = 3;
 		hB = new HitBox(this);
-		
+		maxHealth = health;
 		init();
 	}
 	
@@ -32,7 +31,7 @@ public class Enemy extends Basic {
 		super(x, y, 15);
 		health = 3;
 		hB = new HitBox(this);
-		
+		maxHealth = health;
 		init();
 	}
 	
@@ -40,7 +39,7 @@ public class Enemy extends Basic {
 		super(x, y, msize);
 		health = 3;
 		hB = new HitBox(this);
-		
+		maxHealth = health;
 		init();
 	}
 	

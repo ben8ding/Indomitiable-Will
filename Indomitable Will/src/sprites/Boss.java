@@ -5,8 +5,6 @@ import java.awt.Rectangle;
 
 public class Boss extends Enemy {
 
-
-	
 	private int health;
 	private final int PROJ_SPEED = 3;
 	
@@ -18,7 +16,15 @@ public class Boss extends Enemy {
 	
 	public Boss() {
 		super();
-		health = 3;
+		health = 20;
+		hB = new HitBox(this);
+		
+		init();
+	}
+	
+	public Boss(int x, int y) {
+		super(x,y,30);
+		health = 20;
 		hB = new HitBox(this);
 		
 		init();
@@ -39,8 +45,8 @@ public class Boss extends Enemy {
 	public void draw(PApplet drawer) {
 		
 		drawer.pushStyle();
-		drawer.stroke(0);
-		drawer.fill(255);
+		drawer.stroke(255);
+		drawer.fill(240,120,120);
 	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		
