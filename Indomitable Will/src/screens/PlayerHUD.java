@@ -1,5 +1,12 @@
 package screens;
 
+import java.util.ArrayList;
+
+import Pickups.Pistol;
+import Pickups.PowerUp;
+import Pickups.Rifle;
+import Pickups.Shotgun;
+import Pickups.Weapon;
 import processing.core.*;
 import sprites.Player;
 /**
@@ -10,24 +17,70 @@ import sprites.Player;
 public class PlayerHUD {
 	private final int INDIC_SIZE = 40;
 	private Player p;
-	private PShape pistol, shotgun, rifle, powerUp, hpBar;
+	private PImage pistol, shotgun, rifle, powerUp;
+	private PShape pistolRect, shotgunRect, rifleRect, powerUpRect, hpBar;
 	public PlayerHUD(Player p) {
 		this.p = p;
 	}
 	public void setup(PApplet drawer) {
-		pistol = drawer.createShape(drawer.RECT, 20, 710, INDIC_SIZE, INDIC_SIZE, 5);
-		shotgun = drawer.createShape(drawer.RECT, 70, 710, INDIC_SIZE, INDIC_SIZE, 5);
-		rifle = drawer.createShape(drawer.RECT, 120, 710, INDIC_SIZE, INDIC_SIZE, 5);
-		powerUp = drawer.createShape(drawer.RECT, 170, 710, INDIC_SIZE, INDIC_SIZE, 5);
-//		hpBar = drawer.createShape(drawer.RECT, 10);
+		pistolRect = drawer.createShape(drawer.RECT, 20, 710, INDIC_SIZE, INDIC_SIZE, 5);
+		shotgunRect = drawer.createShape(drawer.RECT, 120, 710, INDIC_SIZE, INDIC_SIZE, 5);
+		rifleRect = drawer.createShape(drawer.RECT, 70, 710, INDIC_SIZE, INDIC_SIZE, 5);
+		powerUpRect = drawer.createShape(drawer.RECT, 170, 710, INDIC_SIZE, INDIC_SIZE, 5);
+		hpBar = drawer.createShape(drawer.RECT, 20, 680, 200, 20, 10);
 	}
 	public void draw(PApplet drawer) {
+		
 		drawer.pushStyle();
 		drawer.pushMatrix();
-		drawer.shape(pistol);
-		drawer.shape(shotgun);
-		drawer.shape(rifle);
-		drawer.shape(powerUp);
+		Weapon playerCurrWep = p.getCurrentWeapon();
+		drawer.strokeWeight(10);
+		if(playerCurrWep instanceof Pistol) {
+			drawer.rect(20, 710, INDIC_SIZE, INDIC_SIZE,5);
+		} else if (playerCurrWep instanceof Rifle) {
+			drawer.rect(70, 710, INDIC_SIZE, INDIC_SIZE,5);
+		} else if (playerCurrWep instanceof Shotgun) {
+			drawer.rect(120, 710, INDIC_SIZE, INDIC_SIZE,5);
+		}
+		drawer.shape(pistolRect);
+		drawer.shape(shotgunRect);
+		drawer.shape(rifleRect);
+		drawer.shape(powerUpRect);
+		ArrayList<Weapon> weapons = p.getWeapons();
+		for(Weapon w : weapons) {
+			if(w instanceof Pistol && pistol == null) {
+				pistol = w.getImg();
+			} else if (w instanceof Shotgun && shotgun == null) {
+				shotgun = w.getImg();
+			} else if (w instanceof Rifle && rifle == null) {
+				rifle = w.getImg();
+			}
+		}
+		if(p.getBuff() != null) {
+			powerUp = new PowerUp(p.getBuff()).getImage();
+		}
+		if(pistol != null) {
+			drawer.image(pistol, 30, 720);
+		}
+		if(shotgun != null) {
+			drawer.image(shotgun, 80, 720);
+		}
+		if(rifle != null) {
+			drawer.image(rifle, 130, 720);
+		}
+		if(powerUp != null) {
+			drawer.image(powerUp, 30, 720);
+		}
+		
+		drawer.strokeWeight(1);
+		drawer.shape(hpBar);
+		
+		drawer.fill(0,255, 0);
+		drawer.rect(20, 680, p.getHp()/ 50f * 200, 20, 10);
+		drawer.fill(0);
+		
+		drawer.textSize(12);
+		drawer.text(p.getHp() + "/50", 100, 695);
 		drawer.popMatrix();
 		drawer.popStyle();
 	}
