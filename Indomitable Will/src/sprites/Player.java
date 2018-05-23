@@ -150,6 +150,7 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
+			
 			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY() -hB.getHeight()/4
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
@@ -162,6 +163,8 @@ public class Player extends Basic {
 			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX() - hB.getWidth()/4
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
+					
+			
 			if (bottomCol) {
 				if (!blockedDir.contains(Direction.DOWN))
 					blockedDir.add(Direction.DOWN);
@@ -180,6 +183,7 @@ public class Player extends Basic {
 			if (rightCol) {
 				if (!blockedDir.contains(Direction.RIGHT))
 					blockedDir.add(Direction.RIGHT);
+			
 				result = true;
 				xVel = 0;
 				dx2 = 0;
@@ -322,7 +326,7 @@ public class Player extends Basic {
 	public ArrayList<Projectile> fire() {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 		if(currentWeapon != null) {
-			fire = this.weapons.get(0).fire(getXLoc(), getYLoc(), angle);
+			fire = currentWeapon.fire(getXLoc(), getYLoc(), angle);
 		}
 		
 		
