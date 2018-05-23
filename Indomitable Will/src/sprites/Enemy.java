@@ -1,17 +1,9 @@
 package sprites;
 
 import processing.core.PApplet;
-import java.awt.Rectangle;
-/**
- * 
- * @author
- *
-=======
 
-/**
- * @author ben8d
- * @version 5-22-18
- */
+import java.awt.Rectangle;
+
 public class Enemy extends Basic {
 
 	
