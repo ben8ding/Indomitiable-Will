@@ -47,6 +47,13 @@ public class Level {
 		walls.add(new Rectangle(990,0,10,660)); 
 		walls.add(new Rectangle(0,660,1000,10));
 
+/*		enemies.add(new Enemy(250, 400));
+		walls.add(new Rectangle(0, -190, 1000, 200));
+		walls.add(new Rectangle(-40, 0, 50, 700));
+		walls.add(new Rectangle(985, -10, 500, 710));
+		walls.add(new Rectangle(0, 660, 1000, 40));
+		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
+*/
 
 		timer = 0;
 		cleared = false;
@@ -73,6 +80,7 @@ public class Level {
 		drops = l.getDrops();
 		player = new Player(p);
 	}
+	
 	public void setup(PApplet drawer) {
 		hud.setup(drawer);
 		player.setup(drawer);
@@ -92,10 +100,11 @@ public class Level {
 		drawer.pushStyle();
 		drawer.background(255);
 		hud.draw(drawer);
-		drawer.rect(drawer.width - 35, 0, 20, 30);
+		drawer.rect(drawer.width - 35, 0, 20, 20);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 27, 27);
+		drawer.text("II", drawer.width - 28, 17);
+
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			if(used.getItem() instanceof PowerUp) {
@@ -154,13 +163,13 @@ public class Level {
 			 if(bullets.size()>0 && bullets.get(0)!=null) {
 			
 				 if(player.checkCollision(bullets.get(i).getBox())) {
-				 	//System.out.println("pong");
+				 
 				 	remove = true;
 				 	player.takeDamage();
 			 }
 			 
 			 				if (player.checkCollision(bullets.get(i).getBox())) {
-			 					// System.out.println("pong");
+			 					
 			 					remove = true;
 			 					player.takeDamage();
 			 				}
@@ -184,7 +193,7 @@ public class Level {
 			 				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
 			 
 			 					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
-			 						System.out.println("pong");
+			 						
 			 						remove = true;
 			 						enemies.get(0).takeDamage(1);
 			 
@@ -206,11 +215,11 @@ public class Level {
 			 
 			 		if (enemies.size() == 0)
 				cleared = true;
-			// System.out.println(player.getHp());
+			
 		drawer.popStyle();
 
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -244,7 +253,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
-		System.out.println("");
+	
 		this.drops = drops;
 	}
 
@@ -259,7 +268,10 @@ public class Level {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	/**
+	 * add a rectanguiar obstacle in the map
+	 * @param rect obstacle
+	 */
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
 	}
@@ -275,7 +287,7 @@ public class Level {
 	public void setPlayerBullets(ArrayList<Projectile> playerBullets) {
 		this.playerBullets = playerBullets;
 	}
-
+	
 	public boolean isCleared() {
 		return cleared;
 	}

@@ -18,7 +18,13 @@ public class Shotgun extends Weapon {
 		bSpeed = 3;
 		timer = 0;
 	}
-
+	/**
+	 * "Fires" projectile after a cooldown of 1 second by adding projectile into ArrayList
+	 * @param xLoc x-coordinate of projectile
+	 * @param yLoc y-coordinate of projectile
+	 * @param angle angle to fire at
+	 * @return fire ArrayList of projectiles
+	 */
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
 		if (System.nanoTime() - timer > 1000000000) {

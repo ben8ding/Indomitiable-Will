@@ -11,9 +11,6 @@ import processing.core.PImage;
  */
 public class LoseScreen {
 
-	public void setup(PApplet drawer) {
-
-	}
 
 	public void draw(PApplet drawer) {
 		drawer.pushMatrix();

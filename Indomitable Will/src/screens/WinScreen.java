@@ -10,9 +10,7 @@ import processing.core.PImage;
  * @version 5-22-18
  */
 public class WinScreen {
-	public void setup(PApplet drawer) {
 
-	}
 
 	public void draw(PApplet drawer) {
 		drawer.pushMatrix();

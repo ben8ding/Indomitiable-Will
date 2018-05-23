@@ -41,6 +41,10 @@ public class PowerUp implements Obtainable {
 		}
 		return img;
 	}
+	/**
+	 * Increases speed of player when player picks up powerup
+	 * @param p player object
+	 */
 	public void use(Player p) {
 		if(powerUp == powerUpType.SPEED) {
 			p.speedUp(240);
