@@ -68,8 +68,7 @@ public class Enemy extends Basic {
 			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
 						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
 			drawer.fill(255, 128, 128);
-//			drawer.text("perceptron boundary", 450, 
-//						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+//			
 			
 		}
 

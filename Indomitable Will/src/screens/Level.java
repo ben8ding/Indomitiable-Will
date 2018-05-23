@@ -41,30 +41,17 @@ public class Level {
 
 		// enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-<<<<<<< HEAD
-		walls.add(new Rectangle(-10, -190, 1010, 200));
 
-		walls.add(new Rectangle(-40, 0, 50, 660));
-		walls.add(new Rectangle(990, 0, 10, 660));
-		walls.add(new Rectangle(0, 660, 1000, 10));
 
-=======
+
 		walls.add(new Rectangle(-10,-190,1010,200));
 
 		walls.add(new Rectangle(-40,0,50,660));
 		walls.add(new Rectangle(990,0,10,660)); 
 		walls.add(new Rectangle(0,660,1000,10));
 
-/*		enemies.add(new Enemy(250, 400));
-		walls.add(new Rectangle(0, -190, 1000, 200));
-		walls.add(new Rectangle(-40, 0, 50, 700));
-		walls.add(new Rectangle(985, -10, 500, 710));
-		walls.add(new Rectangle(0, 660, 1000, 40));
-		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
-*/
-
->>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
-		timer = 0;
+ 
+		timer = 0; 
 		cleared = false;
 		for (Enemy e : enemies) {
 			walls.add(e.getBox());

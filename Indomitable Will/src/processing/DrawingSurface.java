@@ -161,7 +161,7 @@ public class DrawingSurface extends PApplet {
 			lose.draw(this);
 		}
 
-		// if player clears a level
+		// if player clears a level 
 		if (current.isCleared() && state == State.GAME) {
 			if (currentLevel != 4) {
 				System.out.println(currentLevel);
