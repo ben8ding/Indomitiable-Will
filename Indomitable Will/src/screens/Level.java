@@ -53,17 +53,25 @@ public class Level {
 		for(Enemy e : enemies) {
 			walls.add(e.getBox());
 		}
-		drops.add(new Capsule(600,50, new PowerUp(PowerUp.powerUpType.FIRERATE)));
 	}
 	public Level(Level l, Player p) {
-		this();
+		walls = new ArrayList<Rectangle>();
+		bullets = new ArrayList<Projectile>();
+		playerBullets = new ArrayList<Projectile>();
+		enemies = new ArrayList<Enemy>();
+		drops = new ArrayList<Capsule>();
+
+		enemies.add(new Enemy(40, 40));
+		hud = new PlayerHUD(player);
+		walls.add(new Rectangle(-10,-190,1010,200));
+		walls.add(new Rectangle(-40,0,50,660));
+		walls.add(new Rectangle(990,0,10,660));
+		walls.add(new Rectangle(0,660,1000,10));
 		hud = l.hud;
 		walls = l.getWalls();
 		enemies = l.getEnemies();
 		drops = l.getDrops();
-		player = p;
-		player.setXLoc(50);
-		player.setYLoc(300);
+		player = new Player(p);
 	}
 	public void setup(PApplet drawer) {
 		hud.setup(drawer);

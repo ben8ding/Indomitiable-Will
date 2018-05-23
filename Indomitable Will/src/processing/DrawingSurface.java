@@ -49,7 +49,7 @@ public class DrawingSurface extends PApplet {
 
 	private State state;
 
-	public DrawingSurface() {
+	public DrawingSurface() {  
 		lose = new LoseScreen();
 		ws = new WinScreen();
 		state = previousState = State.STARTUP;
@@ -115,15 +115,16 @@ public class DrawingSurface extends PApplet {
 		levels.get(3).addEnemy(new Enemy(40, 40));
 		levels.get(3).setDrops(drops);
 		drops = new ArrayList<Capsule>();
-		drops.add(new Capsule(600, 300, new Rifle()));
+		drops.add(new Capsule(800, 250, new Rifle()));
 
 		levels.get(4).addObstacle(new Rectangle(750, 500, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(250, 0, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(350, 100, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(450, 200, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(550, 300, 50, 120));
-		levels.get(4).addObstacle(new Rectangle(650, 400, 50, 120));
+		levels.get(4).addObstacle(new Rectangle(650, 400, 50, 120)); 
 		levels.get(4).addEnemy(new Enemy(40, 40));
+
 
 		levels.get(4).setDrops(drops);
 
@@ -162,6 +163,10 @@ public class DrawingSurface extends PApplet {
 				current = new Level(current, levels.get(currentLevel).getPlayer());
 				currentLevel++;
 				levels.set(currentLevel, current);
+				if(currentLevel >= 3 && currentLevel < 5) {
+					current.getPlayer().setXLoc(800);
+					current.getPlayer().setYLoc(300);
+				}
 			} else {
 				state = State.WIN;
 				clear();
