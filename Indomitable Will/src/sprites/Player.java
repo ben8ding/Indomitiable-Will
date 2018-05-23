@@ -25,7 +25,8 @@ import java.awt.Rectangle;
  */
 public class Player extends Basic {
 
-	private int health;
+	
+	private static int health;
 	private boolean wall;
 	private static final double cs = 3.48;
 	private static final double sped = 3.52;
@@ -43,17 +44,19 @@ public class Player extends Basic {
 	private boolean isFast;
 	// spedTime/60 = numSeconds
 	private int spedTime;
+	private int firingFastTime;
 	/*
 	 * 0 is unblocked, 1 is top, 2 is right, 3 is bottom, 4 is left
 	 */
 	private ArrayList<Direction> blockedDir = new ArrayList<Direction>(4);
+	private boolean isFiringFast;
 
 	public Player() {
 
 		super(50, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		wall = false;
-		health = 100;
+		health = 50;
 		hB = new HitBox(this);
 		timer = 0;
 	}
@@ -63,9 +66,11 @@ public class Player extends Basic {
 		img = p.img;
 		weapons = p.weapons;
 		currentWeapon = p.currentWeapon;
-		health = p.health;
 		hB = p.hB;
 		wall = p.wall;
+		shotgun = p.shotgun;
+		pistol = p.pistol;
+		rifle = p.rifle;
 	}
 
 	public void setup(PApplet drawer) {
@@ -103,6 +108,12 @@ public class Player extends Basic {
 			spedTime--;
 		} else if (spedTime == 0) {
 			isFast = false;
+		}
+		if (firingFastTime > 0) {
+			isFiringFast = true;
+			firingFastTime--;
+		} else if (firingFastTime == 0) {
+			isFiringFast = false;
 		}
 		timer++;
 
@@ -355,6 +366,15 @@ public class Player extends Basic {
 		return health;
 	}
 
+	public PowerUp.powerUpType getBuff(){
+		if(isFast) {
+			return PowerUp.powerUpType.SPEED;
+		} else if (isFiringFast){
+			return PowerUp.powerUpType.FIRERATE;
+		} else {
+			return null;
+		}
+	}
 	public int getROF() {
 		if (currentWeapon != null)
 			return currentWeapon.getROF();
@@ -377,5 +397,8 @@ public class Player extends Basic {
 
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
+	}
+	public Weapon getCurrentWeapon() {
+		return currentWeapon;
 	}
 }
