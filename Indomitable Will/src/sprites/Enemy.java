@@ -11,9 +11,9 @@ public class Enemy extends Basic {
 	private final int PROJ_SPEED = 3;
 	
 	double wx, wy, wc; 	// weights for x, y, and constant
-	int pout;		// perceptron output
-	int goal;		// whether hit goal
-	double l_rate;	// learning rate
+	int pout;			// perceptron output
+	int goal;			// whether hit goal
+	double l_rate;		// learning rate
 	
 	
 	public Enemy() {
@@ -31,6 +31,15 @@ public class Enemy extends Basic {
 		
 		init();
 	}
+	
+	public Enemy(int x, int y, int msize) {
+		super(x, y, msize);
+		health = 3;
+		hB = new HitBox(this);
+		
+		init();
+	}
+	
 	
 	public void init() {
 		wx = wy = wc = 0;
@@ -50,8 +59,8 @@ public class Enemy extends Basic {
 	
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 		
-//		if(wy != 0) 
-//			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
+		if(wy != 0) 
+			drawer.line(0.0f, (float)(- 1000 * wc/wy), 1000.0f, (float)(1000 * (-wx - wc)/wy));
 
 		hB.draw(drawer);
 		act();
@@ -103,8 +112,8 @@ public class Enemy extends Basic {
 		wy += (goal - pout) * l_rate * y_s;
 		wc += (goal - pout) * l_rate;
 		
-//		System.out.printf("weights %f, %f %f", wx, wy, wc);
-//		System.out.printf("goal-pout %d, %d\n", goal, pout);
+		System.out.printf("weights %f, %f %f", wx, wy, wc);
+		System.out.printf("goal-pout %d, %d\n", goal, pout);
 		}
 		
 		double vx = (double)(x - xLoc);
