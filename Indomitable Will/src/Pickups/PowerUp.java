@@ -33,14 +33,12 @@ public class PowerUp implements Obtainable {
 		// TODO Auto-generated method stub
 		return this;
 	}
-	public void draw(PApplet drawer) {
+	public PImage getImage() {
 		if(powerUp == powerUpType.SPEED) {
 			img = original.get(0, 0, 18, 18);
 		} else if (powerUp == powerUpType.FIRERATE) {
 			img = original.get(72, 0, 18, 18);
 		}
-	}
-	public PImage getImage() {
 		return img;
 	}
 	public void use(Player p) {
