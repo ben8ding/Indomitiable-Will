@@ -8,21 +8,26 @@ import sprites.Projectile;
 import processing.core.PApplet;
 
 /**
- * @author ben8d
+ * @author ben8d,matthewli
  * @version 5-22-18
  */
 public class Rifle extends Weapon {
-	
+	private long timer;
+
 	public Rifle() {
 		ROF = 1;
 		bSpeed = 10;
+		timer = 0;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
 
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
-		fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
-				Math.sin(Math.toRadians(angle + 90)) * bSpeed));
+		if (System.nanoTime() - timer > 200000) {
+			fire.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
+					Math.sin(Math.toRadians(angle + 90)) * bSpeed));
+			timer = System.nanoTime();
+		}
 		return fire;
 
 	}

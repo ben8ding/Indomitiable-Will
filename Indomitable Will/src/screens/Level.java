@@ -14,6 +14,8 @@ import sprites.Projectile;
 /**
  * 
  * @author Matthew, Nathaniel, Ben
+ * @version 5-22-18
+>>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will
  *
  */
 public class Level {
@@ -135,7 +137,7 @@ public class Level {
 		if (timer % 10 == 0) {
 
 			for (Enemy object : enemies) {
-				if(object.getAmmoCount() > 0 && object.inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) {
+				if(object.getAmmoCount() > 0 && object.getPerceptron().inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) {
 					bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 				}
 			}
@@ -150,7 +152,7 @@ public class Level {
 
 		if (timer % 5 == 0) {
 			for (Enemy object : enemies) {
-				object.trainPerceptron(lid);
+				object.getPerceptron().trainPerceptron(lid);
 			}
 		}
 	

@@ -7,27 +7,35 @@ import sprites.Projectile;
 
 /**
  * 
- * @author Nathaniel
+ * @author Nathaniel,matthewli
  * @version 5/18/18 11:03
  */
 public class Pistol extends Weapon {
+	private long timer;
+
 	public Pistol() {
 		bSpeed = 6;
 		ROF = 5;
+		timer = 0;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
-		
+
 		ArrayList<Projectile> result = new ArrayList<Projectile>();
-		result.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle+90)) * bSpeed,
-				Math.sin(Math.toRadians(angle+90)) * bSpeed, 100));
+		if (System.nanoTime() - timer > 500000) {
+			result.add(new Projectile(xLoc, yLoc, Math.cos(Math.toRadians(angle + 90)) * bSpeed,
+					Math.sin(Math.toRadians(angle + 90)) * bSpeed, 100));
+			timer = System.nanoTime();
+		}
 		return result;
 	}
+
 	public Obtainable getDrop() {
 		return this;
 	}
+
 	public void setup(PApplet drawer) {
-		img=drawer.loadImage("sprites" + System.getProperty("file.separator") + "pistol.png");
+		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "pistol.png");
 	}
-	
+
 }
