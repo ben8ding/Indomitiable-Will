@@ -2,6 +2,10 @@ package sprites;
 
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Projectile extends Basic {
 	
 	public int shade;
@@ -32,8 +36,8 @@ public class Projectile extends Basic {
 	
 	public Projectile(int x, int y, double xDir, double yDir) {
 		super(x, y, 10);
-		xVel = xDir;
-		yVel = yDir;
+		xVel = 5*xDir;
+		yVel = 5*yDir;
 		hB = new HitBox(this);
 		
 		

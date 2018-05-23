@@ -3,6 +3,10 @@ package sprites;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public abstract class Basic {
 	protected PImage img;
 	protected int xLoc;
@@ -41,7 +45,7 @@ public abstract class Basic {
 		xLoc = set;
 	}
 	
-	public void setyLoc(int set) {
+	public void setYLoc(int set) {
 		yLoc = set;
 	}
 	

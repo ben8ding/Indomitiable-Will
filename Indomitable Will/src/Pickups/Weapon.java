@@ -6,13 +6,14 @@ import processing.core.PImage;
 import sprites.Projectile;
 import processing.core.PApplet;
 
-public class Weapon implements Obtainable {
-	/**
-	 * 1/ROF = FIRERATE
-	 */
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
+public abstract class Weapon implements Obtainable {
+	protected PImage img;
 	protected int bSpeed;
 	protected int ROF;
-	
 	public Weapon() {
 		ROF = 20;
 	}
@@ -28,28 +29,18 @@ public class Weapon implements Obtainable {
 
 	}
 
-	public void setup(PApplet drawer) {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
 	public PImage getImg() {
 		// TODO Auto-generated method stub
-		return null;
+		return img;
 	}
-
-	@Override
 	public Obtainable getDrop() {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	public int getROF() {
 		return ROF;
 	}
 	
-	public void draw(PApplet drawer) {
-
-	}
 }

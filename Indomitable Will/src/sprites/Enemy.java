@@ -9,7 +9,11 @@ public class Enemy extends Basic {
 	
 	private int health;
 	private final int PROJ_SPEED = 3;
+
+	private int MAX_AMMO = 50;
 	
+	protected final int maxHealth;
+
 	double wx, wy, wc; 	// weights for x, y, and constant
 	int pout;			// perceptron output
 	int goal;			// whether hit goal

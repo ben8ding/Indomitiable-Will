@@ -1,10 +1,10 @@
 package sprites;
 
 import processing.core.PApplet;
-import shapes.Line;
 import java.awt.Rectangle;
 
 public class Boss extends Enemy {
+
 
 	
 	private int health;
@@ -113,5 +113,6 @@ public class Boss extends Enemy {
 	}
 	public HitBox getBox() {
 		return this.hB;
+
 	}
 }

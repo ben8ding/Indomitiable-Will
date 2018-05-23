@@ -6,11 +6,15 @@ import processing.core.PImage;
 import sprites.Projectile;
 import processing.core.PApplet;
 
+/**
+ * @author ben8d
+ * @version 5-22-18
+ */
 public class Shotgun extends Weapon {
 
 	public Shotgun() {
 		ROF = 10;
-		bSpeed =5;
+		bSpeed = 3;
 	}
 
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
@@ -36,23 +40,6 @@ public class Shotgun extends Weapon {
 
 	public void setup(PApplet drawer) {
 		// TODO Auto-generated method stub
-
-		
-	}
-
-	@Override
-	public PImage getImg() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Obtainable getDrop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void draw(PApplet drawer) {
-
+		img=drawer.loadImage("sprites" + System.getProperty("file.separator") + "shotgun.png");
 	}
 }
