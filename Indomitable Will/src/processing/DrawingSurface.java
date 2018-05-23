@@ -137,7 +137,9 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		pushStyle();
 		// draw menu on first play
+		System.out.println(state);
 		if (state == State.STARTUP) {
+			System.out.println("we are at startup stage");
 			menu.draw(this);
 			previousState = state;
 			state = State.MENU;
@@ -208,8 +210,9 @@ public class DrawingSurface extends PApplet {
 				}
 				previousState = state;
 				state = State.GAME;
+				System.out.println("hallo from the far east side");
+
 				levels.get(0).draw(this);
-				// System.out.println("hallo from the far east side");
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 200
 					&& getMouseY() < height / 2 - 150 && state == State.PAUSED && mousePressed) {// if paused and wants
 																									// to continue

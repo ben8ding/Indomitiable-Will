@@ -25,6 +25,7 @@ public class Menu {
 		drawer.rect(drawer.width/2-150, drawer.height/2+15,300,50);
 		drawer.fill(0);
 		drawer.textSize(30);
+		System.out.println("we are in the menu class");
 		PImage img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Chicken.png");
 		drawer.image(img, 0, 0);
 		drawer.image(img, 133, 134);
