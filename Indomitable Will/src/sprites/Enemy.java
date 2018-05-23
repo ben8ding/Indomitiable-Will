@@ -29,7 +29,6 @@ public class Enemy extends Basic {
 		health = 3;
 		maxHealth = 3;
 		hB = new HitBox(this);
-		perceptron = new Perceptron();
 
 		ammo_cnt = MAX_AMMO / 5;
 	}

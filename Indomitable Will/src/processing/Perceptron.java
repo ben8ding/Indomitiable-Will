@@ -1,10 +1,5 @@
 package processing;
 
-/**
- * @author ben8d
- * @version 5-22-18
- */
-
 public class Perceptron {
 
 	public double getWx() {

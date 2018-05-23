@@ -38,10 +38,9 @@ public class DrawingSurface extends PApplet {
 	private State previousState;
 	private ArrayList<Level> levels;
 	private ArrayList<Integer> keys;
-	public static final int xSize = 1000;
-	public static final int ySize = 700;
+	public static final int xSize = 1200;
+	public static final int ySize = 800;
 	private long waitTime;
-	private PlayerHUD hud;
 	private enum State {
 		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE, STARTUP
 	};
@@ -136,7 +135,9 @@ public class DrawingSurface extends PApplet {
 		}
 		Level current = levels.get(currentLevel);
 		current.setID(currentLevel);
+
 		System.out.printf("Player health: %d\n", levels.get(currentLevel).getPlayer().getHp());
+
 		// if player dies, then send to lose menu
 		if (levels.get(currentLevel).getPlayer().getHp() <= 0 && state == State.GAME) {
 			System.out.println("we at the lose menu");

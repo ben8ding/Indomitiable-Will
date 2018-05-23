@@ -13,14 +13,14 @@ import sprites.Player;
 import sprites.Projectile;
 /**
  * 
- * @author matthewli
+ * @author Matthew, Nathaniel, Ben
  * @version 5-22-18
  *
  */
 public class Level {
 
 	private Player player;
-
+	private PlayerHUD hud;
 	private ArrayList<Rectangle> walls;
 	private ArrayList<Projectile> bullets;
 	private ArrayList<Projectile> playerBullets;
@@ -40,11 +40,13 @@ public class Level {
 		drops = new ArrayList<Capsule>();
 
 		enemies.add(new Enemy(40, 40));
-		
+		hud = new PlayerHUD(player);
 		walls.add(new Rectangle(-10,-190,1010,200));
-		walls.add(new Rectangle(-40,0,50,700));
-		walls.add(new Rectangle(985,-10,500,710));
-		walls.add(new Rectangle(0,660,1000,40));
+
+		walls.add(new Rectangle(-40,0,50,660));
+		walls.add(new Rectangle(990,0,10,660));
+		walls.add(new Rectangle(0,660,1000,10));
+
 
 		timer = 0;
 		cleared = false;
@@ -55,6 +57,7 @@ public class Level {
 	}
 	public Level(Level l, Player p) {
 		this();
+		hud = l.hud;
 		walls = l.getWalls();
 		enemies = l.getEnemies();
 		drops = l.getDrops();
@@ -63,6 +66,7 @@ public class Level {
 		player.setYLoc(300);
 	}
 	public void setup(PApplet drawer) {
+		hud.setup(drawer);
 		player.setup(drawer);
 		for (Capsule object : drops) {
 			object.getItem().setup(drawer);
@@ -79,6 +83,7 @@ public class Level {
 		drawer.clear();
 		drawer.pushStyle();
 		drawer.background(255);
+		hud.draw(drawer);
 		drawer.rect(drawer.width - 35, 0, 20, 30);
 		drawer.textSize(15);
 		drawer.fill(0);
@@ -95,7 +100,7 @@ public class Level {
 		player.checkCollision(walls);
 		drawer.stroke(0);
 		for (Rectangle object : walls) {
-			if(object.getSize().getWidth() > 40)
+			if(object.getSize().getWidth() > 40 || object.getSize().getHeight() > 40)
 			drawer.rect(object.x, object.y, object.width, object.height);
 		}
 		for (Projectile object : bullets) {
@@ -153,7 +158,7 @@ public class Level {
 			 				}
 			 
 			 				for (Rectangle wall : walls) {
-			 					if (bullets.get(i).getBox().checkCollision(wall)) {
+			 					if (bullets.get(i).getBox().checkCollision(wall) || bullets.get(i).getXLoc() > 1000 || bullets.get(i).getXLoc() < 0 || bullets.get(i).getYLoc() > 700 || bullets.get(i).getYLoc() < 0) {
 			 						if(wall.getSize().getWidth() > 40)
 			 						remove = true;
 			 					}
@@ -178,7 +183,7 @@ public class Level {
 			 					}
 			 
 			 					for (Rectangle wall : walls) {
-			 						if (playerBullets.get(i).getBox().checkCollision(wall)) {
+			 						if (playerBullets.get(i).getBox().checkCollision(wall)|| playerBullets.get(i).getXLoc() > 1000 || playerBullets.get(i).getXLoc() < 0 || playerBullets.get(i).getYLoc() > 700 || playerBullets.get(i).getYLoc() < 0) {
 			 							remove = true;
 			 						}
 			 					}

@@ -45,4 +45,5 @@ public class Shotgun extends Weapon {
 		// TODO Auto-generated method stub
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "shotgun.png");
 	}
+
 }

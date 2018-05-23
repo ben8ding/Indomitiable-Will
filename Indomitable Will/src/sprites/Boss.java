@@ -4,7 +4,11 @@ import processing.Perceptron;
 import processing.core.PApplet;
 
 import java.awt.Rectangle;
-
+/**
+ * 
+ * @author Ben
+ *
+ */
 public class Boss extends Enemy {
 
 	protected int health;

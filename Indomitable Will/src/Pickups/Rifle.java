@@ -8,14 +8,14 @@ import sprites.Projectile;
 import processing.core.PApplet;
 
 /**
- * @author ben8d,matthewli
+ * @author ben8d,matthewli, Nathaniel
  * @version 5-22-18
  */
 public class Rifle extends Weapon {
 	private long timer;
 
 	public Rifle() {
-		ROF = 1;
+		ROF = 2;
 		bSpeed = 10;
 		timer = 0;
 	}
