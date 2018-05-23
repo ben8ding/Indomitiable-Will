@@ -41,11 +41,7 @@ public class Level {
 
 		// enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-		walls.add(new Rectangle(-10, -190, 1010, 200));
-
-		walls.add(new Rectangle(-40, 0, 50, 660));
-		walls.add(new Rectangle(990, 0, 10, 660));
-		walls.add(new Rectangle(0, 660, 1000, 10));
+	
 
 		walls.add(new Rectangle(-10,-190,1010,200));
 
@@ -62,6 +58,7 @@ public class Level {
 */
 
 		timer = 0;
+ 
 		cleared = false;
 		for (Enemy e : enemies) {
 			walls.add(e.getBox());
