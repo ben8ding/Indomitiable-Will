@@ -1,7 +1,11 @@
 package screens;
 
 import processing.core.PApplet;
-
+/**
+ * 
+ * @author matthewli
+ *
+ */
 public class Instructions {
 
 	public Instructions() {

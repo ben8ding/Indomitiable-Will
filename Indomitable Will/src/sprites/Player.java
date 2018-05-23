@@ -51,7 +51,7 @@ public class Player extends Basic {
 		super(50, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		wall = false;
-		health = 5;
+		health = 100;
 		hB = new HitBox(this);
 		timer = 0;
 	}
@@ -123,7 +123,9 @@ public class Player extends Basic {
 		}
 		return result;
 	}
-
+	public void setHealth(int health) {
+		this.health= health;
+	}
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {

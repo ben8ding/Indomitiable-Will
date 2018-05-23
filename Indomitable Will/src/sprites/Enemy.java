@@ -2,6 +2,11 @@ package sprites;
 
 import processing.core.PApplet;
 import java.awt.Rectangle;
+/**
+ * 
+ * @author
+ *
+=======
 
 /**
  * @author ben8d
