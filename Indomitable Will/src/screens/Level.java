@@ -163,13 +163,13 @@ public class Level {
 			 if(bullets.size()>0 && bullets.get(0)!=null) {
 			
 				 if(player.checkCollision(bullets.get(i).getBox())) {
-				 	//System.out.println("pong");
+				 
 				 	remove = true;
 				 	player.takeDamage();
 			 }
 			 
 			 				if (player.checkCollision(bullets.get(i).getBox())) {
-			 					// System.out.println("pong");
+			 					
 			 					remove = true;
 			 					player.takeDamage();
 			 				}
@@ -193,7 +193,7 @@ public class Level {
 			 				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
 			 
 			 					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
-			 						System.out.println("pong");
+			 						
 			 						remove = true;
 			 						enemies.get(0).takeDamage(1);
 			 
@@ -215,7 +215,7 @@ public class Level {
 			 
 			 		if (enemies.size() == 0)
 				cleared = true;
-			// System.out.println(player.getHp());
+			
 		drawer.popStyle();
 
 	}
@@ -253,7 +253,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
-		System.out.println("");
+	
 		this.drops = drops;
 	}
 
