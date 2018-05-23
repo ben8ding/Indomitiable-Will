@@ -3,10 +3,11 @@ package screens;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+
 /**
  * 
- * @author Matthew
- *
+ * @author matthewli
+ * @version 5-22-18
  */
 public class WinScreen {
 	public void setup(PApplet drawer) {

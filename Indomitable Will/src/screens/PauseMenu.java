@@ -2,7 +2,11 @@ package screens;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/**
+ * 
+ * @author matthewli
+ * @version 5-22-18
+ */
 public class PauseMenu {
 	
 	public PauseMenu() {
