@@ -24,7 +24,8 @@ import java.util.Random;
 
 /**
  * 
- * @author Matthew,Nathaniel,Ben 5-22/18
+ * @author Matthew,Nathaniel,Ben
+ * @version 5-22/18
  */
 public class DrawingSurface extends PApplet {
 	private WinScreen ws;
@@ -40,7 +41,7 @@ public class DrawingSurface extends PApplet {
 	public static final int xSize = 1000;
 	public static final int ySize = 700;
 	private long waitTime;
-
+	private PlayerHUD hud;
 	private enum State {
 		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE, STARTUP
 	};
