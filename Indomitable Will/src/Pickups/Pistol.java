@@ -11,7 +11,6 @@ import sprites.Projectile;
  * @version 5/18/18 11:03
  */
 public class Pistol extends Weapon {
-
 	public Pistol() {
 		bSpeed = 6;
 		ROF = 5;
@@ -27,4 +26,8 @@ public class Pistol extends Weapon {
 	public Obtainable getDrop() {
 		return this;
 	}
+	public void setup(PApplet drawer) {
+		img=drawer.loadImage("sprites" + System.getProperty("file.separator") + "pistol.png");
+	}
+	
 }

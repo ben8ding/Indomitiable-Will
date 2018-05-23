@@ -12,7 +12,6 @@ import processing.core.PApplet;
  * @version 5-22-18
  */
 public class Rifle extends Weapon {
-	private PImage img;
 	
 	public Rifle() {
 		ROF = 1;
@@ -32,20 +31,5 @@ public class Rifle extends Weapon {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "rifle.png");
 		// TODO Auto-generated method stub
 
-	}
-	@Override
-	public PImage getImg() {
-		// TODO Auto-generated method stub
-		return img;
-	}
-
-	@Override
-	public Obtainable getDrop() {
-		// TODO Auto-generated method stub
-		return this;
-	}
-
-	public void draw(PApplet drawer) {
-		drawer.image(img, 0, 0);
 	}
 }
