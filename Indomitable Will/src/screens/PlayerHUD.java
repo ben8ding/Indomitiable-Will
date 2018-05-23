@@ -5,7 +5,7 @@ import sprites.Player;
 
 public class PlayerHUD {
 	private Player p;
-	private PShape pistol, shotgun, rifle, powerUp;
+	private PShape pistol, shotgun, rifle, powerUp, hpBar;
 	public PlayerHUD(Player p) {
 		this.p = p;
 	}

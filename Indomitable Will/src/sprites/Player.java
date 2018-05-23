@@ -72,6 +72,25 @@ public class Player extends Basic {
 	}
 
 	public void draw(PApplet drawer) {
+		if(drawer.key == '1') {
+			for(Weapon w : weapons) {
+				if(w instanceof Pistol) {
+					currentWeapon = w;
+				}
+			}
+		} else if(drawer.key == '2') {
+			for(Weapon w : weapons) {
+				if(w instanceof Rifle) {
+					currentWeapon = w;
+				}
+			}
+		} else if(drawer.key == '3') {
+			for(Weapon w : weapons) {
+				if(w instanceof Shotgun) {
+					currentWeapon = w;
+				}
+			}
+		}
 		if(weapons.size() == 1) {
 			currentWeapon = weapons.get(0);
 		} 
