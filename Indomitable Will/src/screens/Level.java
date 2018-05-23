@@ -11,6 +11,7 @@ import processing.core.PApplet;
 import sprites.Enemy;
 import sprites.Player;
 import sprites.Projectile;
+
 /**
  * 
  * @author Matthew, Nathaniel, Ben
@@ -30,30 +31,29 @@ public class Level {
 	private boolean cleared;
 	private int lid;
 
-
 	public Level() {
-		player = new Player(); 
+		player = new Player();
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
 		playerBullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 
-		//enemies.add(new Enemy(40, 40));
+		// enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-		walls.add(new Rectangle(-10,-190,1010,200));
+		walls.add(new Rectangle(-10, -190, 1010, 200));
 
-		walls.add(new Rectangle(-40,0,50,660));
-		walls.add(new Rectangle(990,0,10,660)); 
-		walls.add(new Rectangle(0,660,1000,10));
-
+		walls.add(new Rectangle(-40, 0, 50, 660));
+		walls.add(new Rectangle(990, 0, 10, 660));
+		walls.add(new Rectangle(0, 660, 1000, 10));
 
 		timer = 0;
 		cleared = false;
-		for(Enemy e : enemies) {
+		for (Enemy e : enemies) {
 			walls.add(e.getBox());
 		}
 	}
+
 	public Level(Level l, Player p) {
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
@@ -63,16 +63,17 @@ public class Level {
 
 		enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-		walls.add(new Rectangle(-10,-190,1010,200));
-		walls.add(new Rectangle(-40,0,50,660));
-		walls.add(new Rectangle(990,0,10,660));
-		walls.add(new Rectangle(0,660,1000,10));
+		walls.add(new Rectangle(-10, -190, 1010, 200));
+		walls.add(new Rectangle(-40, 0, 50, 660));
+		walls.add(new Rectangle(990, 0, 10, 660));
+		walls.add(new Rectangle(0, 660, 1000, 10));
 		hud = l.hud;
 		walls = l.getWalls();
 		enemies = l.getEnemies();
 		drops = l.getDrops();
 		player = new Player(p);
 	}
+
 	public void setup(PApplet drawer) {
 		hud.setup(drawer);
 		player.setup(drawer);
@@ -81,7 +82,7 @@ public class Level {
 		}
 
 	}
-	
+
 	public void setID(int i) {
 		lid = i;
 	}
@@ -98,8 +99,8 @@ public class Level {
 		drawer.text("II", drawer.width - 27, 27);
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
-			if(used.getItem() instanceof PowerUp) {
-				PowerUp pu = (PowerUp)used.getItem();
+			if (used.getItem() instanceof PowerUp) {
+				PowerUp pu = (PowerUp) used.getItem();
 				pu.use(player);
 			}
 			drops.remove(used);
@@ -108,8 +109,8 @@ public class Level {
 		player.checkCollision(walls);
 		drawer.stroke(0);
 		for (Rectangle object : walls) {
-			if(object.getSize().getWidth() > 40 || object.getSize().getHeight() > 40)
-			drawer.rect(object.x, object.y, object.width, object.height);
+			if (object.getSize().getWidth() > 40 || object.getSize().getHeight() > 40)
+				drawer.rect(object.x, object.y, object.width, object.height);
 		}
 		for (Projectile object : bullets) {
 			object.draw(drawer);
@@ -127,90 +128,99 @@ public class Level {
 			playerBullets.addAll(player.fire());
 		}
 
-
-		if (timer % 10 == 0) {					// Enemy can fire at high rates as long as it has ammo
+		if (timer % 10 == 0) { // Enemy can fire at high rates as long as it has ammo
 			for (Enemy object : enemies) {
-				if(object.getAmmoCount() > 0 && object.getPerceptron().inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) {		// Enemy AI tells whether to fire or not based on prediction of hit
+				if (object.getAmmoCount() > 0
+						&& object.getPerceptron().inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) { 
 					bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 				}
 			}
 		}
 
-		if (timer % 80 == 0) {					// Enemy ammo is added at much low rate
-			for (Enemy object : enemies) {		// Thus, it is beneficial for enemy to conserve ammo if it cannot hit target
-				object.addAmmo();				// so that if the ammo cache level is high, it can fire at high rate.
-			}									// Otherwise, if enemy always fire, its firing rate is limited to the rate of ammo re-supply.
+		if (timer % 80 == 0) { // Enemy ammo is added at much low rate
+			for (Enemy object : enemies) { // Thus, it is beneficial for enemy to conserve ammo if it cannot hit target
+				object.addAmmo(); // so that if the ammo cache level is high, it can fire at high rate.
+			} // Otherwise, if enemy always fire, its firing rate is limited to the rate of
+				// ammo re-supply.
 		}
 
-		if (timer % 5 == 0) {					// enemy AI training happens continuously.
+		if (timer % 5 == 0) { // enemy AI training happens continuously.
 			for (Enemy object : enemies) {
 				object.getPerceptron().trainPerceptron(lid);
 			}
 		}
-	
-		 for(int i = 0; i<bullets.size();i++) {
-			
-			 boolean remove = false;
-			 if(bullets.size()>0 && bullets.get(0)!=null) {
-			
-				 if(player.checkCollision(bullets.get(i).getBox())) {
-				 
-				 	remove = true;
-				 	player.takeDamage();
-			 }
-			 
-			 				if (player.checkCollision(bullets.get(i).getBox())) {
-			 					
-			 					remove = true;
-			 					player.takeDamage();
-			 				}
-			 
-			 				for (Rectangle wall : walls) {
-			 					if (bullets.get(i).getBox().checkCollision(wall) || bullets.get(i).getXLoc() > 1000 || bullets.get(i).getXLoc() < 0 || bullets.get(i).getYLoc() > 700 || bullets.get(i).getYLoc() < 0) {
-			 						if(wall.getSize().getWidth() > 40)
-			 						remove = true;
-			 					}
-			 				}
-			 
-			 			}
-			 			if (remove)
-			 				bullets.remove(i);
-			 		}
-			 
-			 		for (int i = 0; i < playerBullets.size(); i++  ) {
-			 
-			 			boolean remove = false;
-			 			if (enemies.size() > 0 && enemies.get(0) != null) {
-			 				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
-			 
-			 					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
-			 						
-			 						remove = true;
-			 						enemies.get(0).takeDamage(1);
-			 
-			 					}
-			 
-			 					for (Rectangle wall : walls) {
-			 						if (playerBullets.get(i).getBox().checkCollision(wall)|| playerBullets.get(i).getXLoc() > 1000 || playerBullets.get(i).getXLoc() < 0 || playerBullets.get(i).getYLoc() > 700 || playerBullets.get(i).getYLoc() < 0) {
-			 							remove = true;
-			 						}
-			 					}
-			 
-			 				}
-			 				if (remove)
-			 					playerBullets.remove(i);
-			 				if (enemies.get(0).getHp() == 0)
-			 					enemies.remove(0);
-			 			}
-			 		}
-			 
-			 		if (enemies.size() == 0)
-				cleared = true;
-			
+
+		collisionCheck();
+
+		if (enemies.size() == 0)
+			cleared = true;
+
 		drawer.popStyle();
 
 	}
 
+	private void collisionCheck() {
+		for (int i = 0; i < bullets.size(); i++) {
+
+			boolean remove = false;
+			if (bullets.size() > 0 && bullets.get(0) != null) {
+
+				if (player.checkCollision(bullets.get(i).getBox())) {
+
+					remove = true;
+					player.takeDamage();
+				}
+
+				if (player.checkCollision(bullets.get(i).getBox())) {
+
+					remove = true;
+					player.takeDamage();
+				}
+
+				for (Rectangle wall : walls) {
+					if (bullets.get(i).getBox().checkCollision(wall) || bullets.get(i).getXLoc() > 1000
+							|| bullets.get(i).getXLoc() < 0 || bullets.get(i).getYLoc() > 700
+							|| bullets.get(i).getYLoc() < 0) {
+						if (wall.getSize().getWidth() > 40)
+							remove = true;
+					}
+				}
+
+			}
+			if (remove)
+				bullets.remove(i);
+		}
+
+		for (int i = 0; i < playerBullets.size(); i++) {
+
+			boolean remove = false;
+			if (enemies.size() > 0 && enemies.get(0) != null) {
+				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
+
+					if (enemies.get(0).checkCollision(playerBullets.get(i).getBox())) {
+
+						remove = true;
+						enemies.get(0).takeDamage(1);
+
+					}
+
+					for (Rectangle wall : walls) {
+						if (playerBullets.get(i).getBox().checkCollision(wall) || playerBullets.get(i).getXLoc() > 1000
+								|| playerBullets.get(i).getXLoc() < 0 || playerBullets.get(i).getYLoc() > 700
+								|| playerBullets.get(i).getYLoc() < 0) {
+							remove = true;
+						}
+					}
+
+				}
+				if (remove)
+					playerBullets.remove(i);
+				if (enemies.get(0).getHp() == 0)
+					enemies.remove(0);
+			}
+		}
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -218,10 +228,6 @@ public class Level {
 	public ArrayList<Rectangle> getWalls() {
 		return walls;
 	}
-
-	// public void setWalls(ArrayList<Rectangle> walls) {
-	// this.walls = walls;
-	// }
 
 	public ArrayList<Projectile> getBullets() {
 		return bullets;
@@ -244,7 +250,7 @@ public class Level {
 	}
 
 	public void setDrops(ArrayList<Capsule> drops) {
-	
+
 		this.drops = drops;
 	}
 
@@ -263,7 +269,7 @@ public class Level {
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
 	}
-	
+
 	public void addEnemy(Enemy buddy) {
 		enemies.add(buddy);
 	}
