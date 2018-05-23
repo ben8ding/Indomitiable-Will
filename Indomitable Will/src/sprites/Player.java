@@ -135,7 +135,7 @@ public class Player extends Basic {
 		drawer.stroke(0);
 		drawer.fill(255);
 
-		move();
+		move();  
 		//hB.draw(drawer);
 		hB.refreshLoc(this);
 

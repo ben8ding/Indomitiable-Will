@@ -101,7 +101,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(1).addObstacle(new Rectangle(900, (int) 100, 50, 300));
 		levels.get(1).addObstacle(new Rectangle(530, (int) (350), 50, 300));
 		levels.get(1).addEnemy(new Enemy(700, 600));
-		levels.get(1).addEnemy(new Enemy(830, 120));
+
 		levels.get(1).setDrops(drops);
 		
 		drops = new ArrayList<Capsule>();
@@ -162,7 +162,7 @@ public class DrawingSurface extends PApplet {
 			lose.draw(this);
 		}
 
-		// if player clears a level
+		// if player clears a level 
 		if (current.isCleared() && state == State.GAME) {
 			if (currentLevel != 4) {
 				current = levels.get(currentLevel + 1);
