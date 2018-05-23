@@ -142,7 +142,7 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		pushStyle();
 		// draw menu on first play
-		System.out.println(state);
+		//System.out.println(state);
 		if (state == State.STARTUP) {
 			System.out.println("we are at startup stage");
 			menu.draw(this);
