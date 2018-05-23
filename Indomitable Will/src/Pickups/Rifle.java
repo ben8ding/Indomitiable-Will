@@ -15,7 +15,7 @@ public class Rifle extends Weapon {
 	private long timer;
 
 	public Rifle() {
-		ROF = 1;
+		ROF = 2;
 		bSpeed = 10;
 		timer = 0;
 	}
