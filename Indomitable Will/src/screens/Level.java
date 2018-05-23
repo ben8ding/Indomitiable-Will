@@ -56,7 +56,6 @@ public class Level {
 		walls.add(new Rectangle(-40, 0, 50, 700));
 		walls.add(new Rectangle(985, -10, 500, 710));
 		walls.add(new Rectangle(0, 660, 1000, 40));
-<<<<<<< HEAD
 		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
 */
 
@@ -77,6 +76,7 @@ public class Level {
 		player.setXLoc(50);
 		player.setYLoc(300);
 	}
+	
 	public void setup(PApplet drawer) {
 		hud.setup(drawer);
 		player.setup(drawer);
@@ -216,7 +216,7 @@ public class Level {
 		drawer.popStyle();
 
 	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -265,7 +265,10 @@ public class Level {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	/**
+	 * add a rectanguiar obstacle in the map
+	 * @param rect obstacle
+	 */
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
 	}
@@ -277,7 +280,7 @@ public class Level {
 	public void setPlayerBullets(ArrayList<Projectile> playerBullets) {
 		this.playerBullets = playerBullets;
 	}
-
+	
 	public boolean isCleared() {
 		return cleared;
 	}

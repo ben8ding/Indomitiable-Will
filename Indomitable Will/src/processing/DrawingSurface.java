@@ -64,7 +64,9 @@ public class DrawingSurface extends PApplet {
 		pauseMenu = new PauseMenu();
 		startTime = 0;
 	}
-
+	/**
+	 * sets size of window
+	 */
 	public void settings() {
 		size(xSize, ySize);
 	}
@@ -268,13 +270,17 @@ public class DrawingSurface extends PApplet {
 		}
 		popStyle();
 	}
-
+	/**
+	 * records code of key pressed by user
+	 */
 	public void keyPressed() {
 		if (!keys.contains(keyCode)) {
 			keys.add(keyCode);
 		}
 	}
-
+	/**
+	 * records code of key pressed by user
+	 */
 	public void keyReleased() {
 		if (keys.contains(keyCode))
 			keys.remove(keys.indexOf(keyCode));
