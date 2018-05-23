@@ -165,7 +165,7 @@ public class DrawingSurface extends PApplet {
 		// stuff that happens if player is not in game
 		if (state != State.GAME) {
 			if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 + 15
-					&& getMouseY() < height / 2 + 50 && mousePressed && state == State.MENU) {
+					&& getMouseY() < height / 2 + 50 && mousePressed && state == State.MENU) {//at menu want to go to instructions
 				previousState = state;
 				state = State.INSTRUCTIONS;
 				instructions.draw(this);
@@ -222,7 +222,7 @@ public class DrawingSurface extends PApplet {
 				waitTime = System.nanoTime();
 			} // if player is at death menu and clicks play again
 			if ((state == State.LOSE ||state == State.WIN)&& getMouseX() > width / 2 - 200 && getMouseX() < width + 200
-					&& getMouseY() > height / 2 - 115 && getMouseY() < height / 2 - 15 && mousePressed) {
+					&& getMouseY() > height / 2 - 115 && getMouseY() < height / 2 - 15 && mousePressed) {// win/lose and press back to main menu
 				previousState = state;
 				state = State.MENU;
 				background(255);
@@ -239,8 +239,8 @@ public class DrawingSurface extends PApplet {
 			boolean up = keys.contains((int) 'W') || keys.contains(UP);
 			boolean left = keys.contains((int) 'A') || keys.contains(LEFT);
 			boolean right = keys.contains((int) 'D') || keys.contains(RIGHT);
-			if (getMouseX() > width - 35 && getMouseX() < width - 10 && getMouseY() > 0 && getMouseY() < 30
-					&& state == State.GAME && mousePressed) {
+			if (getMouseX() > width - 35 && getMouseX() < width - 10 && getMouseY() > 0 && getMouseY() < 20
+					&& state == State.GAME && mousePressed) {//game to pausemenu
 				previousState = state;
 				state = State.PAUSED;
 				background(255);

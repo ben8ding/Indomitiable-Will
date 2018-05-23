@@ -92,10 +92,11 @@ public class Level {
 		drawer.pushStyle();
 		drawer.background(255);
 		hud.draw(drawer);
-		drawer.rect(drawer.width - 35, 0, 20, 30);
+		drawer.rect(drawer.width - 35, 0, 20, 20);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 27, 27);
+		drawer.text("II", drawer.width - 28, 17);
+
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			if(used.getItem() instanceof PowerUp) {
