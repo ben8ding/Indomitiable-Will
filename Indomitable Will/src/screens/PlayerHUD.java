@@ -22,6 +22,17 @@ public class PlayerHUD {
 	public PlayerHUD(Player p) {
 		this.p = p;
 	}
+	public PlayerHUD(PlayerHUD p) {
+		this.p = p.p;
+		pistol = p.pistol;
+		shotgun = p.shotgun;
+		rifle = p.rifle;
+		pistolRect = p.pistolRect;
+		shotgunRect = p.shotgunRect;
+		rifleRect = p.rifleRect;
+		powerUpRect = p.powerUpRect;
+		hpBar = p.hpBar;
+	}
 	public void setup(PApplet drawer) {
 		pistolRect = drawer.createShape(drawer.RECT, 20, 710, INDIC_SIZE, INDIC_SIZE, 5);
 		shotgunRect = drawer.createShape(drawer.RECT, 120, 710, INDIC_SIZE, INDIC_SIZE, 5);
@@ -30,7 +41,7 @@ public class PlayerHUD {
 		hpBar = drawer.createShape(drawer.RECT, 20, 680, 200, 20, 10);
 	}
 	public void draw(PApplet drawer) {
-		
+		System.out.println(pistol);
 		drawer.pushStyle();
 		drawer.pushMatrix();
 		Weapon playerCurrWep = p.getCurrentWeapon();
@@ -63,10 +74,10 @@ public class PlayerHUD {
 			drawer.image(pistol, 30, 720);
 		}
 		if(shotgun != null) {
-			drawer.image(shotgun, 80, 720);
+			drawer.image(shotgun, 130, 720);
 		}
 		if(rifle != null) {
-			drawer.image(rifle, 130, 720);
+			drawer.image(rifle, 80, 720);
 		}
 		if(powerUp != null) {
 			drawer.image(powerUp, 30, 720);

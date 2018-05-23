@@ -8,7 +8,7 @@ import sprites.Projectile;
 /**
  * 
  * @author Nathaniel,matthewli
- * @version 5/18/18 11:03
+ * @version 5-22-18
  */
 public class Pistol extends Weapon {
 	private long timer;
@@ -19,6 +19,13 @@ public class Pistol extends Weapon {
 		timer = 0;
 	}
 
+	/**
+	 * "Fires" projectile after a cooldown of 0.5 seconds by adding projectile into ArrayList
+	 * @param xLoc x-coordinate of projectile
+	 * @param yLoc y-coordinate of projectile
+	 * @param angle angle to fire at
+	 * @return result ArrayList of projectiles
+	 */
 	public ArrayList<Projectile> fire(int xLoc, int yLoc, double angle) {
 
 		ArrayList<Projectile> result = new ArrayList<Projectile>();

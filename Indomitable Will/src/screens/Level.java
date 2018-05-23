@@ -41,12 +41,29 @@ public class Level {
 
 		// enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
+<<<<<<< HEAD
 		walls.add(new Rectangle(-10, -190, 1010, 200));
 
 		walls.add(new Rectangle(-40, 0, 50, 660));
 		walls.add(new Rectangle(990, 0, 10, 660));
 		walls.add(new Rectangle(0, 660, 1000, 10));
 
+=======
+		walls.add(new Rectangle(-10,-190,1010,200));
+
+		walls.add(new Rectangle(-40,0,50,660));
+		walls.add(new Rectangle(990,0,10,660)); 
+		walls.add(new Rectangle(0,660,1000,10));
+
+/*		enemies.add(new Enemy(250, 400));
+		walls.add(new Rectangle(0, -190, 1000, 200));
+		walls.add(new Rectangle(-40, 0, 50, 700));
+		walls.add(new Rectangle(985, -10, 500, 710));
+		walls.add(new Rectangle(0, 660, 1000, 40));
+		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
+*/
+
+>>>>>>> branch 'Ben's_branch' of https://github.com/ben8ding/Indomitiable-Will.git
 		timer = 0;
 		cleared = false;
 		for (Enemy e : enemies) {
@@ -63,14 +80,16 @@ public class Level {
 
 		enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-		walls.add(new Rectangle(-10, -190, 1010, 200));
-		walls.add(new Rectangle(-40, 0, 50, 660));
-		walls.add(new Rectangle(990, 0, 10, 660));
-		walls.add(new Rectangle(0, 660, 1000, 10));
-		hud = l.hud;
+
+		walls.add(new Rectangle(-10,-190,1010,200));
+		walls.add(new Rectangle(-40,0,50,660));
+		walls.add(new Rectangle(990,0,10,660));
+		walls.add(new Rectangle(0,660,1000,10));
+		hud = new PlayerHUD(l.hud);
+
 		walls = l.getWalls();
 		enemies = l.getEnemies();
-		drops = l.getDrops();
+		drops = l.getDrops(); 
 		player = new Player(p);
 	}
 
@@ -93,10 +112,11 @@ public class Level {
 		drawer.pushStyle();
 		drawer.background(255);
 		hud.draw(drawer);
-		drawer.rect(drawer.width - 35, 0, 20, 30);
+		drawer.rect(drawer.width - 35, 0, 20, 20);
 		drawer.textSize(15);
 		drawer.fill(0);
-		drawer.text("II", drawer.width - 27, 27);
+		drawer.text("II", drawer.width - 28, 17);
+
 		Capsule used = player.checkCollection(drops);
 		if (used != null) {
 			if (used.getItem() instanceof PowerUp) {
@@ -159,6 +179,7 @@ public class Level {
 
 	}
 
+
 	private void collisionCheck() {
 		for (int i = 0; i < bullets.size(); i++) {
 
@@ -184,7 +205,7 @@ public class Level {
 						if (wall.getSize().getWidth() > 40)
 							remove = true;
 					}
-				}
+				} 
 
 			}
 			if (remove)
@@ -193,7 +214,7 @@ public class Level {
 
 		for (int i = 0; i < playerBullets.size(); i++) {
 
-			boolean remove = false;
+			boolean remove = false; 
 			if (enemies.size() > 0 && enemies.get(0) != null) {
 				if (playerBullets.size() > 0 && playerBullets.get(0) != null) {
 
@@ -220,6 +241,7 @@ public class Level {
 			}
 		}
 	}
+
 	
 	public Player getPlayer() {
 		return player;
@@ -265,7 +287,10 @@ public class Level {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	/**
+	 * add a rectanguiar obstacle in the map
+	 * @param rect obstacle
+	 */
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
 	}
@@ -281,7 +306,7 @@ public class Level {
 	public void setPlayerBullets(ArrayList<Projectile> playerBullets) {
 		this.playerBullets = playerBullets;
 	}
-
+	
 	public boolean isCleared() {
 		return cleared;
 	}
@@ -292,5 +317,11 @@ public class Level {
 
 	public void setWalls(ArrayList<Rectangle> walls) {
 		this.walls = walls;
+	}
+	public PlayerHUD getHud() {
+		return hud;
+	}
+	public void setHud(PlayerHUD p) {
+		hud = p;
 	}
 }

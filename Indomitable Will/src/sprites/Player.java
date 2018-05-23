@@ -24,6 +24,7 @@ import java.awt.Rectangle;
  *
  */
 public class Player extends Basic {
+
 	
 	private static int health;
 	private boolean wall;
@@ -32,9 +33,11 @@ public class Player extends Basic {
 	private boolean firing;
 	private int timer; 
 	private Weapon currentWeapon = null;
+
 	private enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
+
 	private PImage shotgun, pistol, rifle;
 	// private int blockedDir;
 	private ArrayList<Weapon> weapons;
@@ -49,7 +52,7 @@ public class Player extends Basic {
 	private boolean isFiringFast;
 
 	public Player() {
-		
+
 		super(50, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		wall = false;
@@ -57,6 +60,7 @@ public class Player extends Basic {
 		hB = new HitBox(this);
 		timer = 0;
 	}
+
 	public Player(Player p) {
 		super(50, 350, 22);
 		img = p.img;
@@ -68,6 +72,7 @@ public class Player extends Basic {
 		pistol = p.pistol;
 		rifle = p.rifle;
 	}
+
 	public void setup(PApplet drawer) {
 		img = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player_fists.png");
 		shotgun = drawer.loadImage("sprites" + System.getProperty("file.separator") + "player_shotgun.png");
@@ -76,28 +81,28 @@ public class Player extends Basic {
 	}
 
 	public void draw(PApplet drawer) {
-		if(drawer.key == '1') {
-			for(Weapon w : weapons) {
-				if(w instanceof Pistol) {
+		if (drawer.key == '1') {
+			for (Weapon w : weapons) {
+				if (w instanceof Pistol) {
 					currentWeapon = w;
 				}
 			}
-		} else if(drawer.key == '2') {
-			for(Weapon w : weapons) {
-				if(w instanceof Rifle) {
+		} else if (drawer.key == '2') {
+			for (Weapon w : weapons) {
+				if (w instanceof Rifle) {
 					currentWeapon = w;
 				}
 			}
-		} else if(drawer.key == '3') {
-			for(Weapon w : weapons) {
-				if(w instanceof Shotgun) {
+		} else if (drawer.key == '3') {
+			for (Weapon w : weapons) {
+				if (w instanceof Shotgun) {
 					currentWeapon = w;
 				}
 			}
 		}
-		if(weapons.size() == 1) {
+		if (weapons.size() == 1) {
 			currentWeapon = weapons.get(0);
-		} 
+		}
 		if (spedTime > 0) {
 			isFast = true;
 			spedTime--;
@@ -111,26 +116,25 @@ public class Player extends Basic {
 			isFiringFast = false;
 		}
 		timer++;
-		
+
 		drawer.pushMatrix();
 		drawer.translate(xLoc, yLoc);
-		drawer.rotate((float) Math.toRadians(angle+90));
+		drawer.rotate((float) Math.toRadians(angle + 90));
 		drawer.translate(-xLoc, -yLoc);
-		if(currentWeapon == null) {
-			drawer.image(img, xLoc - img.width/2, yLoc - img.width/2);
+		if (currentWeapon == null) {
+			drawer.image(img, xLoc - img.width / 2, yLoc - img.width / 2);
 		} else if (currentWeapon instanceof Shotgun) {
-			drawer.image(shotgun, xLoc - shotgun.width/2, yLoc - shotgun.height/2);
+			drawer.image(shotgun, xLoc - shotgun.width / 2, yLoc - shotgun.height / 2);
 		} else if (currentWeapon instanceof Pistol) {
-			drawer.image(pistol, xLoc - pistol.width/2, yLoc - pistol.width/2);
+			drawer.image(pistol, xLoc - pistol.width / 2, yLoc - pistol.width / 2);
 		} else if (currentWeapon instanceof Rifle) {
-			drawer.image(rifle, xLoc - rifle.width/2, yLoc - rifle.width/2);
+			drawer.image(rifle, xLoc - rifle.width / 2, yLoc - rifle.width / 2);
 		}
-		
-		
+
 		drawer.pushStyle();
 		drawer.stroke(0);
 		drawer.fill(255);
-		
+
 		move();
 		//hB.draw(drawer);
 		hB.refreshLoc(this);
@@ -152,29 +156,34 @@ public class Player extends Basic {
 		}
 		return result;
 	}
+
 	public void setHealth(int health) {
-		this.health= health;
+		this.health = health;
 	}
+	
 	public boolean checkCollision(ArrayList<Rectangle> walls) {
 		boolean result = false;
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-			
-			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY() && predictedY < wall.getMinY() -hB.getHeight()/4
+
+			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY()
+					&& predictedY < wall.getMinY() - hB.getHeight() / 4
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY() && predictedY > wall.getMaxY() + hB.getHeight()/4
+			boolean topCol = predictedY - hB.getHeight() / 2 < wall.getMaxY()
+					&& predictedY > wall.getMaxY() + hB.getHeight() / 4
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
 					&& predictedX - hB.getWidth() / 2 < wall.getMaxX();
-			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX() && predictedX > wall.getMaxX() + hB.getWidth() /4
+			boolean leftCol = predictedX - hB.getWidth() / 2 < wall.getMaxX()
+					&& predictedX > wall.getMaxX() + hB.getWidth() / 4
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
-			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX() && predictedX < wall.getMinX() - hB.getWidth()/4
+			boolean rightCol = predictedX + hB.getWidth() / 2 > wall.getMinX()
+					&& predictedX < wall.getMinX() - hB.getWidth() / 4
 					&& predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY - hB.getHeight() / 2 < wall.getMaxY();
-					
-			
+
 			if (bottomCol) {
 				if (!blockedDir.contains(Direction.DOWN))
 					blockedDir.add(Direction.DOWN);
@@ -193,7 +202,7 @@ public class Player extends Basic {
 			if (rightCol) {
 				if (!blockedDir.contains(Direction.RIGHT))
 					blockedDir.add(Direction.RIGHT);
-			
+
 				result = true;
 				xVel = 0;
 				dx2 = 0;
@@ -215,22 +224,21 @@ public class Player extends Basic {
 					blockedDir.remove(blockedDir.indexOf(Direction.LEFT));
 				if (blockedDir.contains(Direction.RIGHT))
 					blockedDir.remove(blockedDir.indexOf(Direction.RIGHT));
-				
+
 			}
-		
+
 		}
 		return result;
 	}
 
 	public boolean checkCollision(Rectangle hitbox) {
-		
+
 		return hB.checkCollision(hitbox);
-		
-		
+
 	}
 
 	private void move() {
-		
+
 		// if (!wall) {
 		if (!isFast) {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
@@ -239,7 +247,7 @@ public class Player extends Basic {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
 			yVel = (int) (yVel + 0.3 * ((double) dy2 * 1.01 - 0.02 * (double) yVel));
 		}
-	
+
 		xLoc += xVel;
 		yLoc += yVel;
 		// }
@@ -329,17 +337,16 @@ public class Player extends Basic {
 	}
 
 	public void startFiring() {
-		if(weapons.size() > 0)
+		if (weapons.size() > 0)
 			firing = true;
 	}
 
 	public ArrayList<Projectile> fire() {
 		ArrayList<Projectile> fire = new ArrayList<Projectile>();
-		if(currentWeapon != null) {
+		if (currentWeapon != null) {
 			fire = currentWeapon.fire(getXLoc(), getYLoc(), angle);
 		}
-		
-		
+
 		return fire;
 	}
 
@@ -350,14 +357,15 @@ public class Player extends Basic {
 	public void takeDamage() {
 		health--;
 	}
-	
+
 	public void heal(int amount) {
-		health+=amount;
+		health += amount;
 	}
-	
+
 	public int getHp() {
 		return health;
 	}
+
 	public PowerUp.powerUpType getBuff(){
 		if(isFast) {
 			return PowerUp.powerUpType.SPEED;
@@ -368,24 +376,26 @@ public class Player extends Basic {
 		}
 	}
 	public int getROF() {
-		if(currentWeapon != null)
-		return currentWeapon.getROF();
-		else 
-		return 0;
+		if (currentWeapon != null)
+			return currentWeapon.getROF();
+		else
+			return 0;
 	}
-	
+
 	public void speedUp(int time) {
 		spedTime = time;
 	}
+
 	public boolean switchWeapon(Weapon w) {
 		boolean result = false;
-		if(weapons.contains(w)) {
+		if (weapons.contains(w)) {
 			result = true;
 			currentWeapon = w;
-		} 
+		}
 		return result;
 	}
-	public ArrayList<Weapon> getWeapons(){
+
+	public ArrayList<Weapon> getWeapons() {
 		return weapons;
 	}
 	public Weapon getCurrentWeapon() {

@@ -9,14 +9,6 @@ import processing.core.PApplet;
  */
 public class Instructions {
 
-	public Instructions() {
-
-	}
-
-	public void setup(PApplet drawer) {
-
-	}
-
 	public void draw(PApplet drawer) {
 
 		drawer.pushMatrix();
