@@ -14,7 +14,7 @@ public class Enemy extends Basic {
 	Perceptron perceptron;
 	int ammo_cnt;
 	
-	public Enemy() {
+	public Enemy() { 
 		super(500, 350, 15);
 		health = 3;
 		maxHealth = 3;
@@ -61,14 +61,14 @@ public class Enemy extends Basic {
 		drawer.fill(255);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 
-		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
-			drawer.stroke(255, 128, 128);
-			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
-						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
-			drawer.fill(255, 128, 128);
-			drawer.text("perceptron boundary", 450, 
-						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
-		}
+//		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
+//			drawer.stroke(255, 128, 128);
+//			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
+//						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+//			drawer.fill(255, 128, 128);
+//			drawer.text("perceptron boundary", 450, 
+//						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+//		}
 
 		drawer.fill(0);
 		drawer.textAlign(drawer.CENTER);
@@ -76,7 +76,7 @@ public class Enemy extends Basic {
 		drawer.text(health + "/" + maxHealth, xLoc, yLoc - size / 3 + 3);
 		drawer.textSize(8);
 
-		hB.draw(drawer);
+		//hB.draw(drawer);
 		act();
 		drawer.popStyle();
 	}

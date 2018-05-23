@@ -15,7 +15,7 @@ public class Projectile extends Basic {
 		xVel = 10;
 		yVel = 10;
 		hB = new HitBox(this);
-		shade = 128;
+		shade = 128; 
 	}
 	/**
 	 * 
@@ -56,7 +56,7 @@ public class Projectile extends Basic {
 		drawer.stroke(0);
 		drawer.fill(shade);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
-		hB.draw(drawer);
+		//hB.draw(drawer);
 		act();
 		drawer.popStyle();
 	}

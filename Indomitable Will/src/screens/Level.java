@@ -32,19 +32,19 @@ public class Level {
 
 
 	public Level() {
-		player = new Player();
+		player = new Player(); 
 		walls = new ArrayList<Rectangle>();
 		bullets = new ArrayList<Projectile>();
 		playerBullets = new ArrayList<Projectile>();
 		enemies = new ArrayList<Enemy>();
 		drops = new ArrayList<Capsule>();
 
-		enemies.add(new Enemy(40, 40));
+		//enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
 		walls.add(new Rectangle(-10,-190,1010,200));
 
 		walls.add(new Rectangle(-40,0,50,660));
-		walls.add(new Rectangle(990,0,10,660));
+		walls.add(new Rectangle(990,0,10,660)); 
 		walls.add(new Rectangle(0,660,1000,10));
 
 /*		enemies.add(new Enemy(250, 400));
@@ -266,6 +266,10 @@ public class Level {
 	 */
 	public void addObstacle(Rectangle rect) {
 		walls.add(rect);
+	}
+	
+	public void addEnemy(Enemy buddy) {
+		enemies.add(buddy);
 	}
 
 	public ArrayList<Projectile> getPlayerBullets() {
