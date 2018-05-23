@@ -51,7 +51,7 @@ public class Player extends Basic {
 		super(50, 350, 22);
 		weapons = new ArrayList<Weapon>();
 		wall = false;
-		health = 1000;
+		health = 100;
 		hB = new HitBox(this);
 		timer = 0;
 	}

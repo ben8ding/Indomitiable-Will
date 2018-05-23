@@ -45,20 +45,6 @@ public class Level {
 		walls.add(new Rectangle(-40,0,50,700));
 		walls.add(new Rectangle(985,-10,500,710));
 		walls.add(new Rectangle(0,660,1000,40));
-		// drops.add(new Capsule(40,40, new Weapon(Weapon.weaponType.SHOTGUN)));
-//		drops.add(new Capsule(600, 40, new PowerUp(PowerUp.powerUpType.SPEED)));
-		//bullets.add(new Projectile());
-//		walls.add(new Rectangle(500, 0, 100, 350));
-//		walls.add(new Rectangle(60, 350, 300, 100));
-
-/*		enemies.add(new Enemy(250, 400));
-		walls.add(new Rectangle(0, -190, 1000, 200));
-		walls.add(new Rectangle(-40, 0, 50, 700));
-		walls.add(new Rectangle(985, -10, 500, 710));
-		walls.add(new Rectangle(0, 660, 1000, 40));
-<<<<<<< HEAD
-		drops.add(new Capsule(600, 50, new PowerUp(PowerUp.powerUpType.SPEED)));
-*/
 
 		timer = 0;
 		cleared = false;
@@ -129,23 +115,21 @@ public class Level {
 		}
 
 
-		if (timer % 10 == 0) {
-
+		if (timer % 10 == 0) {					// Enemy can fire at high rates as long as it has ammo
 			for (Enemy object : enemies) {
-				if(object.getAmmoCount() > 0 && object.getPerceptron().inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) {
+				if(object.getAmmoCount() > 0 && object.getPerceptron().inferPerceptron(player.getXLoc(), player.getYLoc()) > 0) {		// Enemy AI tells whether to fire or not based on prediction of hit
 					bullets.add(object.fire(player.getXLoc(), player.getYLoc()));
 				}
 			}
 		}
 
-
-		if (timer % 80 == 0) {
-			for (Enemy object : enemies) {
-				object.addAmmo();
-			}
+		if (timer % 80 == 0) {					// Enemy ammo is added at much low rate
+			for (Enemy object : enemies) {		// Thus, it is beneficial for enemy to conserve ammo if it cannot hit target
+				object.addAmmo();				// so that if the ammo cache level is high, it can fire at high rate.
+			}									// Otherwise, if enemy always fire, its firing rate is limited to the rate of ammo re-supply.
 		}
 
-		if (timer % 5 == 0) {
+		if (timer % 5 == 0) {					// enemy AI training happens continuously.
 			for (Enemy object : enemies) {
 				object.getPerceptron().trainPerceptron(lid);
 			}

@@ -136,7 +136,7 @@ public class DrawingSurface extends PApplet {
 		}
 		Level current = levels.get(currentLevel);
 		current.setID(currentLevel);
-		System.out.println(levels.get(currentLevel).getPlayer().getHp());
+		System.out.printf("Player health: %d\n", levels.get(currentLevel).getPlayer().getHp());
 		// if player dies, then send to lose menu
 		if (levels.get(currentLevel).getPlayer().getHp() <= 0 && state == State.GAME) {
 			System.out.println("we at the lose menu");
