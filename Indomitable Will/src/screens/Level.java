@@ -74,7 +74,7 @@ public class Level {
 
 		enemies.add(new Enemy(40, 40));
 		hud = new PlayerHUD(player);
-
+		
 		walls.add(new Rectangle(-10,-190,1010,200));
 		walls.add(new Rectangle(-40,0,50,660));
 		walls.add(new Rectangle(990,0,10,660));
@@ -316,6 +316,6 @@ public class Level {
 		return hud;
 	}
 	public void setHud(PlayerHUD p) {
-		hud = p;
+		hud = new PlayerHUD(p);
 	}
 }

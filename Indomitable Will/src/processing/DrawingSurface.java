@@ -144,7 +144,7 @@ public class DrawingSurface extends PApplet {
 		Level current = levels.get(currentLevel);
 		current.setID(currentLevel);
 
-		System.out.printf("Player health: %d\n", levels.get(currentLevel).getPlayer().getHp());
+//		System.out.printf("Player health: %d\n", levels.get(currentLevel).getPlayer().getHp());
 
 		// if player dies, then send to lose menu
 		if (levels.get(currentLevel).getPlayer().getHp() <= 0 && state == State.GAME) {
@@ -157,9 +157,9 @@ public class DrawingSurface extends PApplet {
 		// if player clears a level
 		if (current.isCleared() && state == State.GAME) {
 			if (currentLevel != 4) {
-				System.out.println(currentLevel);
 				current = levels.get(currentLevel + 1);
-				current = new Level(current, levels.get(currentLevel).getPlayer());
+				current.setPlayer(levels.get(currentLevel).getPlayer());
+				current.setHud(levels.get(currentLevel).getHud());
 				currentLevel++;
 				levels.set(currentLevel, current);
 				if(currentLevel >= 3 && currentLevel < 5) {
