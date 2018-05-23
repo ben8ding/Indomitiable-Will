@@ -41,7 +41,6 @@ public class PlayerHUD {
 		hpBar = drawer.createShape(drawer.RECT, 20, 680, 200, 20, 10);
 	}
 	public void draw(PApplet drawer) {
-		System.out.println(pistol);
 		drawer.pushStyle();
 		drawer.pushMatrix();
 		Weapon playerCurrWep = p.getCurrentWeapon();

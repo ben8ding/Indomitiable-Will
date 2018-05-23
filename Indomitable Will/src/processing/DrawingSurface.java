@@ -85,10 +85,10 @@ public class DrawingSurface extends PApplet {
 		levels.get(0).addObstacle(new Rectangle(175, (200), 50, 300));
 		levels.get(0).addEnemy(new Enemy(600, 600));
 
-		// drops.add(new Capsule(50, 300, new Pistol()));
-		drops.add(new Capsule(50, 250, new Shotgun()));
+		 drops.add(new Capsule(50, 300, new Pistol()));
+//		drops.add(new Capsule(50, 250, new Shotgun()));
 
-		drops.add(new Capsule(50, 200, new Rifle()));
+//		drops.add(new Capsule(50, 200, new Rifle()));
 
 
 		levels.get(0).setDrops(drops);
@@ -143,6 +143,7 @@ public class DrawingSurface extends PApplet {
 		pushStyle();
 		// draw menu on first play
 		if (state == State.STARTUP) {
+			System.out.println("hi");
 			menu.draw(this);
 			previousState = state;
 			state = State.MENU;
@@ -164,7 +165,6 @@ public class DrawingSurface extends PApplet {
 		// if player clears a level
 		if (current.isCleared() && state == State.GAME) {
 			if (currentLevel != 4) {
-				System.out.println(currentLevel);
 				current = levels.get(currentLevel + 1);
 				current.setPlayer(levels.get(currentLevel).getPlayer());
 				current.setHud(levels.get(currentLevel).getHud());
