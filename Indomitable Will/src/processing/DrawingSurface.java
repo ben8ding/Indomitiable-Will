@@ -12,6 +12,7 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
 import screens.*;
+import sprites.Enemy;
 import sprites.Player;
 import screens.Menu;
 import java.awt.*;
@@ -42,7 +43,7 @@ public class DrawingSurface extends PApplet {
 	public static final int ySize = 800;
 	private long waitTime;
 	private enum State {
-		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE, STARTUP
+		PAUSED, MENU, GAME, INSTRUCTIONS, WIN, LOSE, STARTUP 
 	};
 
 	private State state;
@@ -78,6 +79,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(0).addObstacle(new Rectangle((int) (150), (int) (530), 300, 50));
 		levels.get(0).addObstacle(new Rectangle(500, (int) 80, 50, 300));
 		levels.get(0).addObstacle(new Rectangle(175, (int) (200), 50, 300));
+		levels.get(0).addEnemy(new Enemy(600,600));
 
 		drops.add(new Capsule(50, 300, new Pistol()));
 		drops.add(new Capsule(50, 250, new Shotgun()));
@@ -91,6 +93,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(1).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
 		levels.get(1).addObstacle(new Rectangle(900, (int) 100, 50, 300));
 		levels.get(1).addObstacle(new Rectangle(530, (int) (350), 50, 300));
+		levels.get(1).addEnemy(new Enemy(700,600));
 		levels.get(1).setDrops(drops);
 
 		drops = new ArrayList<Capsule>();
@@ -98,6 +101,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(2).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
 		levels.get(2).addObstacle(new Rectangle(100, (int) 230, 50, 300));
 		levels.get(2).addObstacle(new Rectangle(400, (int) (70), 50, 300));
+		levels.get(2).addEnemy(new Enemy(400,450));
 		levels.get(2).setDrops(drops);
 		drops = new ArrayList<Capsule>();
 
@@ -107,6 +111,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(3).addObstacle(new Rectangle(400, 200, 50, 120));
 		levels.get(3).addObstacle(new Rectangle(500, 100, 50, 120));
 		levels.get(3).addObstacle(new Rectangle(600, 10, 50, 120));
+		levels.get(3).addEnemy(new Enemy(40,40));
 		levels.get(3).setDrops(drops);
 		drops = new ArrayList<Capsule>();
 		drops.add(new Capsule(600, 300, new Rifle()));
@@ -117,6 +122,7 @@ public class DrawingSurface extends PApplet {
 		levels.get(4).addObstacle(new Rectangle(450, 200, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(550, 300, 50, 120));
 		levels.get(4).addObstacle(new Rectangle(650, 400, 50, 120));
+		levels.get(4).addEnemy(new Enemy(40,40));
 
 		levels.get(4).setDrops(drops);
 
@@ -192,7 +198,7 @@ public class DrawingSurface extends PApplet {
 					this.setup();
 				}
 				previousState = state;
-				state = State.GAME;
+				state = State.GAME; 
 				levels.get(0).draw(this);
 				// System.out.println("hallo from the far east side");
 			} else if (getMouseX() > width / 2 - 150 && getMouseX() < width / 2 + 150 && getMouseY() > height / 2 - 200
