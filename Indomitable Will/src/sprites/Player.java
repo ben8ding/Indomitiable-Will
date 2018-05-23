@@ -88,13 +88,13 @@ public class Player extends Basic {
 		drawer.rotate((float) Math.toRadians(angle+90));
 		drawer.translate(-xLoc, -yLoc);
 		if(currentWeapon == null) {
-			drawer.image(img, xLoc - size, yLoc - size);
+			drawer.image(img, xLoc - img.width/2, yLoc - img.width/2);
 		} else if (currentWeapon instanceof Shotgun) {
-			drawer.image(shotgun, xLoc - size, yLoc - size);
+			drawer.image(shotgun, xLoc - shotgun.width/2, yLoc - shotgun.height/2);
 		} else if (currentWeapon instanceof Pistol) {
-			drawer.image(pistol, xLoc - size, yLoc - size);
+			drawer.image(pistol, xLoc - pistol.width/2, yLoc - pistol.width/2);
 		} else if (currentWeapon instanceof Rifle) {
-			drawer.image(rifle, xLoc - size, yLoc - size);
+			drawer.image(rifle, xLoc - rifle.width/2, yLoc - rifle.width/2);
 		}
 		
 		
@@ -197,7 +197,7 @@ public class Player extends Basic {
 	}
 
 	private void move() {
-		isFast = true;
+		
 		// if (!wall) {
 		if (!isFast) {
 			xVel = (int) (xVel + 0.3 * ((double) dx2 * 1.01 - 0.02 * (double) xVel));
