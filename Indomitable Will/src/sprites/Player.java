@@ -30,7 +30,7 @@ public class Player extends Basic {
 	private static final double cs = 3.48;
 	private static final double sped = 3.52;
 	private boolean firing;
-	private int timer;
+	private int timer; 
 	private Weapon currentWeapon = null;
 	private enum Direction {
 		UP, RIGHT, DOWN, LEFT
@@ -132,7 +132,7 @@ public class Player extends Basic {
 		drawer.fill(255);
 		
 		move();
-		hB.draw(drawer);
+		//hB.draw(drawer);
 		hB.refreshLoc(this);
 
 		drawer.popStyle();

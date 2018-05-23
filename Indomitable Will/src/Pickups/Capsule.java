@@ -16,7 +16,7 @@ public class Capsule extends Basic {
 	private Obtainable item;
 
 	public Capsule() {
-		super(600, 450, 12);
+		super(600, 450, 12); 
 
 		hB = new HitBox(this);
 
@@ -36,7 +36,7 @@ public class Capsule extends Basic {
 		drawer.fill(120, 255, 10);
 		drawer.image(item.getImg(), (float)(xLoc-hB.getWidth()/2), (float)(yLoc-hB.getHeight()/2));
 		
-		hB.draw(drawer);
+		//hB.draw(drawer);
 		act();
 		drawer.popStyle();
 	}
