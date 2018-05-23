@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import Pickups.Capsule;
 import Pickups.Pistol;
+import Pickups.PowerUp;
 import Pickups.Rifle;
 import Pickups.Shotgun;
 import processing.awt.PSurfaceAWT;
@@ -86,19 +87,23 @@ public class DrawingSurface extends PApplet {
 
 		// drops.add(new Capsule(50, 300, new Pistol()));
 		drops.add(new Capsule(50, 250, new Shotgun()));
-		// drops.add(new Capsule(50, 200, new Rifle()));
+
+		drops.add(new Capsule(50, 200, new Rifle()));
+
 
 		levels.get(0).setDrops(drops);
 
 		drops = new ArrayList<Capsule>();
 
-		levels.get(1).addObstacle(new Rectangle((450), (200), 300, 50));
-		levels.get(1).addObstacle(new Rectangle(900, 100, 50, 300));
-		levels.get(1).addObstacle(new Rectangle(530, 350, 50, 320));
+//		drops.add(new Capsule(50, 200, new PowerUp(PowerUp.powerUpType.FIRERATE)));
+		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (600), 300, 50));
+		levels.get(1).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
+		levels.get(1).addObstacle(new Rectangle(900, (int) 100, 50, 300));
+		levels.get(1).addObstacle(new Rectangle(530, (int) (350), 50, 300));
 		levels.get(1).addEnemy(new Enemy(700, 600));
-		levels.get(1).addEnemy(new Enemy(830, 120));
-		levels.get(1).setDrops(drops);
 
+		levels.get(1).setDrops(drops);
+		
 		drops = new ArrayList<Capsule>();
 		levels.get(2).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
 		levels.get(2).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
@@ -163,7 +168,8 @@ public class DrawingSurface extends PApplet {
 			if (currentLevel != 4) {
 				System.out.println(currentLevel);
 				current = levels.get(currentLevel + 1);
-				current = new Level(current, levels.get(currentLevel).getPlayer());
+				current.setPlayer(levels.get(currentLevel).getPlayer());
+				current.setHud(levels.get(currentLevel).getHud());
 				currentLevel++;
 				levels.set(currentLevel, current);
 				if (currentLevel >= 3 && currentLevel < 5) {

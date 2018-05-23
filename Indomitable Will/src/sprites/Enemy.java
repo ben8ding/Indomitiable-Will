@@ -61,14 +61,17 @@ public class Enemy extends Basic {
 		drawer.fill(255);
 		drawer.ellipse(xLoc, yLoc, size * 2, size * 2);
 
-//		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
-//			drawer.stroke(255, 128, 128);
-//			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
-//						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
-//			drawer.fill(255, 128, 128);
+		
+		//this line reveals the perceptron boundary where the AI can determine when to attack
+		if (perceptron.getWy() != 0 && perceptron.getLid() >= 3) {
+			drawer.stroke(255, 128, 128);
+			drawer.line(0.0f, (float) (-600 * perceptron.getWc() / perceptron.getWy()), 
+						900.0f, (float)((- 900 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
+			drawer.fill(255, 128, 128);
 //			drawer.text("perceptron boundary", 450, 
 //						(float)((- 450 * perceptron.getWx() - 600 * perceptron.getWc()) / perceptron.getWy()));
-//		}
+			
+		}
 
 		drawer.fill(0);
 		drawer.textAlign(drawer.CENTER);
