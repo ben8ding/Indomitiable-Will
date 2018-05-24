@@ -24,16 +24,11 @@ public class PowerUp implements Obtainable {
 		original = drawer.loadImage("sprites" + System.getProperty("file.separator") + "Icons.png");
 	}
 	@Override
-	public PImage getImg() {
-		// TODO Auto-generated method stub
-		return img;
-	}
-	@Override
 	public Obtainable getDrop() {
 		// TODO Auto-generated method stub
 		return this;
 	}
-	public PImage getImage() {
+	public PImage getImg() {
 		if(powerUp == powerUpType.SPEED) {
 			img = original.get(0, 0, 18, 18);
 		} else if (powerUp == powerUpType.FIRERATE) {

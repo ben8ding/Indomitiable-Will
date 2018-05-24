@@ -29,7 +29,7 @@ public class Player extends Basic {
 	private static int health;
 	private boolean wall;
 	private static final double cs = 3.48;
-	private static final double sped = 3.52;
+	private static final double sped = 3.5;
 	private boolean firing;
 	private int timer; 
 	private Weapon currentWeapon = null;

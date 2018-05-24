@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import Pickups.Capsule;
 import Pickups.Pistol;
+import Pickups.PowerUp;
 import Pickups.Rifle;
 import Pickups.Shotgun;
 import processing.awt.PSurfaceAWT;
@@ -90,14 +91,14 @@ public class DrawingSurface extends PApplet {
 		levels.get(0).setDrops(drops);
 
 		drops = new ArrayList<Capsule>();
-
+		drops.add(new Capsule(50, 200, new PowerUp(PowerUp.powerUpType.SPEED)));
 		levels.get(1).addObstacle(new Rectangle((int) (300), (int) (600), 300, 50));
 		levels.get(1).addObstacle(new Rectangle((int) (450), (int) (200), 300, 50));
 		levels.get(1).addObstacle(new Rectangle(900, (int) 100, 50, 300));
 		levels.get(1).addObstacle(new Rectangle(530, (int) (350), 50, 300));
 		levels.get(1).addEnemy(new Enemy(700,600));
 		levels.get(1).setDrops(drops);
-
+		
 		drops = new ArrayList<Capsule>();
 		levels.get(2).addObstacle(new Rectangle((int) (200), (int) (560), 300, 50));
 		levels.get(2).addObstacle(new Rectangle((int) (520), (int) (420), 300, 50));
@@ -164,6 +165,9 @@ public class DrawingSurface extends PApplet {
 				levels.set(currentLevel, current);
 				if(currentLevel >= 3 && currentLevel < 5) {
 					current.getPlayer().setXLoc(800);
+					current.getPlayer().setYLoc(300);
+				} else {
+					current.getPlayer().setXLoc(50);
 					current.getPlayer().setYLoc(300);
 				}
 			} else {

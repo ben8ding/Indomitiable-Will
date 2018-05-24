@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Pickups.Pistol;
 import Pickups.PowerUp;
+import Pickups.PowerUp.powerUpType;
 import Pickups.Rifle;
 import Pickups.Shotgun;
 import Pickups.Weapon;
@@ -17,7 +18,7 @@ import sprites.Player;
 public class PlayerHUD {
 	private final int INDIC_SIZE = 40;
 	private Player p;
-	private PImage pistol, shotgun, rifle, powerUp;
+	private PImage pistol, shotgun, rifle, powerUpSpeed, powerUpFireRate;
 	private PShape pistolRect, shotgunRect, rifleRect, powerUpRect, hpBar;
 	public PlayerHUD(Player p) {
 		this.p = p;
@@ -32,6 +33,8 @@ public class PlayerHUD {
 		rifleRect = p.rifleRect;
 		powerUpRect = p.powerUpRect;
 		hpBar = p.hpBar;
+		powerUpFireRate = p.powerUpFireRate;
+		powerUpSpeed = p.powerUpSpeed;
 	}
 	public void setup(PApplet drawer) {
 		pistolRect = drawer.createShape(drawer.RECT, 20, 710, INDIC_SIZE, INDIC_SIZE, 5);
@@ -39,6 +42,8 @@ public class PlayerHUD {
 		rifleRect = drawer.createShape(drawer.RECT, 70, 710, INDIC_SIZE, INDIC_SIZE, 5);
 		powerUpRect = drawer.createShape(drawer.RECT, 170, 710, INDIC_SIZE, INDIC_SIZE, 5);
 		hpBar = drawer.createShape(drawer.RECT, 20, 680, 200, 20, 10);
+		powerUpSpeed = drawer.loadImage("sprites/" + System.getProperty("file.separator") + "Icons.png").get(0, 0, 18, 18);
+		powerUpFireRate = drawer.loadImage("sprites/" + System.getProperty("file.separator") + "Icons.png").get(72, 0, 18, 18);
 	}
 	public void draw(PApplet drawer) {
 		drawer.pushStyle();
@@ -66,8 +71,10 @@ public class PlayerHUD {
 				rifle = w.getImg();
 			}
 		}
-		if(p.getBuff() != null) {
-			powerUp = new PowerUp(p.getBuff()).getImage();
+		if(p.getBuff() == PowerUp.powerUpType.SPEED) {
+			drawer.image(powerUpSpeed, 180, 720);
+		} else if(p.getBuff() == PowerUp.powerUpType.FIRERATE) {
+			drawer.image(powerUpFireRate, 180, 720);
 		}
 		if(pistol != null) {
 			drawer.image(pistol, 30, 720);
@@ -77,9 +84,6 @@ public class PlayerHUD {
 		}
 		if(rifle != null) {
 			drawer.image(rifle, 80, 720);
-		}
-		if(powerUp != null) {
-			drawer.image(powerUp, 30, 720);
 		}
 		
 		drawer.strokeWeight(1);
