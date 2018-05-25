@@ -166,7 +166,10 @@ public class Player extends Basic {
 		for (Rectangle wall : walls) {
 			double predictedY = yLoc + yVel;
 			double predictedX = xLoc + xVel;
-
+			if(isFast) {
+				predictedX += dx2;
+				predictedY += dy2;
+			}
 			boolean bottomCol = predictedY + hB.getHeight() / 2 > wall.getMinY()
 					&& predictedY < wall.getMinY() - hB.getHeight() / 4
 					&& predictedX + hB.getWidth() / 2 > wall.getMinX()
